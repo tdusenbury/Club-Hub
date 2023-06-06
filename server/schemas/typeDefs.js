@@ -23,6 +23,11 @@ const typeDefs = gql`
     eventCreator: User
     attendingUsers: [User]
   }
+  type UserEvent {
+    _id; ID!
+    user: User!
+    event: Event!
+  }
 
   type Auth {
     token: ID!
@@ -45,8 +50,8 @@ const typeDefs = gql`
     createEvent(name:String!, location: String!, startTime: String, startDate: String!, endTime: String, endDate: String!, description: String, eventCreator: ID!): Event
     updateEvent(_id:ID!, name:String!, location: String!, startTime: String, startDate: String!, endTime: String, endDate: String!, description: String, eventCreator: ID!): Event
     deleteEvent(_id:ID!, name:String!, location: String!, startTime: String, startDate: String!, endTime: String, endDate: String!, description: String, eventCreator: ID!): Event
-    addUserEvent(eventId: ID!, userId: ID!): [Event, User]
-    removeUserEvent(eventId: ID!, userId: ID!): [Event, User]
+    addUserEvent(eventId: ID!, userId: ID!): UserEvent
+    removeUserEvent(eventId: ID!, userId: ID!): UserEvent
   }
 `;
 // what if i have a many to many relationship in mongoose and i need to update both of Event and User (line 48 + 49)
