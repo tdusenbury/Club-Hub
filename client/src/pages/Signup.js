@@ -8,7 +8,8 @@ import Auth from '../utils/auth';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    username: '',
+    name: '',
+    phone: '',
     email: '',
     password: '',
   });
@@ -53,8 +54,8 @@ const Signup = () => {
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
-                  placeholder="Your username"
-                  name="username"
+                  placeholder="Your name"
+                  name="name"
                   type="text"
                   value={formState.name}
                   onChange={handleChange}
@@ -69,7 +70,15 @@ const Signup = () => {
                 />
                 <input
                   className="form-input"
-                  placeholder="******"
+                  placeholder="Your phone number"
+                  name="phone"
+                  type="text"
+                  value={formState.phone}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="password"
                   name="password"
                   type="password"
                   value={formState.password}
@@ -80,7 +89,7 @@ const Signup = () => {
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
-                  Submit
+                  Create Account
                 </button>
               </form>
             )}
