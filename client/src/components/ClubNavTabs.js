@@ -10,7 +10,7 @@ function ClubNavTabs({ currentPage, handlePageChange }) {
           href="#clubhomepage"
           onClick={() => handlePageChange('ClubHomePage')}
           className={currentPage === 'ClubHomePage' ? 'active' : ''}
-          style={currentPage === 'ClubHomePage' ? styles.activeNavLink : styles.navLink}
+          // style={currentPage === 'ClubHomePage' ? styles.activeNavLink : styles.navLink}
         >
           Home
         </a>
@@ -18,7 +18,7 @@ function ClubNavTabs({ currentPage, handlePageChange }) {
           href="#members"
           onClick={() => handlePageChange('Members')}
           className={currentPage === 'Members' ? 'active' : ''}
-          style={currentPage === 'Members' ? styles.activeNavLink : styles.navLink}
+          // style={currentPage === 'Members' ? styles.activeNavLink : styles.navLink}
         >
           Members
         </a>
@@ -27,7 +27,7 @@ function ClubNavTabs({ currentPage, handlePageChange }) {
           href="#eventscalendar"
           onClick={() => handlePageChange('EventsCalendar')}
           className={currentPage === 'EventsCalendar' ? 'active' : ''}
-          style={currentPage === 'EventsCalendar' ? styles.activeNavLink : styles.navLink}
+          // style={currentPage === 'EventsCalendar' ? styles.activeNavLink : styles.navLink}
         >
           Events / Calendar
         </a>
@@ -35,7 +35,7 @@ function ClubNavTabs({ currentPage, handlePageChange }) {
           href="#personaldashboard"
           onClick={() => handlePageChange('PersonalDashboard')}
           className={currentPage === 'PersonalDashboard' ? 'active' : ''}
-          style={currentPage === 'PersonalDashboard' ? styles.activeNavLink : styles.navLink}
+          // style={currentPage === 'PersonalDashboard' ? styles.activeNavLink : styles.navLink}
         >
         Personal Dashboard
         </a>
@@ -43,7 +43,7 @@ function ClubNavTabs({ currentPage, handlePageChange }) {
           href="#signout"
           onClick={() => handlePageChange('Home')}
           className={currentPage === 'Home' ? 'active' : ''}
-          style={currentPage === 'Home' ? styles.activeNavLink : styles.navLink}
+          // style={currentPage === 'Home' ? styles.activeNavLink : styles.navLink}
         >
         Sign Out
         </a>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 function HomeNavTabs({ currentPage, handlePageChange }) {
@@ -6,39 +7,22 @@ function HomeNavTabs({ currentPage, handlePageChange }) {
     <div >
       <h1> NAV TABS</h1>
       <div>
-      <a
-          href="#home"
-          onClick={() => handlePageChange('Home')}
-          className={currentPage === 'Home' ? 'active' : ''}
-          style={currentPage === 'Home' ? styles.activeNavLink : styles.navLink}
-        >
-          Home
-        </a>
-        <a
-          href="#about"
-          onClick={() => handlePageChange('About')}
-          className={currentPage === 'About' ? 'active' : ''}
-          style={currentPage === 'About' ? styles.activeNavLink : styles.navLink}
-        >
-          About
-        </a>
-       
-        <a
-          href="#login"
-          onClick={() => handlePageChange('Login')}
-          className={currentPage === 'Login' ? 'active' : ''}
-          style={currentPage === 'Login' ? styles.activeNavLink : styles.navLink}
-        >
-          Login
-        </a>
-        <a
-          href="#signup"
-          onClick={() => handlePageChange('Signup')}
-          className={currentPage === 'Signup' ? 'active' : ''}
-          style={currentPage === 'Signup' ? styles.activeNavLink : styles.navLink}
-        >
-          Sign Up
-        </a>
+        <Link
+          to="/">
+            <h2>Home</h2>
+          </Link>
+          <Link
+          to="/about">
+            <h2>About</h2>
+          </Link>
+          <Link
+          to="/login">
+            <h2>Login</h2>
+          </Link>
+          <Link
+          to="/signup">
+            <h2>Sign Up</h2>
+          </Link>
       </div>
     </div>
   );

@@ -58,10 +58,10 @@ function App() {
                 path="/signup" 
                 element={<Signup />}
               />
-              <Route 
+              {/* <Route 
                 path="/about" 
                 element={<About />}
-              />
+              /> */}
             </Routes>
           </div>
         </div>
