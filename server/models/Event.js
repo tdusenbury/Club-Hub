@@ -28,18 +28,15 @@ const eventSchema = new Schema({
   },
   description: {
     type: String,
+    trim: true,
     minlength: 1,
     maxlength: 280,
   },
-  eventsCreator: 
+  eventCreator: 
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
-    },
-  attendingUsers: [ {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-}]
+    }
 });
 
 const Event = model('Event', eventSchema);
