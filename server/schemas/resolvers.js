@@ -1,26 +1,44 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought } = require('../models');
+const { User, Event, UserEvent } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().populate('thoughts');
-    },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts');
-    },
-    me: async (parent, args, context) => {
+    getMembers: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        return User.find();
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    getMe: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id });
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    getAllEvents: async (parent, args, context) => {
+      if (context.user) {
+        return Event.find().populate('User');
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    getEvent: async (parent, {eventId}, context) => {
+      if (context.user) {
+        return Event.findOne({ _id: eventId }).populate('User');
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    getUserEvent: async (parent, args, context) => {
+      if (context.user) {
+        return UserEvent.find({ userId: context.user._id }).populate('Event');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    createUser: async (parent, { name, phone, email, password }) => {
+      const user = await User.create({ name, phone, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -41,6 +59,30 @@ const resolvers = {
 
       return { token, user };
     },
+    updateUser: async (parent, { name, phone, email, address, emergencyContactNumber, emergencyContactName}, context) => {
+      if (context.user) {
+        User.findOneAndUpdate(
+          { _id: context.user._id },
+          { name: name, phone: phone, email: email, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName},
+          {new : true}
+        );
+
+        return thought;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    deleteUser: async (parent, args, context) => {
+      if (context.user) {
+        // TODO: How to expire token while deleting user
+        User.findOneAndDelete(
+          { _id: context.user._id },
+          {new : true}
+        );
+
+        return thought;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    }
   }
 };
 
