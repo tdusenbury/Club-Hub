@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+// const eventSchema = require('./Event');
 
 const userSchema = new Schema({
   name: {
