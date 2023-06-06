@@ -17,11 +17,7 @@ function HomeNavTabs({ currentPage, handlePageChange }) {
           </Link>
           <Link
           to="/login">
-            <h2>Login</h2>
-          </Link>
-          <Link
-          to="/signup">
-            <h2>Sign Up</h2>
+            <h2>Login / Signup</h2>
           </Link>
       </div>
     </div>
