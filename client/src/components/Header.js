@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Auth from '../utils/auth';
+import HomeNavTabs from './HomeNavTabs';
 
 const Header = () => {
   const logout = (event) => {
@@ -16,8 +17,10 @@ const Header = () => {
             <h1 className="m-0">Header</h1>
           </Link>
           <p className="m-0">Some text will be added later</p>
+          <HomeNavTabs/>
         </div>
-        <div>
+      
+        {/* <div>
           {Auth.loggedIn() ? (
             <>
               <Link className="btn btn-lg btn-info m-2" to="/me">
@@ -37,7 +40,7 @@ const Header = () => {
               </Link>
             </>
           )}
-        </div>
+        </div> */}
       </div>
     </header>
   );
