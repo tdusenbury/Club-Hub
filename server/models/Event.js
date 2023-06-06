@@ -32,11 +32,17 @@ const eventSchema = new Schema({
     minlength: 1,
     maxlength: 280,
   },
-  eventCreator: 
+  eventCreator:
+  {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  attendingUsers: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
     }
+  ]
 });
 
 const Event = model('Event', eventSchema);

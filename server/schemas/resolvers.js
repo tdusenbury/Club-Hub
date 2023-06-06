@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Event, UserEvent } = require('../models');
+const { User, Event } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -22,7 +22,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    getEvent: async (parent, {eventId}, context) => {
+    getEvent: async (parent, { eventId }, context) => {
       if (context.user) {
         return await Event.findOne({ _id: eventId }).populate('User');
       }
@@ -59,12 +59,12 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (parent, { name, phone, email, address, emergencyContactNumber, emergencyContactName}, context) => {
+    updateUser: async (parent, { name, phone, email, address, emergencyContactNumber, emergencyContactName }, context) => {
       if (context.user) {
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { name: name, phone: phone, email: email, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName},
-          {new : true}
+          { name: name, phone: phone, email: email, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName },
+          { new: true }
         );
 
         return User;
@@ -76,43 +76,80 @@ const resolvers = {
         // TODO: How to expire token while deleting user
         await User.findOneAndDelete(
           { _id: context.user._id },
-          {new : true}
+          { new: true }
         );
 
         return User;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    createEvent: async (parent, {name, location, startTime, startDate, endTime, endDate, description}, context) => {
+    createEvent: async (parent, { name, location, startTime, startDate, endTime, endDate, description }, context) => {
       if (context.user) {
         await Event.create(
-          {name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description, eventCreator: context.user._id}
+          { name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description, eventCreator: context.user._id }
         );
 
         return Event;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    updateEvent: async (parent, { eventId, name, location, startTime, startDate, endTime, endDate, description}, context) => {
+    updateEvent: async (parent, { eventId, name, location, startTime, startDate, endTime, endDate, description }, context) => {
       if (context.user) {
         await Event.findOneAndUpdate(
           { _id: eventId },
-          { name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description},
-          {new : true}
+          { name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description },
+          { new: true }
         );
 
         return Event;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    deleteEvent: async (parent, {eventId}, context) => {
+    deleteEvent: async (parent, { eventId }, context) => {
       if (context.user) {
         await Event.findOneAndDelete(
           { _id: eventId },
-          {new : true}
+          { new: true }
+        );
+        await User.updateMany(
+          { events: { $in: [eventId] } }, // Filter users who have the event ID in their events array
+          { $pull: { events: eventId } } // Pull the event ID from the events array
+        )
+        return Event;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addUserEvent: async (parent, { eventId, userId }, context) => {
+      if (context.user) {
+        const updatedEvent = await Event.findOneAndUpdate(
+          { _id: eventId },
+          { $addToSet: { attendingUsers: userId } },
+          { new: true }
+        );
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { events: eventId } },
+          { new: true }
+        );
+        return [updatedUser, updatedEvent];
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeUserEvent: async (parent, { eventId, userId }, context) => {
+      if (context.user) {
+        const updatedEvent = await Event.findOneAndUpdate(
+          { _id: eventId },
+          { $pull: { attendingUsers: userId } },
+          { new: true }
+        );
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { events: eventId } },
+          { new: true }
         );
 
-        return Event;
+
+        return [updatedUser, updatedEvent];
       }
       throw new AuthenticationError('You need to be logged in!');
     },
