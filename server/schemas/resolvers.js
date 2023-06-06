@@ -6,31 +6,31 @@ const resolvers = {
   Query: {
     getMembers: async (parent, args, context) => {
       if (context.user) {
-        return User.find();
+        return await User.find();
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     getMe: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return await User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     getAllEvents: async (parent, args, context) => {
       if (context.user) {
-        return Event.find().populate('User');
+        return await Event.find().populate('User');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     getEvent: async (parent, {eventId}, context) => {
       if (context.user) {
-        return Event.findOne({ _id: eventId }).populate('User');
+        return await Event.findOne({ _id: eventId }).populate('User');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     getUserEvent: async (parent, args, context) => {
       if (context.user) {
-        return UserEvent.find({ userId: context.user._id }).populate('Event');
+        return await UserEvent.find({ userId: context.user._id }).populate('Event');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -61,28 +61,61 @@ const resolvers = {
     },
     updateUser: async (parent, { name, phone, email, address, emergencyContactNumber, emergencyContactName}, context) => {
       if (context.user) {
-        User.findOneAndUpdate(
+        await User.findOneAndUpdate(
           { _id: context.user._id },
           { name: name, phone: phone, email: email, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName},
           {new : true}
         );
 
-        return thought;
+        return User;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     deleteUser: async (parent, args, context) => {
       if (context.user) {
         // TODO: How to expire token while deleting user
-        User.findOneAndDelete(
+        await User.findOneAndDelete(
           { _id: context.user._id },
           {new : true}
         );
 
-        return thought;
+        return User;
       }
       throw new AuthenticationError('You need to be logged in!');
-    }
+    },
+    createEvent: async (parent, {name, location, startTime, startDate, endTime, endDate, description}, context) => {
+      if (context.user) {
+        await Event.create(
+          {name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description, eventCreator: context.user._id}
+        );
+
+        return Event;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    updateEvent: async (parent, { eventId, name, location, startTime, startDate, endTime, endDate, description}, context) => {
+      if (context.user) {
+        await Event.findOneAndUpdate(
+          { _id: eventId },
+          { name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description},
+          {new : true}
+        );
+
+        return Event;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    deleteEvent: async (parent, {eventId}, context) => {
+      if (context.user) {
+        await Event.findOneAndDelete(
+          { _id: eventId },
+          {new : true}
+        );
+
+        return Event;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   }
 };
 
