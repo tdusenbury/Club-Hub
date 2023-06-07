@@ -1,4 +1,4 @@
-// import { gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 // export const QUERY_USER = gql`
 //   query user($username: String!) {
@@ -32,3 +32,20 @@
 //     }
 //   }
 // `;
+
+
+export const QUERY_EVENTS = gql`
+  query getAllEvents {
+    getAllEvents {
+      _id
+      name
+      location
+      startTime
+      startDate
+      endTime
+      endDate
+      description
+      eventCreator
+    }
+  }
+`;

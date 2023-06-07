@@ -24,3 +24,19 @@ export const CREATE_USER = gql`
   }
 `;
 
+export const ADD_EVENT = gql`
+  mutation createEvent($name:String!, $location: String!, $startTime:String!,$startDate: String!, $endTime:String,$endDate: String!, $description:String! ) {
+    createEvent(name:$name, location: $location, startTime: $startTime,startDate: $startDate, endTime:$endTime,endDate: $endDate, description: $description) {
+      _id
+      location
+      name 
+      location
+      startTime 
+      startDate
+      endTime 
+      endDate
+      description 
+    }
+  }
+`;
+
