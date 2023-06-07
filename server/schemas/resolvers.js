@@ -85,12 +85,14 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     createEvent: async (parent, { name, location, startTime, startDate, endTime, endDate, description }, context) => {
+      console.log(name, location, startTime, startDate, endTime, endDate, description);
+
       if (context.user) {
-        await Event.create(
+        const newEvent = await Event.create(
           { name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description, eventCreator: context.user._id }
         );
 
-        return Event;
+        return newEvent;
       }
       throw new AuthenticationError('You need to be logged in!');
     },

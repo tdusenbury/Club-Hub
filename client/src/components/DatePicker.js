@@ -7,8 +7,9 @@ const MyCalendar = ({ onDateChange }) => {
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
-        onDateChange(date.toString().split(" ").slice(0, 4).join(" "));
-        console.log(typeof date);
+        const newDate = new Date(date);
+        onDateChange(newDate.getTime());
+
     };
 
 

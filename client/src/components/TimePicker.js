@@ -9,7 +9,6 @@ const MyClock = ({ onTimeChange }) => {
 
     function onChange(value) {
         onTimeChange(value.format(str));
-
     }
 
     return (

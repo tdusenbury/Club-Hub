@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import MyCalendar from '../components/DatePicker';
 import MyClock from '../components/TimePicker';
 import '../assets/styles/Events.css';
+import { useMutation } from '@apollo/client';
+import { ADD_EVENT } from '../utils/mutations';
+import { QUERY_EVENTS } from '../utils/queries';
+
+
 
 const СreateEvent = () => {
     const [eventData, setEventData] = useState({
@@ -14,6 +19,23 @@ const СreateEvent = () => {
         description: ''
     });
 
+    const [createEvent, { error }] = useMutation(ADD_EVENT);
+
+    // , {
+    //     update(cache, { data: { createEvent } }) {
+    //         try {
+    //             const { events } = cache.readQuery({ query: QUERY_EVENTS });
+
+    //             cache.writeQuery({
+    //                 query: QUERY_EVENTS,
+    //                 data: { events: [createEvent, ...events] },
+    //             });
+    //         } catch (e) {
+    //             console.error(e);
+    //         }
+    //     },
+    // });
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEventData((prevData) => ({
@@ -22,12 +44,39 @@ const СreateEvent = () => {
         }));
     };
 
-    const handleCreateEvent = () => {
-        // TODO add login and use mutation hook
+    const handleCreateEvent = async (event) => {
+
         console.log(eventData);
+        event.preventDefault();
+
+        try {
+            const { data } = await createEvent({
+                variables: {
+                    name: eventData.name,
+                    location: eventData.location,
+                    startTime: eventData.startTime,
+                    startDate: eventData.startDate.toString(),
+                    endTime: eventData.endTime,
+                    endDate: eventData.endDate.toString(),
+                    description: eventData.description
+
+                },
+            });
+            console.log(data);
+            setEventData({
+                name: '',
+                location: '',
+                startTime: '',
+                startDate: '',
+                endTime: '',
+                endDate: '',
+                description: ''
+            });
+        } catch (err) {
+            console.error(err);
+        }
     };
-    console.log(eventData.endTime);
-    console.log(eventData.startTime);
+
 
     return (
         <div className="event-page-container">
