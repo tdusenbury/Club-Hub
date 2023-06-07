@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MyCalendar from '../components/DatePicker';
 import MyClock from '../components/TimePicker';
-
+import '../assets/styles/Events.css';
 
 const СreateEvent = () => {
     const [eventData, setEventData] = useState({
@@ -38,9 +38,11 @@ const СreateEvent = () => {
                         <label>Name:</label>
                         <input type="text" name="name" value={eventData.name} onChange={handleInputChange} />
                     </div>
+                </div>
+                <div className="form-row">
                     <div className="form-column">
                         <label>Location:</label>
-                        <input type="text" name="location" value={eventData.location} onChange={handleInputChange} />
+                        <textarea type="text" name="location" value={eventData.location} onChange={handleInputChange} />
                     </div>
                 </div>
                 <div className="form-row">
@@ -52,8 +54,7 @@ const СreateEvent = () => {
                         <label>Start Date:</label>
                         <MyCalendar selectedDate={eventData.startDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} />
                     </div>
-                </div>
-                <div className="form-row">
+
                     <div className="form-column">
                         <label>End Time:</label>
                         <MyClock onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, endTime: time }))} />
