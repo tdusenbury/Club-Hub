@@ -62,25 +62,25 @@ const resolvers = {
     },
     updateUser: async (parent, { name, phone, email, address, emergencyContactNumber, emergencyContactName }, context) => {
       if (context.user) {
-        await User.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { name: name, phone: phone, email: email, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName },
           { new: true }
         );
 
-        return User;
+        return user;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     deleteUser: async (parent, args, context) => {
       if (context.user) {
         // TODO: How to expire token while deleting user
-        await User.findOneAndDelete(
+        const user = await User.findOneAndDelete(
           { _id: context.user._id },
           { new: true }
         );
 
-        return User;
+        return user;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -98,19 +98,19 @@ const resolvers = {
     },
     updateEvent: async (parent, { eventId, name, location, startTime, startDate, endTime, endDate, description }, context) => {
       if (context.user) {
-        await Event.findOneAndUpdate(
+        const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
           { name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description },
           { new: true }
         );
 
-        return Event;
+        return updatedEvent;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     deleteEvent: async (parent, { eventId }, context) => {
       if (context.user) {
-        await Event.findOneAndDelete(
+        const deletedEvent = await Event.findOneAndDelete(
           { _id: eventId },
           { new: true }
         );
@@ -118,7 +118,7 @@ const resolvers = {
           { events: { $in: [eventId] } }, // Filter users who have the event ID in their events array
           { $pull: { events: eventId } } // Pull the event ID from the events array
         )
-        return Event;
+        return deletedEvent;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -150,7 +150,6 @@ const resolvers = {
           { $pull: { events: eventId } },
           { new: true }
         );
-
 
         return [updatedUser, updatedEvent];
       }
