@@ -14,6 +14,8 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import About from './pages/About';
 import ClubHomePage from './pages/ClubHomePage';
+import PersonalDashboard from './pages/PersonalDashboard';
+import ChangeUserInfoForm from './pages/ChangeUserInfoForm';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -62,6 +64,14 @@ function App() {
               <Route 
                 path="/clubhomepage" 
                 element={<ClubHomePage />}
+              /> 
+              <Route 
+                path="/personaldashboard" 
+                element={<PersonalDashboard />}
+              />
+              <Route 
+                path="/changeuserinfo" 
+                element={<ChangeUserInfoForm />}
               />
               {/* <Route 
                 path="/about" 
