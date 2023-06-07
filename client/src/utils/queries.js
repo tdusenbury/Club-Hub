@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+
 // export const QUERY_USER = gql`
 //   query user($username: String!) {
 //     user(username: $username) {
@@ -16,31 +17,24 @@ import { gql } from '@apollo/client';
 // `;
 
 
-
-export const QUERY_ME = gql`
-  query me {
-    me {
-      _id
-      username
-      email
+export const GET_ME = gql`
+  query getMe {
+    getMe {
+      name
       phone
       address
       emergencyContactNumber
       emergencyContactName
       events {
-        _id
-        name
-        location
-        startTime
-        startDate
-        endTime
-        endDate
-        description
-        eventCreator
+          _id
+          name
+          location
+          startTime
+          startDate
+          endTime
+          endDate
+          description  
       }
-    }
-  }
-`;
 
 
 export const QUERY_EVENTS = gql`
