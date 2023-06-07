@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import MyCalendar from './components/DatePicker';
-import MyClock from './components/TimePicker';
+import MyCalendar from '../components/DatePicker';
+import MyClock from '../components/TimePicker';
 
 
 const СreateEvent = () => {
