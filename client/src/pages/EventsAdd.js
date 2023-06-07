@@ -26,6 +26,8 @@ const СreateEvent = () => {
         // TODO add login and use mutation hook
         console.log(eventData);
     };
+    console.log(eventData.endTime);
+    console.log(eventData.startTime);
 
     return (
         <div className="event-page-container">
@@ -44,7 +46,7 @@ const СreateEvent = () => {
                 <div className="form-row">
                     <div className="form-column">
                         <label>Start Time:</label>
-                        <MyClock selectedTime={eventData.startTime} onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, startTime: time }))} />
+                        <MyClock onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, startTime: time }))} />
                     </div>
                     <div className="form-column">
                         <label>Start Date:</label>
@@ -54,7 +56,7 @@ const СreateEvent = () => {
                 <div className="form-row">
                     <div className="form-column">
                         <label>End Time:</label>
-                        <MyClock selectedTime={eventData.endTime} onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, endTime: time }))} />
+                        <MyClock onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, endTime: time }))} />
                     </div>
                     <div className="form-column">
                         <label>End Date:</label>
