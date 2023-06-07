@@ -18,13 +18,13 @@ const resolvers = {
     },
     getAllEvents: async (parent, args, context) => {
       if (context.user) {
-        return await Event.find().populate('User');
+        return await Event.find().sort({ startDate: -1 });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     getEvent: async (parent, { eventId }, context) => {
       if (context.user) {
-        return await Event.findOne({ _id: eventId }).populate('User');
+        return await Event.findOne({ _id: eventId });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
