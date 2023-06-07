@@ -17,6 +17,8 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "dotenv": "^16.1.4"
+    "dotenv": "^16.1.4",
+    "rc-time-picker": "^3.7.3",
+    "react-calendar": "^4.2.1"
   }
 }
