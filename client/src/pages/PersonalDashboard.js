@@ -11,6 +11,7 @@ const PersonalDashboard = () => {
     const { loading, data } = useQuery(GET_ME);
 
     const user = data?.getMe || {};
+    console.log(user);
     // navigate to personal profile page if username is yours
     /* if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
        return <Navigate to="/me" />;
@@ -28,7 +29,7 @@ const PersonalDashboard = () => {
          </h4>
        );
      }*/
-     const handleFormSubmit = async (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
 
     };
@@ -43,9 +44,6 @@ const PersonalDashboard = () => {
                     </h2>
                     <p>
                         Name: {user.name}
-                    </p>
-                    <p>
-                        Email: {user.email}
                     </p>
                     <p>
                         Phone: {user.phone}
@@ -63,16 +61,16 @@ const PersonalDashboard = () => {
                         className="col-12 col-md-10 mb-3 p-3"
                         style={{ border: '1px dotted #1a1a1a' }}
                     >
-                    <Link
-                        className="btn btn-block btn-primary"
-                        to="/changeuserinfo">
-                        <button
+                        <Link
                             className="btn btn-block btn-primary"
-                            style={{ cursor: 'pointer' }}
-                        >                
-                            Change Personal Information
-                        </button>
-                    </Link>
+                            to="/changeuserinfo">
+                            <button
+                                className="btn btn-block btn-primary"
+                                style={{ cursor: 'pointer' }}
+                            >
+                                Change Personal Information
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
