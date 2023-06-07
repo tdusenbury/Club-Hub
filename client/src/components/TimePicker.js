@@ -3,23 +3,20 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
 
-const MyClock = () => {
+const MyClock = ({ onTimeChange }) => {
 
-
-    const showSecond = false;
-    const str = showSecond ? 'HH:mm:ss' : 'HH:mm';
+    const str = 'HH:mm a';
 
     function onChange(value) {
-        console.log(value && value.format(str));
+        onTimeChange(value.format(str));
     }
-
 
     return (
         <div>
             <TimePicker
                 use12Hours={true}
                 style={{ width: 100 }}
-                showSecond={showSecond}
+                showSecond={false}
                 defaultValue={moment()}
                 className="xxx"
                 onChange={onChange}

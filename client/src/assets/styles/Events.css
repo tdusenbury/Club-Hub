@@ -1,0 +1,31 @@
+.form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.form-column {
+    margin-right: 1rem;
+    width: 500px;
+}
+
+.label-column {
+    width: 120px;
+}
+
+.input-column {
+
+    flex: 1;
+}
+
+textarea {
+    width: 100%;
+    height: 6rem;
+    resize: vertical;
+}
+
+@media screen and (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
