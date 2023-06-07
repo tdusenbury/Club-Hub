@@ -14,6 +14,8 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import About from './pages/About';
 import ClubHomePage from './pages/ClubHomePage';
+import PersonalDashboard from './pages/PersonalDashboard';
+import ChangeUserInfoForm from './pages/ChangeUserInfoForm';
 import EventCalendar from './pages/EventsCalendar';
 import СreateEvent from './pages/EventsAdd';
 
@@ -64,6 +66,14 @@ function App() {
               <Route
                 path="/clubhomepage"
                 element={<ClubHomePage />}
+              /> 
+              <Route 
+                path="/personaldashboard" 
+                element={<PersonalDashboard />}
+              />
+              <Route 
+                path="/changeuserinfo" 
+                element={<ChangeUserInfoForm />}
               />
               <Route
                 path="/eventscalendar"
