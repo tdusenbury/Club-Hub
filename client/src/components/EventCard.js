@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import Auth from '../utils/auth';
 
-function Event({ name, location, startTime, startDate, endTime, endDate, description, eventCreator }) {
+function EventCard(event) {
+    console.log(event);
     function handleRemove() {
         //TODO
     }
     function handleUpdate() {
         //TODO
     }
-    const renderButtons = Auth.loggedIn() && (Auth.getProfile().data._id === eventCreator);
+    const { name, location, startTime, startDate, endTime, endDate, description, eventCreator } = event.event;
+    console.log(eventCreator._id, Auth.getProfile().data._id);
+    const renderButtons = Auth.loggedIn() && (Auth.getProfile().data._id === eventCreator._id);
     return (
 
         <div>
@@ -33,4 +36,4 @@ function Event({ name, location, startTime, startDate, endTime, endDate, descrip
 }
 
 
-export default Event;
+export default EventCard;

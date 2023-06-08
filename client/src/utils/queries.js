@@ -40,18 +40,24 @@ export const GET_ME = gql`
 `;
 
 
+
 export const QUERY_EVENTS = gql`
-  query getAllEvents {
+  {
     getAllEvents {
+    _id
+    name
+    location
+    startTime
+    startDate
+    endTime
+    endDate
+    description
+    eventCreator{
       _id
-      name
-      location
-      startTime
-      startDate
-      endTime
-      endDate
-      description
-      eventCreator
     }
+
   }
+  }
+
 `;
+

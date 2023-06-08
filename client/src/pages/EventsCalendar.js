@@ -5,8 +5,11 @@ import { QUERY_EVENTS } from '../utils/queries';
 import { Link } from 'react-router-dom';
 
 export default function EventCalendar() {
-    const { loading, data } = useQuery(QUERY_EVENTS);
-    const events = data?.events || [];
+    const { loading, error, data } = useQuery(QUERY_EVENTS);
+    const events = data?.getAllEvents || [];
+    if (error) {
+        return <p>Error: {error.message}</p>;
+    }
     // TODO extract all events from DB. Use query hook.
     // dynamicly map all imformation to EventCard
     console.log(events);
@@ -28,7 +31,7 @@ export default function EventCalendar() {
         <div>
             {events &&
                 events.map((event) => (
-                    <EventCard event />))
+                    <EventCard key={event._id} event={event} />))
             }
             <Link to="/addevent">
                 <button onClick={handleEventCreate}>Add an Event </button>
