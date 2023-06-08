@@ -16,11 +16,10 @@ If you have found this blog outside of GitHub and wish to view the original, [vi
 
 --------------------------------------------------------------
 
-The below image shows that when the site loads, you are presented with a homepage that includes a view of posted blog content; navigation links to the homepage and dashboard; and options to signup or login to a personal account.
+The below image shows that when the site loads, you are presented with the Club Hub home page:
 
 
-
-![alt text](./img/homepage.PNG)
+![alt text]()
 
 
 ----------------------------------------------------------------------
@@ -66,20 +65,38 @@ If a user chooses to add an event, they can go to this page:
 ------------------------------------------------------------------
 
 ## Author Info
-My name is Tamara "T" Dusenbury
-If you have any questions about me or this project, please contact me:
+This is a group collaboration. Below you can find the contact information for all developers:
+
+Afi Nkhume-Crecy
+- [**Github**]()
+- [**LinkedIn**]()
+- [**Email**]()
+
+
+Bahareh Hosseini
+- [**Github**]()
+- [**LinkedIn**]()
+- [**Email**]()
+
+
+Liubov Sobolevskaya
+- [**Github**]()
+- [**LinkedIn**]()
+- [**Email**]()
+
+Tamara "T" Dusenbury
   
 - [**Github**](https://github.com/tdusenbury)
-
 - [**LinkedIn**](https://linkedin.com/in/tamara-dusenbury-02ab8591)
-
 - [**Email**](mailto:tamara.dusenbury@gmail.com)
+
+
 
 
 ------------------------------------------------------------
 ## Credits
 
-I could only be so fortunate to work with such amazing people as those in my cohort!
+
 
 -----------------------------------------------------------------
 
