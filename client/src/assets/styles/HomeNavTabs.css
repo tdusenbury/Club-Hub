@@ -1,0 +1,20 @@
+.nav_link{
+    font-size: 30px;
+    padding: 10px;
+    
+}
+/* 
+.nav_logo{
+    display: inline-block;
+} */
+.nav_links{
+    /* display: inline-block; */
+    width: 85%;
+}
+.nav_Links{
+    float: right;
+}
+
+
+.header_width{
+}
