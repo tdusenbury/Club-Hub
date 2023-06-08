@@ -1,0 +1,35 @@
+.home-container {
+    background-color: #c1e8e0; /* Replace with your desired background color */
+    min-height: 100vh; /* Ensures the container covers the full height of the viewport */
+  }
+
+.home-image {
+    padding:30px;
+    background-color: rgb(46, 77, 161);
+    border-radius: 20px;
+    margin-left: 70px;
+    margin-top: 3.5rem; 
+}
+
+.involved-card {
+    background-color: greenyellow;
+    padding: 20px;
+    height:400px;
+    border-radius: 20px;
+    margin-top: 6rem; 
+}
+
+.mt-custom {
+    margin-top: 3.5rem; 
+}
+
+li {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 40px;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Libre Baskerville', serif;
+}

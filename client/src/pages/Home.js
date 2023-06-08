@@ -1,21 +1,42 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { } from '../utils/queries';
-import { MDBRow, MDBCol } from 'mdb-react-ui-kit';
-
+import { MDBRow, MDBCol, MDBContainer } from 'mdb-react-ui-kit';
+import HomeScreenPic from '../assets/images/HomeScreenPic.png';
+import "../assets/styles/Home.css";
 
 const Home = () => {
   // const { loading, data } = useQuery(QUERY_THOUGHTS);
 
   return (
-         <MDBRow>
-      <MDBCol md='8'>
-        md="8"
-      </MDBCol>
-      <MDBCol md='4'>
-        md="4"
-      </MDBCol>
-    </MDBRow>
+    <div className="home-container">
+      <MDBRow className="home">
+        <MDBCol md='7'>
+          <img
+            src={HomeScreenPic}
+            alt="logo"
+            width="1000px auto"
+            className="home-image"
+          />
+        </MDBCol>
+        <MDBCol md='5'>
+          <MDBContainer className='involved-card'>
+            <div className='text-center mt-custom'>
+              <h2>Get Involved!</h2>
+              <br />
+              <ul>
+                <li>Get in contact with other club members or parents</li>
+                <br />
+                <li>Get access to event schedules and resources</li>
+                <br />
+                <li>See who is in the community!</li>
+                <br />
+              </ul>
+            </div>
+          </MDBContainer>
+        </MDBCol>
+      </MDBRow>
+    </div>
   );
 };
 
