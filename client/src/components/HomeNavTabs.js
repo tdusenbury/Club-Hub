@@ -1,25 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import "../assets/styles/HomeNavTabs.css";
 
 
 function HomeNavTabs({ currentPage, handlePageChange }) {
   return (
-    <div >
-      <h1> NAV TABS</h1>
-      <div>
+    <div className="nav_Links">
         <Link
           to="/">
-            <h2>Home</h2>
+            <span className='nav_link'>Home</span>
           </Link>
           <Link
           to="/about">
-            <h2>About</h2>
+            <span className='nav_link'>About</span>
           </Link>
           <Link
           to="/login">
-            <h2>Login / Signup</h2>
+            <span className='nav_link'>Login / Signup</span>
           </Link>
-      </div>
     </div>
   );
 }

@@ -17,7 +17,9 @@ import ClubHomePage from './pages/ClubHomePage';
 import PersonalDashboard from './pages/PersonalDashboard';
 import ChangeUserInfoForm from './pages/ChangeUserInfoForm';
 import EventCalendar from './pages/EventsCalendar';
+//import UpdateEvent from './pages/EventsUpdate';
 import СreateEvent from './pages/EventsAdd';
+import Members from './pages/Members'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -47,9 +49,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+      <Header />
         <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
+          
             <Routes>
               <Route
                 path="/"
@@ -66,29 +68,36 @@ function App() {
               <Route
                 path="/clubhomepage"
                 element={<ClubHomePage />}
-              /> 
-              <Route 
-                path="/personaldashboard" 
+              />
+              <Route
+                path="/personaldashboard"
                 element={<PersonalDashboard />}
               />
-              <Route 
-                path="/changeuserinfo" 
+              <Route
+                path="/changeuserinfo"
                 element={<ChangeUserInfoForm />}
               />
               <Route
                 path="/eventscalendar"
                 element={<EventCalendar />}
               />
+              {/* <Route
+                path="/updateevent"
+                element={<UpdateEvent />}
+              /> */}
               <Route
                 path="/addevent"
                 element={<СreateEvent />}
+              />
+              <Route
+                path="/members"
+                element={<Members />}
               />
               {/* <Route 
                 path="/about" 
                 element={<About />}
               /> */}
             </Routes>
-          </div>
         </div>
       </Router>
     </ApolloProvider>

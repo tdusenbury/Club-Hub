@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import MyCalendar from './components/DatePicker';
-import MyClock from './components/TimePicker';
-
+import MyCalendar from '../components/DatePicker';
+import MyClock from '../components/TimePicker';
+import { GET_EVENT } from '../utils/queries';
+import { useMutation, useQuery } from '@apollo/client';
 
 const СreateEvent = () => {
+    const { loading, data } = useQuery(GET_EVENT);
+    const event = data?.getEvent || {};
+
     const [eventData, setEventData] = useState({
-        name: '',
-        location: '',
-        startTime: '',
-        startDate: '',
-        endTime: '',
-        endDate: '',
-        description: ''
+        name: event.name || '',
+        location: event.location || '',
+        startTime: event.startTime || '',
+        startDate: event.startDate || '',
+        endTime: event.endTime || '',
+        endDate: event.endDate || '',
+        description: event.description || ''
     });
 
     const handleInputChange = (e) => {
@@ -22,7 +26,7 @@ const СreateEvent = () => {
         }));
     };
 
-    const handleCreateEvent = () => {
+    const handleUpdateEvent = () => {
         // TODO add login and use mutation hook
         console.log(eventData);
     };
@@ -66,7 +70,7 @@ const СreateEvent = () => {
                     <textarea name="description" value={eventData.description} onChange={handleInputChange} />
                 </div>
             </form>
-            <button className="event-button" onClick={handleCreateEvent}>Create an event</button>
+            <button className="event-button" onClick={handleUpdateEvent}>Update an event</button>
         </div>
     );
 };

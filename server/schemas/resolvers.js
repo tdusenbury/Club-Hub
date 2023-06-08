@@ -19,7 +19,7 @@ const resolvers = {
     },
     getAllEvents: async (parent, args, context) => {
       if (context.user) {
-        return await Event.find().sort({ startDate: -1 });
+        return Event.find().sort({ startDate: -1 });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -60,15 +60,18 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (parent, { name, phone, email, address, emergencyContactNumber, emergencyContactName }, context) => {
+
+    updateUser: async (parent, { name, phone, address, emergencyContactNumber, emergencyContactName }, context) => {
       if (context.user) {
-        const user = await User.findOneAndUpdate(
+        const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { name: name, phone: phone, email: email, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName },
+          { name: name, phone: phone, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName },
           { new: true }
         );
 
-        return user;
+        console.log(updatedUser);
+
+        return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -109,6 +112,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     deleteEvent: async (parent, { eventId }, context) => {
+      console.log("I am here");
       if (context.user) {
         const deletedEvent = await Event.findOneAndDelete(
           { _id: eventId },

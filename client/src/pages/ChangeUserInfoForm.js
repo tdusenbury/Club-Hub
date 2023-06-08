@@ -5,16 +5,14 @@ import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 
-import Auth from '../utils/auth';
-
 const ChangeUserInfoForm = () => {
     const { loading, data } = useQuery(GET_ME);
 
     const user = data?.getMe || {};
 
     const [formState, setFormState] = useState({
-        name: user.name,
-        phone: user.phone,
+        name: user.name || '',
+        phone: user.phone || '',
         address: user?.address || "",
         emergencyContactNumber: user?.emergencyContactNumber || "",
         emergencyContactName: user?.emergencyContactName || ""
@@ -23,10 +21,12 @@ const ChangeUserInfoForm = () => {
     const [updateUser, { error, userData }] = useMutation(UPDATE_USER);
     const handleChange = (event) => {
         const { name, value } = event.target;
+        console.log(name, value);
         setFormState({
             ...formState,
             [name]: value,
         });
+
     };
 
     const handleFormSubmit = async (event) => {
@@ -34,9 +34,10 @@ const ChangeUserInfoForm = () => {
         console.log(formState);
 
         try {
-            const { userData } = await updateUser({
+            await updateUser({
                 variables: { ...formState },
             });
+
         } catch (e) {
             console.error(e);
         }

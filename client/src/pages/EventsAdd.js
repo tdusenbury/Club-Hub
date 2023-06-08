@@ -19,22 +19,21 @@ const СreateEvent = () => {
         description: ''
     });
 
-    const [createEvent, { error }] = useMutation(ADD_EVENT);
-
-    // , {
-    //     update(cache, { data: { createEvent } }) {
-    //         try {
-    //             const { events } = cache.readQuery({ query: QUERY_EVENTS });
-
-    //             cache.writeQuery({
-    //                 query: QUERY_EVENTS,
-    //                 data: { events: [createEvent, ...events] },
-    //             });
-    //         } catch (e) {
-    //             console.error(e);
-    //         }
-    //     },
-    // });
+    const [createEvent, { error }] = useMutation(ADD_EVENT, {
+        update(cache, { data: { createEvent } }) {
+            try {
+                const { getAllEvents } = cache.readQuery({ query: QUERY_EVENTS });
+                if (getAllEvents) {
+                    cache.writeQuery({
+                        query: QUERY_EVENTS,
+                        data: { getAllEvents: [createEvent, ...getAllEvents] },
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        },
+    });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -75,6 +74,7 @@ const СreateEvent = () => {
         } catch (err) {
             console.error(err);
         }
+        window.location.assign('/eventscalendar');
     };
 
 
@@ -97,7 +97,7 @@ const СreateEvent = () => {
                 <div className="form-row">
                     <div className="form-column">
                         <label>Start Time:</label>
-                        <MyClock onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, startTime: time }))} />
+                        <MyClock selectedTime={eventData.startTime} onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, startTime: time }))} />
                     </div>
                     <div className="form-column">
                         <label>Start Date:</label>
@@ -106,7 +106,7 @@ const СreateEvent = () => {
 
                     <div className="form-column">
                         <label>End Time:</label>
-                        <MyClock onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, endTime: time }))} />
+                        <MyClock selectedTime={eventData.endTime} onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, endTime: time }))} />
                     </div>
                     <div className="form-column">
                         <label>End Date:</label>
