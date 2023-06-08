@@ -6,10 +6,10 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     getMembers: async (parent, args, context) => {
-   //   if (context.user) {
+      if (context.user) {
         return await User.find();
-   /*   }
-      throw new AuthenticationError('You need to be logged in!');*/
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     getMe: async (parent, args, context) => {
       if (context.user) {
@@ -19,7 +19,7 @@ const resolvers = {
     },
     getAllEvents: async (parent, args, context) => {
       if (context.user) {
-        return await Event.find().sort({ startDate: -1 });
+        return Event.find().sort({ startDate: -1 });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -60,6 +60,7 @@ const resolvers = {
 
       return { token, user };
     },
+
     updateUser: async (parent, {name, phone, address, emergencyContactNumber, emergencyContactName }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
