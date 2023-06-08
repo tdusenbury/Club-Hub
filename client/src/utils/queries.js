@@ -35,7 +35,9 @@ export const GET_ME = gql`
           endDate
           description  
       }
-  }`
+    }
+  }
+`;
 
 
 export const QUERY_EVENTS = gql`
