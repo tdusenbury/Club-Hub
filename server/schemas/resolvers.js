@@ -29,7 +29,7 @@ const resolvers = {
         // const date = new Date(currentDate);
         // const formattedDate = date.toISOString();
         console.log(currentDate);
-        const futureEvents = Event.find({ endDate: { $gt: currentDate } }).sort({ startDate: -1 });
+        const futureEvents = Event.find({ endDate: { $gt: currentDate } }).sort({ startDate: 1 });
         return futureEvents
 
       }
