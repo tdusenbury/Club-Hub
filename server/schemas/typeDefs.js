@@ -36,6 +36,7 @@ const typeDefs = gql`
     getMe: User
     getEvent(_id:ID!): Event
     getAllEvents: [Event]
+    getFutureEvents: [Event]
     getUserEvent(userID:ID!): [Event]
   }
 
