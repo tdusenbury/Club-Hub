@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import MyCalendar from '../components/DatePicker';
 import MyClock from '../components/TimePicker';
+import '../assets/styles/Events.css';
+import { useMutation } from '@apollo/client';
+import { ADD_EVENT } from '../utils/mutations';
+import { QUERY_EVENTS } from '../utils/queries';
+
 
 
 const СreateEvent = () => {
@@ -14,6 +19,23 @@ const СreateEvent = () => {
         description: ''
     });
 
+    const [createEvent, { error }] = useMutation(ADD_EVENT);
+
+    // , {
+    //     update(cache, { data: { createEvent } }) {
+    //         try {
+    //             const { events } = cache.readQuery({ query: QUERY_EVENTS });
+
+    //             cache.writeQuery({
+    //                 query: QUERY_EVENTS,
+    //                 data: { events: [createEvent, ...events] },
+    //             });
+    //         } catch (e) {
+    //             console.error(e);
+    //         }
+    //     },
+    // });
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEventData((prevData) => ({
@@ -22,10 +44,39 @@ const СreateEvent = () => {
         }));
     };
 
-    const handleCreateEvent = () => {
-        // TODO add login and use mutation hook
+    const handleCreateEvent = async (event) => {
+
         console.log(eventData);
+        event.preventDefault();
+
+        try {
+            const { data } = await createEvent({
+                variables: {
+                    name: eventData.name,
+                    location: eventData.location,
+                    startTime: eventData.startTime,
+                    startDate: eventData.startDate.toString(),
+                    endTime: eventData.endTime,
+                    endDate: eventData.endDate.toString(),
+                    description: eventData.description
+
+                },
+            });
+            console.log(data);
+            setEventData({
+                name: '',
+                location: '',
+                startTime: '',
+                startDate: '',
+                endTime: '',
+                endDate: '',
+                description: ''
+            });
+        } catch (err) {
+            console.error(err);
+        }
     };
+
 
     return (
         <div className="event-page-container">
@@ -36,25 +87,26 @@ const СreateEvent = () => {
                         <label>Name:</label>
                         <input type="text" name="name" value={eventData.name} onChange={handleInputChange} />
                     </div>
+                </div>
+                <div className="form-row">
                     <div className="form-column">
                         <label>Location:</label>
-                        <input type="text" name="location" value={eventData.location} onChange={handleInputChange} />
+                        <textarea type="text" name="location" value={eventData.location} onChange={handleInputChange} />
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-column">
                         <label>Start Time:</label>
-                        <MyClock selectedTime={eventData.startTime} onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, startTime: time }))} />
+                        <MyClock onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, startTime: time }))} />
                     </div>
                     <div className="form-column">
                         <label>Start Date:</label>
                         <MyCalendar selectedDate={eventData.startDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} />
                     </div>
-                </div>
-                <div className="form-row">
+
                     <div className="form-column">
                         <label>End Time:</label>
-                        <MyClock selectedTime={eventData.endTime} onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, endTime: time }))} />
+                        <MyClock onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, endTime: time }))} />
                     </div>
                     <div className="form-column">
                         <label>End Date:</label>

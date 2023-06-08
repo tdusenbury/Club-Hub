@@ -36,10 +36,6 @@ export const GET_ME = gql`
           description  
       }
 
-    }
-  }
-`;
-
 
 export const QUERY_EVENTS = gql`
   query getAllEvents {
