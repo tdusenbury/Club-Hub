@@ -13,8 +13,8 @@ const ChangeUserInfoForm = () => {
     const user = data?.getMe || {};
 
     const [formState, setFormState] = useState({
-        name: user.name,
-        phone: user.phone,
+        name: user.name || '',
+        phone: user.phone || '',
         address: user?.address || "",
         emergencyContactNumber: user?.emergencyContactNumber || "",
         emergencyContactName: user?.emergencyContactName || ""
@@ -23,10 +23,12 @@ const ChangeUserInfoForm = () => {
     const [updateUser, { error, userData }] = useMutation(UPDATE_USER);
     const handleChange = (event) => {
         const { name, value } = event.target;
+        console.log(name, value);
         setFormState({
             ...formState,
             [name]: value,
         });
+
     };
 
     const handleFormSubmit = async (event) => {
@@ -34,9 +36,12 @@ const ChangeUserInfoForm = () => {
         console.log(formState);
 
         try {
+            console.log("I am trying");
+            console.log(formState);
             const { userData } = await updateUser({
                 variables: { ...formState },
             });
+
         } catch (e) {
             console.error(e);
         }
