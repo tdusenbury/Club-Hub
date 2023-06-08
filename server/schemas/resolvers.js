@@ -60,15 +60,17 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (parent, { name, phone, email, address, emergencyContactNumber, emergencyContactName }, context) => {
+    updateUser: async (parent, {name, phone, address, emergencyContactNumber, emergencyContactName }, context) => {
       if (context.user) {
-        const user = await User.findOneAndUpdate(
+        const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { name: name, phone: phone, email: email, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName },
+          { name: name, phone: phone, address: address, emergencyContactNumber: emergencyContactNumber, emergencyContactName: emergencyContactName },
           { new: true }
         );
 
-        return user;
+        console.log(updatedUser);
+
+        return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
     },

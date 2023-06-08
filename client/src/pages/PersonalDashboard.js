@@ -1,21 +1,13 @@
 import React from 'react';
-import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { GET_ME } from '../utils/queries';
 import { Link } from 'react-router-dom';
 
-import Auth from '../utils/auth';
-
 const PersonalDashboard = () => {
     const { loading, data } = useQuery(GET_ME);
 
     const user = data?.getMe || {};
-    console.log(user);
-    // navigate to personal profile page if username is yours
-    /* if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-       return <Navigate to="/me" />;
-     }*/
 
     if (loading) {
         return <div>Loading...</div>;
@@ -31,7 +23,6 @@ const PersonalDashboard = () => {
      }*/
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
     };
 
 
