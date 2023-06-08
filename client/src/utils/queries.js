@@ -61,6 +61,24 @@ export const QUERY_EVENTS = gql`
 
 `;
 
+export const QUERY_FUTURE_EVENTS = gql`
+  {
+    getFutureEvents {
+    _id
+    name
+    location
+    startTime
+    startDate
+    endTime
+    endDate
+    description
+    eventCreator{
+      _id
+    }
+  }
+  }
+`;
+
 export const GET_MEMBERS = gql`
   query getMembers {
     getMembers {
