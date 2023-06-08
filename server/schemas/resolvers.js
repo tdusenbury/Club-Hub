@@ -126,8 +126,9 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    addUserEvent: async (parent, { eventId, userId }, context) => {
+    addUserEvent: async (parent, { eventId }, context) => {
       if (context.user) {
+        const userId = context.user._id;
         const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
           { $addToSet: { attendingUsers: userId } },
@@ -138,7 +139,7 @@ const resolvers = {
           { $addToSet: { events: eventId } },
           { new: true }
         );
-        return [updatedUser, updatedEvent];
+        return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
     },

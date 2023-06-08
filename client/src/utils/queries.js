@@ -55,7 +55,6 @@ export const QUERY_EVENTS = gql`
     eventCreator{
       _id
     }
-
   }
   }
 
