@@ -49,9 +49,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+      <Header />
         <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
+          
             <Routes>
               <Route
                 path="/"
@@ -98,7 +98,6 @@ function App() {
                 element={<About />}
               /> */}
             </Routes>
-          </div>
         </div>
       </Router>
     </ApolloProvider>

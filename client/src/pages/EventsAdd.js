@@ -22,12 +22,13 @@ const СreateEvent = () => {
     const [createEvent, { error }] = useMutation(ADD_EVENT, {
         update(cache, { data: { createEvent } }) {
             try {
-                const { events } = cache.readQuery({ query: QUERY_EVENTS });
-
-                cache.writeQuery({
-                    query: QUERY_EVENTS,
-                    data: { events: [createEvent, ...events] },
-                });
+                const { getAllEvents } = cache.readQuery({ query: QUERY_EVENTS });
+                if (getAllEvents) {
+                    cache.writeQuery({
+                        query: QUERY_EVENTS,
+                        data: { getAllEvents: [createEvent, ...getAllEvents] },
+                    });
+                }
             } catch (e) {
                 console.error(e);
             }

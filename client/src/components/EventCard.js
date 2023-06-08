@@ -13,12 +13,14 @@ const EventCard = ({ event }) => {
         update(cache, { data: { deleteEvent } }) {
             try {
                 const { getAllEvents } = cache.readQuery({ query: QUERY_EVENTS });
-                const updatedSavedEvents = getAllEvents.filter((event) => event._id !== deleteEvent._id);
 
-                cache.writeQuery({
-                    query: QUERY_EVENTS,
-                    data: { getAllEvents: updatedSavedEvents },
-                });
+                if (getAllEvents) {
+                    const updatedSavedEvents = getAllEvents.filter((event) => event._id !== deleteEvent._id);
+                    cache.writeQuery({
+                        query: QUERY_EVENTS,
+                        data: { getAllEvents: updatedSavedEvents },
+                    });
+                }
             } catch (e) {
                 console.error(e);
             }
