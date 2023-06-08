@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../utils/mutations";
+import "../assets/styles/LoginSignIn.css";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const Login = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
@@ -35,24 +36,26 @@ const Login = (props) => {
 
     // clear form values
     setFormState({
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     });
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+    <main className="containing-div">
+      <div className="login-container">
+        <div className="card" style={{ backgroundColor: "#EEF4F4" }}>
+          <h4 className="card-header text-light p-3 text-center">
+            Login
+          </h4>
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
+                Success! You may now head{" "}
                 <Link to="/clubhomepage">back to the club homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form onSubmit={handleFormSubmit} className="container">
                 <input
                   className="form-input"
                   placeholder="Your email"
@@ -71,11 +74,14 @@ const Login = (props) => {
                 />
                 <button
                   className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   type="submit"
                 >
                   Submit
                 </button>
+                <Link to="/signup">
+                  <h3 className="text-center mt-4">Sign Up</h3>
+                </Link>
               </form>
             )}
 
@@ -85,12 +91,6 @@ const Login = (props) => {
               </div>
             )}
           </div>
-          <div>
-          <Link
-          to="/signup">
-            <h2>Sign Up</h2>
-          </Link>
-      </div>
         </div>
       </div>
     </main>
