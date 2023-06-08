@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
+import "../assets/styles/HomeNavTabs.css";
 
 function ClubNavTabs({ currentPage, handlePageChange }) {
   const logout = (event) => {
@@ -8,33 +9,31 @@ function ClubNavTabs({ currentPage, handlePageChange }) {
     Auth.logout()
   }
   return (
-    <div >
-      <h1> NAV TABS</h1>
       <div>
            <Link
           to="/clubhomepage">
-            <h2>Club Home Page</h2>
+             <span className='nav_link'>Club Home Page</span>
           </Link>
           <Link
           to="/members">
-            <h2>Member List</h2>
+            <span className='nav_link'>Member List</span>
           </Link>
           <Link
           to="/eventscalendar">
-            <h2>Events / Calendar</h2>
+           <span className='nav_link'>Add Event</span>
           </Link>
           <Link
           to="/personaldashboard">
-            <h2>Personal Dashboard</h2>
+            <span className='nav_link'>Personal Dashboard</span>
           </Link>
            <Link
           onClick = {logout}
           to = "/"
           >
-            <h2>Sign Out</h2>
+           <span className='nav_link'>Sign Out</span>
           </Link>
       </div>
-    </div>
+
   );
 }
 
