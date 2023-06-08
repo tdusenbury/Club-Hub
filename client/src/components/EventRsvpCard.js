@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Auth from '../utils/auth';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER_EVENT } from '../utils/mutations';
 import { QUERY_EVENTS } from '../utils/queries';
 
-const EventCard = ({ event }) => {
+const EventRsvpCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, attendingUsers } = event;
-  //  const renderButtons = Auth.loggedIn() && (!attendingUsers.include(Auth.getProfile().data._id));
-  //  console.log(renderButtons)
+    let renderButton = false
+    if(Auth.loggedIn()){
+        for(let i=0; i< attendingUsers.length; i++){
+            if (attendingUsers[i]._id === Auth.getProfile().data._id){
+                renderButton = true;
+            }
+        }
+    }
+
+    console.log(renderButton);
+    console.log(attendingUsers, name)
 
     const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT);
 
@@ -55,13 +64,13 @@ const EventCard = ({ event }) => {
                 <strong>End Date:</strong> {formattedEndDate} <br />
                 <strong>Description:</strong> {description}
             </p>
-            {
+            {!renderButton && (
                 <div className="event-buttons" style={styles.eventButtons}>
                     <button onClick={handleRSVPEvent} style={styles.button}>
                         RSVP for Event
                     </button>
                 </div>
-            }
+            )}
             {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
         </div>
     );
@@ -98,4 +107,4 @@ const styles = {
     },
 };
 
-export default EventCard;
+export default EventRsvpCard;

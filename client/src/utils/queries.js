@@ -55,6 +55,9 @@ export const QUERY_EVENTS = gql`
     eventCreator{
       _id
     }
+    attendingUsers{
+      _id
+    }
   }
   }
 
@@ -72,6 +75,9 @@ export const QUERY_FUTURE_EVENTS = gql`
     endDate
     description
     eventCreator{
+      _id
+    }
+    attendingUsers{
       _id
     }
   }
