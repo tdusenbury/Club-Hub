@@ -17,6 +17,7 @@ import ClubHomePage from './pages/ClubHomePage';
 import PersonalDashboard from './pages/PersonalDashboard';
 import ChangeUserInfoForm from './pages/ChangeUserInfoForm';
 import EventCalendar from './pages/EventsCalendar';
+//import UpdateEvent from './pages/EventsUpdate';
 import СreateEvent from './pages/EventsAdd';
 import Members from './pages/Members'
 
@@ -67,19 +68,23 @@ function App() {
               <Route
                 path="/clubhomepage"
                 element={<ClubHomePage />}
-              /> 
-              <Route 
-                path="/personaldashboard" 
+              />
+              <Route
+                path="/personaldashboard"
                 element={<PersonalDashboard />}
               />
-              <Route 
-                path="/changeuserinfo" 
+              <Route
+                path="/changeuserinfo"
                 element={<ChangeUserInfoForm />}
               />
               <Route
                 path="/eventscalendar"
                 element={<EventCalendar />}
               />
+              {/* <Route
+                path="/updateevent"
+                element={<UpdateEvent />}
+              /> */}
               <Route
                 path="/addevent"
                 element={<СreateEvent />}

@@ -61,7 +61,7 @@ const resolvers = {
       return { token, user };
     },
 
-    updateUser: async (parent, {name, phone, address, emergencyContactNumber, emergencyContactName }, context) => {
+    updateUser: async (parent, { name, phone, address, emergencyContactNumber, emergencyContactName }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -112,6 +112,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     deleteEvent: async (parent, { eventId }, context) => {
+      console.log("I am here");
       if (context.user) {
         const deletedEvent = await Event.findOneAndDelete(
           { _id: eventId },

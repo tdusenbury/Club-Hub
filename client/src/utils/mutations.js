@@ -50,3 +50,10 @@ export const ADD_EVENT = gql`
   }
 `;
 
+export const REMOVE_EVENT = gql`
+mutation deleteEvent($eventId: ID!) {
+  deleteEvent(eventId: $eventId) {
+    _id
+    name
+  }
+}`
