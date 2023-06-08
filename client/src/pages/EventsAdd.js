@@ -73,7 +73,7 @@ const СreateEvent = () => {
         } catch (err) {
             console.error(err);
         }
-        // window.location.assign('/eventscalendar');
+        window.location.assign('/eventscalendar');
     };
 
 
