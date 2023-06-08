@@ -18,6 +18,7 @@ import PersonalDashboard from './pages/PersonalDashboard';
 import ChangeUserInfoForm from './pages/ChangeUserInfoForm';
 import EventCalendar from './pages/EventsCalendar';
 import СreateEvent from './pages/EventsAdd';
+import Members from './pages/Members'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -82,6 +83,10 @@ function App() {
               <Route
                 path="/addevent"
                 element={<СreateEvent />}
+              />
+              <Route
+                path="/members"
+                element={<Members />}
               />
               {/* <Route 
                 path="/about" 
