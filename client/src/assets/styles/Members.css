@@ -1,0 +1,62 @@
+.custom-header-card {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 0.5rem 1rem 1rem 3rem;
+    background: rgb(102, 115, 116);
+    text-align: center;
+}
+
+.header-card h4 {
+    margin: 10px;
+    color: white;
+}
+
+.members-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+}
+
+.members {
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: fixed;
+    
+    background: #fff;
+}
+
+thead {
+    background: white;
+    color: black;
+}
+
+th,
+td {
+    padding: 0.5rem;
+    word-break: break-word;
+}
+
+@media screen and (max-width: 767px) {
+
+    th,
+    td {
+        white-space: normal;
+    }
+}
+
+thead{
+    background-color: lightgray;
+}
