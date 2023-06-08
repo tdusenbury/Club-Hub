@@ -1,28 +1,32 @@
 import React from 'react';
+import EventRsvpCard from '../components/EventRsvpCard';
 import { useQuery } from '@apollo/client';
+import { QUERY_FUTURE_EVENTS } from '../utils/queries';
+import { Link } from 'react-router-dom';
 
-import { } from '../utils/queries';
+export default function ClubHomePage() {
+    const { loading, error, data } = useQuery(QUERY_FUTURE_EVENTS);
+    const events = data?.getFutureEvents || [];
+    if (error) {
+        return <p>Error: {error.message}</p>;
+    }
+    // TODO extract all events from DB. Use query hook.
+    // dynamicly map all imformation to EventCard
+    console.log(events);
 
-const Home = () => {
-  // const { loading, data } = useQuery(QUERY_THOUGHTS);
 
-  return (
-    <main>
-      <div className="flex-row justify-center">
-        <div
-          className="col-12 col-md-10 mb-3 p-3"
-          style={{ border: '1px dotted #1a1a1a' }}
-        >
-          <h1>Club Homepage</h1>
+    return (
+        <div>
+            <div>
+                {events.length ? events.map((event) => (<EventRsvpCard key={event._id} event={event} />)) : <h3>No Events Yet</h3>}
+            </div>
+            <div>{loading ? "Loading" : ""}</div>
         </div>
-        <div className="col-12 col-md-8 mb-3">
 
-          <h1>GET INVOLVED</h1>
+    );
 
-        </div>
-      </div>
-    </main>
-  );
-};
+}
 
-export default Home;
+
+
+

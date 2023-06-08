@@ -57,3 +57,11 @@ mutation deleteEvent($eventId: ID!) {
     name
   }
 }`
+
+export const ADD_USER_EVENT = gql`
+mutation addUserEvent($eventId: ID!) {
+  addUserEvent(eventId: $eventId) {
+    _id
+    name
+  }
+}`

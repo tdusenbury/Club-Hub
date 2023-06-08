@@ -48,7 +48,7 @@ const typeDefs = gql`
     createEvent(name:String!, location: String!, startTime: String, startDate: String!, endTime: String, endDate: String!, description: String): Event
     updateEvent(eventId:ID!, name:String!, location: String!, startTime: String, startDate: String!, endTime: String, endDate: String!, description: String): Event
     deleteEvent(eventId:ID!): Event
-    addUserEvent(eventId: ID!, userId: ID!): User
+    addUserEvent(eventId: ID!): User
     removeUserEvent(eventId: ID!, userId: ID!): User
   }
 `;
