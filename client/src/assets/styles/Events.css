@@ -1,12 +1,11 @@
 .form-row {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 1rem;
 }
 
 .form-column {
-    margin-right: 1rem;
-    width: 500px;
+    width: 600px;
 }
 
 .label-column {
@@ -14,8 +13,12 @@
 }
 
 .input-column {
-
     flex: 1;
+}
+
+
+#dateAndTime {
+    width: 1000px;
 }
 
 textarea {

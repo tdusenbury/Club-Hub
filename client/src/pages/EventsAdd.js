@@ -94,7 +94,7 @@ const СreateEvent = () => {
                         <textarea type="text" name="location" value={eventData.location} onChange={handleInputChange} />
                     </div>
                 </div>
-                <div className="form-row">
+                <div id="dateAndTime" className="form-row">
                     <div className="form-column">
                         <label>Start Time:</label>
                         <MyClock selectedTime={eventData.startTime} onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, startTime: time }))} />
@@ -103,7 +103,6 @@ const СreateEvent = () => {
                         <label>Start Date:</label>
                         <MyCalendar selectedDate={eventData.startDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} />
                     </div>
-
                     <div className="form-column">
                         <label>End Time:</label>
                         <MyClock selectedTime={eventData.endTime} onTimeChange={(time) => setEventData((prevData) => ({ ...prevData, endTime: time }))} />
