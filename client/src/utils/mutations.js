@@ -26,13 +26,11 @@ export const CREATE_USER = gql`
 export const UPDATE_USER = gql`
   mutation updateUser($name: String!, $phone: String!, $address: String, $emergencyContactNumber: String, $emergencyContactName: String) {
     updateUser(name: $name, phone: $phone, address: $address, emergencyContactNumber: $emergencyContactNumber, emergencyContactName: $emergencyContactName ) {
-      user {
-        name 
-        phone
-        address
-        emergencyContactNumber
-        emergencyContactName
-      }
+      name 
+      phone
+      address
+      emergencyContactNumber
+      emergencyContactName
     }
   }
 `;
