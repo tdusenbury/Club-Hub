@@ -55,3 +55,15 @@ export const QUERY_EVENTS = gql`
     }
   }
 `;
+
+export const GET_MEMBERS = gql`
+  query getMembers {
+    getMembers {
+      name
+      phone
+      email
+      emergencyContactNumber
+      emergencyContactName
+    }
+  }
+`;

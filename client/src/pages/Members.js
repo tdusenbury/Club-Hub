@@ -1,44 +1,49 @@
-/*import React from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
+import '../assets/styles/Members.css';
 
-import { GET_ME } from '../utils/queries';
+import { GET_MEMBERS } from '../utils/queries';
 
 const Members = () => {
-    const { loading, data } = useQuery(GET_ME);
+    const { loading, data } = useQuery(GET_MEMBERS);
 
-    const user = data?.getMe || {};
+    const members = data?.getMembers || {};
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
-
     return (
-        <div class="is-flex is-flex-wrap-wrap is-justify-content-center">
-            <div class="header-card custom-header-card">
-                <h4 id="members">Members</h4>
-                <div class="row justify-content-center"> <div class="col-auto"></div>
-                    <div class="members-list">
-                        <div class="list1">
-                            <table class="table">
+        <div className="members-body is-flex is-flex-wrap-wrap is-justify-content-center">
+            <div className="header-card custom-header-card">
+                <h4 className="members">Members</h4>
+                <div className="row justify-content-center">
+
+                    <div className="members-list">
+                        <div className="table-wrapper">
+                            <table className="table">
                                 <thead>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Emergency Contact Name</th>
-                                    <th>Emergency Contact Number</th>
-                                </thead>
-                                <tbody id="memberDisplay">
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Emergency Contact Name</th>
+                                        <th>Emergency Contact Number</th>
                                     </tr>
+                                </thead>
+                                <tbody className="memberDisplay">
+                                    {members &&
+                                        members.map((member, index) => (
+                                            <tr key={member._id || index}>
+                                                <td>{member.name}</td>
+                                                <td>{member.email}</td>
+                                                <td>{member.phone}</td>
+                                                <td>{member.emergencyContactName}</td>
+                                                <td>{member.emergencyContactNumber}</td>
+                                            </tr>
+                                        ))}
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
@@ -48,4 +53,3 @@ const Members = () => {
 };
 
 export default Members;
-*/
