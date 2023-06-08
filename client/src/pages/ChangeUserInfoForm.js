@@ -5,8 +5,6 @@ import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 
-import Auth from '../utils/auth';
-
 const ChangeUserInfoForm = () => {
     const { loading, data } = useQuery(GET_ME);
 
@@ -36,9 +34,7 @@ const ChangeUserInfoForm = () => {
         console.log(formState);
 
         try {
-            console.log("I am trying");
-            console.log(formState);
-            const { userData } = await updateUser({
+            await updateUser({
                 variables: { ...formState },
             });
 
