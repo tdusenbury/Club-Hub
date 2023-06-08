@@ -72,3 +72,26 @@ export const GET_MEMBERS = gql`
     }
   }
 `;
+export const GET_EVENT = gql`
+  query getEvent($eventId: ID!) {
+    getEvent(_id: $eventId) {
+      _id
+      name
+      location
+      startTime
+      startDate
+      endTime
+      endDate
+      description
+      eventCreator {
+        _id
+        name
+        email
+      }
+      attendingUsers {
+        _id
+        name
+        email
+      }
+    }
+}`
