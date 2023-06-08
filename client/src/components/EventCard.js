@@ -1,25 +1,20 @@
 import React from 'react';
 import Auth from '../utils/auth';
-import { Link } from 'react-router-dom';
+
 import { useMutation } from '@apollo/client';
 import { REMOVE_EVENT } from '../utils/mutations';
 import { QUERY_EVENTS } from '../utils/queries';
 
-function EventCard(event) {
-    const { _id, name, location, startTime, startDate, endTime, endDate, description, eventCreator } = event.event;
+const EventCard = ({ event }) => {
+    const { _id, name, location, startTime, startDate, endTime, endDate, description, eventCreator } = event;
     const renderButtons = Auth.loggedIn() && (Auth.getProfile().data._id === eventCreator._id);
 
     const [deleteEvent, { loading, error }] = useMutation(REMOVE_EVENT, {
-        // Define the update function to update the cache after removing a book
         update(cache, { data: { deleteEvent } }) {
             try {
-                // Read the current data from the cache using the QUERY_EVENTS query
                 const { getAllEvents } = cache.readQuery({ query: QUERY_EVENTS });
-
-                // Filter out the removed event from events
                 const updatedSavedEvents = getAllEvents.filter((event) => event._id !== deleteEvent._id);
 
-                // Write the updated data back to the cache
                 cache.writeQuery({
                     query: QUERY_EVENTS,
                     data: { getAllEvents: updatedSavedEvents },
@@ -31,7 +26,7 @@ function EventCard(event) {
     });
 
     const handleRemoveEvent = async () => {
-        console.log("I am trying to delete an event with id:  ", _id);
+        console.log("I am trying to delete an event with id:", _id);
         await deleteEvent({ variables: { eventId: _id } })
             .then(() => {
                 console.log('Event removed successfully!');
@@ -42,32 +37,80 @@ function EventCard(event) {
                 // Handle the error state or display an error message
             });
     };
+    const startDateTime = new Date(parseInt(startDate, 10));
+    const endDateTime = new Date(parseInt(endDate, 10));
+    // Format the startDate and endDate into readable date format
+    const formattedStartDate = startDateTime.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    });
+
+    console.log(formattedStartDate);
+
+    const formattedEndDate = endDateTime.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    });
 
     return (
-        <div>
+        <div className="event-card" style={styles.eventCard}>
             <h2>{name}</h2>
-            <br />
-            {location} <br />
-            {startTime} <br />
-            {startDate} <br />
-            {endTime} <br />
-            {endDate} <br />
-            {description}
+            <p className="event-details" style={styles.eventDetails}>
+                <strong>Location:</strong> {location} <br />
+                <strong>Start Time:</strong> {startTime} <br />
+                <strong>Start Date:</strong> {formattedStartDate} <br />
+                <strong>End Time:</strong> {endTime} <br />
+                <strong>End Date:</strong> {formattedEndDate} <br />
+                <strong>Description:</strong> {description}
+            </p>
             {renderButtons && (
-                <div>
-                    <button onClick={() => handleRemoveEvent()}>Remove an event</button>
+                <div className="event-buttons" style={styles.eventButtons}>
+                    <button onClick={handleRemoveEvent} style={styles.button}>
+                        Remove Event
+                    </button>
                     {/* <Link to="/updateevent">
-            <button>Edit an event</button>
+            <button style={styles.button}>Edit Event</button>
           </Link> */}
                 </div>
             )}
-            {error && (
-                <div className="my-3 p-3 bg-danger text-white">
-                    {error.message}
-                </div>
-            )}
+            {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
         </div>
     );
-}
+};
+
+const styles = {
+    eventCard: {
+        backgroundColor: '#f8f8f8',
+        padding: '20px',
+        borderRadius: '5px',
+        marginBottom: '20px',
+    },
+    eventDetails: {
+        fontSize: '16px',
+        marginBottom: '10px',
+    },
+    eventButtons: {
+        marginTop: '10px',
+    },
+    button: {
+        backgroundColor: '#4caf50',
+        color: '#fff',
+        padding: '8px 16px',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        marginRight: '10px',
+    },
+    errorMessage: {
+        backgroundColor: '#ff4d4f',
+        color: '#fff',
+        padding: '10px',
+        borderRadius: '5px',
+    },
+};
 
 export default EventCard;
