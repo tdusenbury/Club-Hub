@@ -43,31 +43,6 @@ const ChangeUserInfoForm = () => {
         });
 
     };
-    const handleBlur = (event) => {
-        const { target } = event;
-        const inputType = target.name;
-        const inputValue = target.value;
-
-        if (inputValue.trim() === '') {
-            if (inputType === 'name') {
-                setErrorMessage('❌ The name should be entered!');
-            } else if (inputType === 'phone'){
-                const phoneNo = /^\+?[1-9][0-9]{7,14}$/;
-                if(!phoneNo.test(String(inputValue.trim())))
-                {
-                    setErrorMessage('❌ The phone number is not valid!');
-                }
-            }
-            else if (inputType === 'emergencyContactNumber'){
-                const phoneNo = /^\+?[1-9][0-9]{7,14}$/;
-                if(!phoneNo.test(String(inputValue.trim())))
-                {
-                    setErrorMessage('❌ The emergency contact number is not valid!');
-                }
-            }
-        }
-        setErrorMessage('');
-    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -93,6 +68,7 @@ const ChangeUserInfoForm = () => {
             }
         }
 
+        setErrorMessage('');
         try {
             await updateUser({
                 variables: { ...formState },
@@ -108,74 +84,66 @@ const ChangeUserInfoForm = () => {
         return <div>Loading...</div>;
     }
     return (
-        <main className="flex-row justify-center mb-4">
+        <main className="flex-row justify-center mt-4">
             <div className="col-12 col-lg-10">
                 <div className="card">
-                    <h4 className="card-header bg-dark text-light p-2">Edit My Information</h4>
+                    <h4 className="card-header bg-dark text-light text-center">Edit My Information</h4>
                     <div className="card-body">
-                        {!data ? (
-                            <p>
-                                Success! You may now head{' '}
-                                <Link to="/personaldashboard">back to the Personal Dashboard.</Link>
-                            </p>
-                        ) : (
-                            <form onSubmit={handleFormSubmit}>
-                                <label>Name:</label>
-                                <input
-                                    className="form-input"
-                                    placeholder={user.name}
-                                    name="name"
-                                    type="text"
-                                    value={formState.name}
-                                    onChange={handleChange}
-
-                                />
-                                <label>Address:</label>
-                                <input
-                                    className="form-input"
-                                    placeholder={user.address}
-                                    name="address"
-                                    type="text"
-                                    value={formState.address}
-                                    onChange={handleChange}
-                                />
-                                <label>Phone Number:</label>
-                                <input
-                                    className="form-input"
-                                    placeholder={user.phone}
-                                    name="phone"
-                                    type="text"
-                                    value={formState.phone}
-                                    onChange={handleChange}
-                                />
-                                <label>Emergency Contact Name:</label>
-                                <input
-                                    className="form-input"
-                                    placeholder={user.emergencyContactName}
-                                    name="emergencyContactName"
-                                    type="text"
-                                    value={formState.emergencyContactName}
-                                    onChange={handleChange}
-                                />
-                                <label>Emergency Contact Number:</label>
-                                <input
-                                    className="form-input"
-                                    placeholder={user.emergencyContactNumber}
-                                    name="emergencyContactNumber"
-                                    type="text"
-                                    value={formState.emergencyContactNumber}
-                                    onChange={handleChange}
-                                />
-                                <button
-                                    className="btn btn-block btn-primary"
-                                    style={{ cursor: 'pointer' }}
-                                    type="submit"
-                                >
-                                    Change Personal information
-                                </button>
-                                <p className="form-label error-message">{errorMessage}</p>
-                            </form>
-                        )}
+                        <form onSubmit={handleFormSubmit}>
+                            <label>Name:</label>
+                            <input
+                                className="form-input"
+                                placeholder="name"
+                                name="name"
+                                type="text"
+                                value={formState.name}
+                                onChange={handleChange}
+                            />
+                            <label>Address:</label>
+                            <input
+                                className="form-input"
+                                placeholder="address"
+                                name="address"
+                                type="text"
+                                value={formState.address}
+                                onChange={handleChange}
+                            />
+                            <label>Phone Number:</label>
+                            <input
+                                className="form-input"
+                                placeholder="phone"
+                                name="phone"
+                                type="text"
+                                value={formState.phone}
+                                onChange={handleChange}
+                            />
+                            <label>Emergency Contact Name:</label>
+                            <input
+                                className="form-input"
+                                placeholder="emergencyContactName"
+                                name="emergencyContactName"
+                                type="text"
+                                value={formState.emergencyContactName}
+                                onChange={handleChange}
+                            />
+                            <label>Emergency Contact Number:</label>
+                            <input
+                                className="form-input"
+                                placeholder="emergencyContactNumber"
+                                name="emergencyContactNumber"
+                                type="text"
+                                value={formState.emergencyContactNumber}
+                                onChange={handleChange}
+                            />
+                            <button
+                                className="btn btn-block btn-primary"
+                                style={{ cursor: 'pointer' }}
+                                type="submit"
+                            >
+                                Change Personal information
+                            </button>
+                            <p className="form-label error-message">{errorMessage}</p>
+                        </form>
 
                         {error && (
                             <div className="my-3 p-3 bg-danger text-white">

@@ -70,19 +70,19 @@ This is a group collaboration. Below you can find the contact information for al
 Afi Nkhume-Crecy
 - [**Github**](https://github.com/AFICRECY)
 - [**LinkedIn**]()
-- [**Email**]()
+- [**Email**](mailto:)
 
 
 Bahareh Hosseini
 - [**Github**](https://github.com/Bhmerir)
-- [**LinkedIn**]()
-- [**Email**]()
+- [**LinkedIn**](https://www.linkedin.com/in/bahareh-hosseini-86a43453/)
+- [**Email**](mailto:mer_ir@yahoo.com)
 
 
 Liubov Sobolevskaya
 - [**Github**](https://github.com/LiubovSobolevskaya)
 - [**LinkedIn**](https://www.linkedin.com/in/liubov-sobolevskaya/)
-- [**Email**](lubava39@gmail.com)
+- [**Email**](mailto:lubava39@gmail.com)
 
 Tamara "T" Dusenbury
   
