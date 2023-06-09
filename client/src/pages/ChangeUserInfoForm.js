@@ -13,9 +13,9 @@ const ChangeUserInfoForm = () => {
     const [formState, setFormState] = useState({
         name: user.name || '',
         phone: user.phone || '',
-        address: user?.address || "",
-        emergencyContactNumber: user?.emergencyContactNumber || "",
-        emergencyContactName: user?.emergencyContactName || ""
+        address: user?.address || '',
+        emergencyContactNumber: user?.emergencyContactNumber || '',
+        emergencyContactName: user?.emergencyContactName || ''
     });
 
     const [updateUser, { error }] = useMutation(UPDATE_USER, {
@@ -74,6 +74,7 @@ const ChangeUserInfoForm = () => {
                             </p>
                         ) : (
                             <form onSubmit={handleFormSubmit}>
+                                <label>Name:</label>
                                 <input
                                     className="form-input"
                                     placeholder={user.name}
@@ -81,7 +82,9 @@ const ChangeUserInfoForm = () => {
                                     type="text"
                                     value={formState.name}
                                     onChange={handleChange}
+
                                 />
+                                <label>Address:</label>
                                 <input
                                     className="form-input"
                                     placeholder={user.address}
@@ -90,6 +93,7 @@ const ChangeUserInfoForm = () => {
                                     value={formState.address}
                                     onChange={handleChange}
                                 />
+                                <label>Phone Number:</label>
                                 <input
                                     className="form-input"
                                     placeholder={user.phone}
@@ -98,6 +102,7 @@ const ChangeUserInfoForm = () => {
                                     value={formState.phone}
                                     onChange={handleChange}
                                 />
+                                <label>Emergency Contact Name:</label>
                                 <input
                                     className="form-input"
                                     placeholder={user.emergencyContactName}
@@ -106,6 +111,7 @@ const ChangeUserInfoForm = () => {
                                     value={formState.emergencyContactName}
                                     onChange={handleChange}
                                 />
+                                <label>Emergency Contact Number:</label>
                                 <input
                                     className="form-input"
                                     placeholder={user.emergencyContactNumber}
