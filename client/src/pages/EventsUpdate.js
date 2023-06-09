@@ -4,8 +4,9 @@ import MyClock from '../components/TimePicker';
 import { GET_EVENT } from '../utils/queries';
 import { useMutation, useQuery } from '@apollo/client';
 
-const СreateEvent = () => {
-    const { loading, data } = useQuery(GET_EVENT);
+const СreateEvent = (eventId) => {
+
+    const { loading, data } = useQuery(GET_EVENT, { variables: { eventId: eventId } });
     const event = data?.getEvent || {};
 
     const [eventData, setEventData] = useState({

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MyCalendar from '../components/DatePicker';
 import MyClock from '../components/TimePicker';
 import '../assets/styles/Events.css';
 import { useMutation } from '@apollo/client';
 import { ADD_EVENT } from '../utils/mutations';
 import { QUERY_EVENTS } from '../utils/queries';
-
 
 
 const СreateEvent = () => {
@@ -19,6 +18,9 @@ const СreateEvent = () => {
         description: ''
     });
 
+
+
+    const [errors, setErrors] = useState({});
     const [createEvent, { error }] = useMutation(ADD_EVENT, {
         update(cache, { data: { createEvent } }) {
             try {
@@ -35,6 +37,7 @@ const СreateEvent = () => {
         },
     });
 
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEventData((prevData) => ({
@@ -44,37 +47,62 @@ const СreateEvent = () => {
     };
 
     const handleCreateEvent = async (event) => {
-
-        console.log(eventData);
         event.preventDefault();
+        if (validateForm()) {
+            try {
+                const { data } = await createEvent({
+                    variables: {
+                        name: eventData.name,
+                        location: eventData.location,
+                        startTime: eventData.startTime,
+                        startDate: eventData.startDate.toString(),
+                        endTime: eventData.endTime,
+                        endDate: eventData.endDate.toString(),
+                        description: eventData.description
 
-        try {
-            const { data } = await createEvent({
-                variables: {
-                    name: eventData.name,
-                    location: eventData.location,
-                    startTime: eventData.startTime,
-                    startDate: eventData.startDate.toString(),
-                    endTime: eventData.endTime,
-                    endDate: eventData.endDate.toString(),
-                    description: eventData.description
-
-                },
-            });
-            console.log(data);
-            setEventData({
-                name: '',
-                location: '',
-                startTime: '',
-                startDate: '',
-                endTime: '',
-                endDate: '',
-                description: ''
-            });
-        } catch (err) {
-            console.error(err);
+                    },
+                });
+                console.log(data);
+                setEventData({
+                    name: '',
+                    location: '',
+                    startTime: '',
+                    startDate: '',
+                    endTime: '',
+                    endDate: '',
+                    description: ''
+                });
+            } catch (err) {
+                console.error(err);
+            }
+            window.location.assign('/personaldashboard');
         }
-        window.location.assign('/eventscalendar');
+    };
+
+    const validateForm = () => {
+        let formErrors = {};
+
+        if (eventData.name.trim() === '') {
+            formErrors.name = 'Name is required';
+        }
+        if (eventData.location.trim() === '') {
+            formErrors.location = 'Location is required';
+        }
+
+        if (eventData.startDate === '') {
+            formErrors.startDate = 'Start Date is required';
+        }
+        if (eventData.endDate === '') {
+            formErrors.endDate = 'End date is required';
+        }
+
+        if (eventData.description.trim().length < 1 || eventData.description.trim().length > 280) {
+            formErrors.description = 'Description must be at leats 1 character and at most 280 characters.';
+        }
+
+        setErrors(formErrors);
+
+        return Object.keys(formErrors).length === 0;
     };
 
 
@@ -86,10 +114,12 @@ const СreateEvent = () => {
                     <label>Name:</label>
                     <input type="text" name="name" value={eventData.name} onChange={handleInputChange} />
                 </div>
+                {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}
                 <div className="input-area">
                     <label>Location:</label>
                     <textarea type="text" name="location" value={eventData.location} onChange={handleInputChange} />
                 </div>
+                {errors.location && <span style={{ color: 'red' }}>{errors.location}</span>}
                 <div id="dateAndTime" className="form-row">
                     <div className="form-column">
                         <div className="Time">
@@ -99,7 +129,9 @@ const СreateEvent = () => {
                         <div className="Date">
                             <label>Start Date:</label>
                             <MyCalendar selectedDate={eventData.startDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} />
+                            {errors.startDate && <span style={{ color: 'red' }}>{errors.startDate}</span>}
                         </div>
+
                     </div>
                     <div className="form-column">
                         <div className="Time">
@@ -109,6 +141,7 @@ const СreateEvent = () => {
                         <div className="Date">
                             <label>End Date:</label>
                             <MyCalendar selectedDate={eventData.endDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, endDate: date }))} />
+                            {errors.endDate && <span style={{ color: 'red' }}>{errors.endDate}</span>}
                         </div>
                     </div>
                 </div>
@@ -116,6 +149,7 @@ const СreateEvent = () => {
                     <label>Description:</label>
                     <textarea name="description" value={eventData.description} onChange={handleInputChange} />
                 </div>
+                {errors.description && <span style={{ color: 'red' }}>{errors.description}</span>}
             </form>
             <button className="event-button" onClick={handleCreateEvent}>Create an event</button>
         </div>

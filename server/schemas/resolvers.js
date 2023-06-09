@@ -31,6 +31,16 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    getAttendingEvents: async (parent, args, context) => {
+
+      if (context.user) {
+        const currentDate = Date.now();
+        const attendingEvents = await Event.find({ attendingUsers: { $in: [context.user._id] }, endDate: { $gte: currentDate } });
+        return attendingEvents;
+
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     getFutureEvents: async (parent, args, context) => {
       if (context.user) {
         const currentDate = Date.now();
@@ -157,20 +167,19 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    removeUserEvent: async (parent, { eventId, userId }, context) => {
+    removeUserEvent: async (parent, { eventId }, context) => {
       if (context.user) {
         const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
-          { $pull: { attendingUsers: userId } },
+          { $pull: { attendingUsers: context.user._id } },
           { new: true }
         );
         const updatedUser = await User.findOneAndUpdate(
-          { _id: userId },
+          { _id: context.user._id },
           { $pull: { events: eventId } },
           { new: true }
         );
-
-        return [updatedUser, updatedEvent];
+        return updatedEvent;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
