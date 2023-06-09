@@ -81,21 +81,25 @@ function App() {
               path="/eventmanager"
               element={<EventCalendar />}
             />
+
             {/* <Route
                 path="/updateevent"
                 element={<UpdateEvent />}
               /> */}
+            <Route
+              path="/addevent"
+              element={<СreateEvent />}
+            />
 
-      
-              <Route
-                path="/members"
-                element={<Members />}
-              />
-              <Route 
-                path="/about" 
-                element={<About />}
-              />
-            </Routes>
+            <Route
+              path="/members"
+              element={<Members />}
+            />
+            <Route
+              path="/about"
+              element={<About />}
+            />
+          </Routes>
 
         </div>
       </Router>
