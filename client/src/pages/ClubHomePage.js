@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_FUTURE_EVENTS } from '../utils/queries';
 import { Link } from 'react-router-dom';
 
+
 export default function ClubHomePage() {
     const { loading, error, data } = useQuery(QUERY_FUTURE_EVENTS);
     const events = data?.getFutureEvents || [];

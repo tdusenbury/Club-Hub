@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+
 export const GET_ME = gql`
   query getMe {
     getMe {
@@ -60,6 +61,27 @@ export const QUERY_MY_EVENTS = gql`
     eventCreator{
       _id
     }
+    
+  }
+  }
+`;
+
+
+export const QUERY_ATTENDING_EVENTS = gql`
+  {
+    getAttendingEvents {
+    _id
+    name
+    location
+    startTime
+    startDate
+    endTime
+    endDate
+    description
+    eventCreator{
+      _id
+    }
+
     
   }
   }

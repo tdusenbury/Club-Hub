@@ -1,42 +1,46 @@
 import React from 'react';
+import Auth from '../utils/auth';
+
 import { useMutation } from '@apollo/client';
-import { REMOVE_EVENT } from '../utils/mutations';
-import { QUERY_MY_EVENTS } from '../utils/queries';
-import { Link } from 'react-router-dom';
+import { REMOVE_USER_EVENT } from '../utils/mutations';
+import { GET_ME } from '../utils/queries';
+import { removeEventId } from '../utils/localStorage';
 
-const EventCard = ({ event }) => {
-    const { _id, name, location, startTime, startDate, endTime, endDate, description, eventCreator } = event;
+const PersonalDashboarEventCards = ({ event }) => {
+    const { _id, name, location, startTime, startDate, endTime, endDate, description } = event;
 
-    const [deleteEvent, { loading, error }] = useMutation(REMOVE_EVENT, {
-        update(cache, { data: { deleteEvent } }) {
+    const [removeUserEvent, { loading, error }] = useMutation(REMOVE_USER_EVENT, {
+        update(cache, { data: { removeUserEvent } }) {
             try {
-                const { getMyEvents } = cache.readQuery({ query: QUERY_MY_EVENTS });
-                if (getMyEvents) {
-                    const updatedSavedEvents = getMyEvents.filter((event) => event._id !== deleteEvent._id);
+                const { getMe } = cache.readQuery({ query: GET_ME });
+
+                if (getMe) {
+                    const updatedEvents = getMe.events.filter((event) => event._id !== removeUserEvent._id);
                     cache.writeQuery({
-                        query: QUERY_MY_EVENTS,
-                        data: { getMyEvents: updatedSavedEvents },
+                        query: GET_ME,
+                        data: { getMe: { ...getMe, events: [...updatedEvents] } },
                     });
                 }
             } catch (e) {
                 console.error(e);
             }
         },
+
     });
 
-    const handleRemoveEvent = async () => {
 
-        await deleteEvent({ variables: { eventId: _id } })
+    const handleRemoveRSVPEvent = async () => {
+
+        await removeUserEvent({ variables: { eventId: _id } })
             .then(() => {
-                console.log('Event removed successfully!');
+                console.log('RVSP revoked successfully!');
                 // Perform any additional logic or UI updates here
             })
             .catch((error) => {
-                console.error('Error removing event:', error.message);
+                console.error('Error revoking RVSP:', error.message);
                 // Handle the error state or display an error message
             });
-        //window.location.reload();
-
+        removeEventId(_id);
     };
     const startDateTime = new Date(parseInt(startDate, 10));
     const endDateTime = new Date(parseInt(endDate, 10));
@@ -47,8 +51,6 @@ const EventCard = ({ event }) => {
         day: 'numeric',
         year: 'numeric',
     });
-
-    console.log(formattedStartDate);
 
     const formattedEndDate = endDateTime.toLocaleDateString('en-US', {
         weekday: 'long',
@@ -62,20 +64,17 @@ const EventCard = ({ event }) => {
             <h2>{name}</h2>
             <p className="event-details" style={styles.eventDetails}>
                 <strong>Location:</strong> {location} <br />
-                <strong>Start Time:</strong> {startTime} <br />
+                {startTime && <span><strong>Start Time:</strong> {startTime}</span>}<br />
                 <strong>Start Date:</strong> {formattedStartDate} <br />
-                <strong>End Time:</strong> {endTime} <br />
+                {endTime && <span><strong>End Time:</strong> {endTime} </span>}<br />
                 <strong>End Date:</strong> {formattedEndDate} <br />
                 <strong>Description:</strong> {description}
             </p>
 
             <div className="event-buttons" style={styles.eventButtons}>
-                <button onClick={handleRemoveEvent} style={styles.button}>
-                    Remove Event
+                <button onClick={handleRemoveRSVPEvent} style={styles.button}>
+                    Revoke RSVP
                 </button>
-                {/* <Link to="/updateevent">
-                    <button style={styles.button}> Edit Event</button>
-                </Link> */}
             </div>
 
             {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
@@ -105,7 +104,6 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         marginRight: '10px',
-        width: '150px'
     },
     errorMessage: {
         backgroundColor: '#ff4d4f',
@@ -115,4 +113,4 @@ const styles = {
     },
 };
 
-export default EventCard;
+export default PersonalDashboarEventCards;

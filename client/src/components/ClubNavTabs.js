@@ -45,7 +45,7 @@ export default function ClubNavTabs({ currentPage, handlePageChange }) {
               <MDBNavbarLink href='/members'>Member List</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href='/eventscalendar'>Task Manager</MDBNavbarLink>
+              <MDBNavbarLink href='/eventmanager'>Event Manager</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href='/personaldashboard'>Personal Dashboard</MDBNavbarLink>
