@@ -85,15 +85,18 @@ function App() {
                 path="/updateevent"
                 element={<UpdateEvent />}
               /> */}
-            <Route
-              path="/members"
-              element={<Members />}
-            />
-            {/* <Route 
+
+      
+              <Route
+                path="/members"
+                element={<Members />}
+              />
+              <Route 
                 path="/about" 
                 element={<About />}
-              /> */}
-          </Routes>
+              />
+            </Routes>
+
         </div>
       </Router>
     </ApolloProvider>

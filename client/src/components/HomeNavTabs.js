@@ -19,9 +19,10 @@ export default function HomeNavTabs() {
   const [showNav, setShowNav] = useState(false);
 
   return (
+    <div className="nav-bar">
     <>
-    <MDBNavbar expand='lg' light bgColor='light'>
-      <MDBContainer fluid>
+    <MDBNavbar className='navright' expand='lg' light bgColor='light'>
+      <MDBContainer>
         <MDBNavbarBrand href='#' className="p-3"></MDBNavbarBrand>
         <MDBNavbarToggler
           type='button'
@@ -47,27 +48,11 @@ export default function HomeNavTabs() {
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>
-    </MDBNavbar></>
+    </MDBNavbar>
+    </>
+    </div>
   );
 }
 
-// function HomeNavTabs({ currentPage, handlePageChange }) {
-//   return (
-//     <div className="nav_Links">
-//         <Link
-//           to="/">
-//             <span className='nav_link'>Home</span>
-//           </Link>
-//           <Link
-//           to="/about">
-//             <span className='nav_link'>About</span>
-//           </Link>
-//           <Link
-//           to="/login">
-//             <span className='nav_link'>Login / Signup</span>
-//           </Link>
-//     </div>
-//   );
-// }
 
-// export default HomeNavTabs;
+
