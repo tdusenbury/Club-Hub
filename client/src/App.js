@@ -93,10 +93,10 @@ function App() {
                 path="/members"
                 element={<Members />}
               />
-              {/* <Route 
+              <Route 
                 path="/about" 
                 element={<About />}
-              /> */}
+              />
             </Routes>
         </div>
       </Router>
