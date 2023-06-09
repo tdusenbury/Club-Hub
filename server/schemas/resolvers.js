@@ -24,10 +24,9 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     getMyEvents: async (parent, args, context) => {
-      console.log("I am here");
       if (context.user) {
-        const events = await Event.find({ eventCreator: { _id: context.user._id } });
-        console.log(events);
+        const currentDate = Date.now();
+        const events = await Event.find({ eventCreator: { _id: context.user._id }, endDate: { $gte: currentDate } });
         return events;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -35,11 +34,8 @@ const resolvers = {
     getFutureEvents: async (parent, args, context) => {
       if (context.user) {
         const currentDate = Date.now();
-        // const date = new Date(currentDate);
-        // const formattedDate = date.toISOString();
-        console.log(currentDate);
         const futureEvents = Event.find({ endDate: { $gte: currentDate } }).populate('attendingUsers').sort({ startDate: 1 });
-        console.log(futureEvents)
+
         return futureEvents
 
       }
@@ -92,8 +88,6 @@ const resolvers = {
           { new: true }
         );
 
-        console.log(updatedUser);
-
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -111,8 +105,6 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     createEvent: async (parent, { name, location, startTime, startDate, endTime, endDate, description }, context) => {
-      console.log(name, location, startTime, startDate, endTime, endDate, description);
-
       if (context.user) {
         const newEvent = await Event.create(
           { name: name, location: location, startTime: startTime, startDate: startDate, endTime: endTime, endDate: endDate, description: description, eventCreator: context.user._id }
@@ -135,7 +127,6 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     deleteEvent: async (parent, { eventId }, context) => {
-      console.log("I am here");
       if (context.user) {
         const deletedEvent = await Event.findOneAndDelete(
           { _id: eventId },
