@@ -95,6 +95,6 @@ const styles = {
     eventCardContainer: {
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly'
     }
 };
