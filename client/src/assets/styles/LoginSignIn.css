@@ -1,0 +1,23 @@
+.containing-div {
+    background-color: #c1e8e0; /* Replace with your desired background color */
+    min-height: 100vh; /* Ensures the container covers the full height of the viewport */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 140px;
+}
+
+h4 {
+    font-size: 40px;
+    }
+
+h3 {
+font-size: 25px;
+}
+
+button {
+    width:20px;
+}
