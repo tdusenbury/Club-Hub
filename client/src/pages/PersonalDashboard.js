@@ -8,7 +8,7 @@ const PersonalDashboard = () => {
     const { loading, data } = useQuery(GET_ME);
 
     const user = data?.getMe || {};
-
+    console.log(user)
     if (loading) {
         return <div>Loading...</div>;
     }

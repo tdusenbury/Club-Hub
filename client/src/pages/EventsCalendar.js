@@ -2,18 +2,23 @@ import React from 'react';
 import EventCard from '../components/EventCard';
 import { useQuery } from '@apollo/client';
 import { QUERY_EVENTS } from '../utils/queries';
+import { QUERY_FUTURE_EVENTS } from '../utils/queries';
 import { Link } from 'react-router-dom';
 
 export default function EventCalendar() {
-    const { loading, error, data } = useQuery(QUERY_EVENTS);
+   /* const { loading, error, data } = useQuery(QUERY_EVENTS);
     const events = data?.getAllEvents || [];
     if (error) {
         return <p>Error: {error.message}</p>;
-    }
-    // TODO extract all events from DB. Use query hook.
-    // dynamicly map all imformation to EventCard
-    console.log(events);
+    }*/
 
+    const { loading, error, data } = useQuery(QUERY_FUTURE_EVENTS);
+    const events = data?.getFutureEvents || [];
+    if (error) {
+         return <p>Error: {error.message}</p>;
+    }
+
+    console.log(events);
 
     return (
         <div>

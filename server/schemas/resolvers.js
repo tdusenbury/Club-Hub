@@ -13,15 +13,29 @@ const resolvers = {
     },
     getMe: async (parent, args, context) => {
       if (context.user) {
-        return await User.findOne({ _id: context.user._id });
+        return await User.findOne({ _id: context.user._id }).populate('events');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     getAllEvents: async (parent, args, context) => {
       if (context.user) {
-        return Event.find().sort({ startDate: -1 });
+        return Event.find().populate('attendingUsers').sort({ startDate: -1 });
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    getFutureEvents: async (parent, args, context) => {
+      if (context.user) {
+        const currentDate = Date.now();
+        // const date = new Date(currentDate);
+        // const formattedDate = date.toISOString();
+        console.log(currentDate);
+        const futureEvents = Event.find({ endDate: { $gte: currentDate } }).populate('attendingUsers').sort({ startDate: 1 });
+        console.log(futureEvents)
+        return futureEvents
+
+      }
+      throw new AuthenticationError('You need to be logged in!');
+
     },
     getEvent: async (parent, { eventId }, context) => {
       if (context.user) {
@@ -126,8 +140,9 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    addUserEvent: async (parent, { eventId, userId }, context) => {
+    addUserEvent: async (parent, { eventId }, context) => {
       if (context.user) {
+        const userId = context.user._id;
         const updatedEvent = await Event.findOneAndUpdate(
           { _id: eventId },
           { $addToSet: { attendingUsers: userId } },
@@ -138,7 +153,7 @@ const resolvers = {
           { $addToSet: { events: eventId } },
           { new: true }
         );
-        return [updatedUser, updatedEvent];
+        return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
