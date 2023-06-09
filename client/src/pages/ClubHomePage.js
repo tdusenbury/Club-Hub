@@ -10,10 +10,6 @@ export default function ClubHomePage() {
     if (error) {
         return <p>Error: {error.message}</p>;
     }
-    // TODO extract all events from DB. Use query hook.
-    // dynamicly map all imformation to EventCard
-    console.log(events);
-
 
     return (
         <div>

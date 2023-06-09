@@ -17,7 +17,6 @@ const EventRsvpCard = ({ event }) => {
 
     const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT);
 
-
     const handleRSVPEvent = async () => {
 
         await addUserEvent({ variables: { eventId: _id } })
@@ -96,6 +95,7 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         marginRight: '10px',
+        width: '150px'
     },
     errorMessage: {
         backgroundColor: '#ff4d4f',

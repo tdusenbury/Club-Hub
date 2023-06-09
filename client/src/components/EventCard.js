@@ -108,6 +108,7 @@ const styles = {
         borderRadius: '5px',
         cursor: 'pointer',
         marginRight: '10px',
+        width: '150px'
     },
     errorMessage: {
         backgroundColor: '#ff4d4f',

@@ -19,24 +19,9 @@ const ChangeUserInfoForm = () => {
         emergencyContactName: user?.emergencyContactName || ''
     });
 
-    const [updateUser, { error }] = useMutation(UPDATE_USER, {
-        update(cache, { data: { updateUser } }) {
-            try {
-                const data = cache.readQuery({ query: GET_ME });
-                if (data) {
-                    cache.writeQuery({
-                        query: GET_ME,
-                        data: { updateUser },
-                    });
-                }
-            } catch (e) {
-                console.error(e);
-            }
-        },
-    });
+    const [updateUser, { error }] = useMutation(UPDATE_USER);
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log(name, value);
         setFormState({
             ...formState,
             [name]: value,
@@ -77,7 +62,7 @@ const ChangeUserInfoForm = () => {
         } catch (e) {
             console.error(e);
         }
-       // window.location.assign('/personaldashboard');
+        window.location.assign('/personaldashboard');
     };
 
     if (loading) {
