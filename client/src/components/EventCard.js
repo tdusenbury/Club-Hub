@@ -4,21 +4,21 @@ import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_EVENT } from '../utils/mutations';
 import { QUERY_EVENTS } from '../utils/queries';
+import { QUERY_MY_EVENTS } from '../utils/queries';
 
 const EventCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, eventCreator } = event;
-    const renderButtons = Auth.loggedIn() && (Auth.getProfile().data._id === eventCreator._id);
 
     const [deleteEvent, { loading, error }] = useMutation(REMOVE_EVENT, {
         update(cache, { data: { deleteEvent } }) {
             try {
-                const { getAllEvents } = cache.readQuery({ query: QUERY_EVENTS });
+                const { getMyEvents } = cache.readQuery({ query: QUERY_MY_EVENTS });
 
-                if (getAllEvents) {
-                    const updatedSavedEvents = getAllEvents.filter((event) => event._id !== deleteEvent._id);
+                if (getMyEvents) {
+                    const updatedSavedEvents = getMyEvents.filter((event) => event._id !== deleteEvent._id);
                     cache.writeQuery({
-                        query: QUERY_EVENTS,
-                        data: { getAllEvents: updatedSavedEvents },
+                        query: QUERY_MY_EVENTS,
+                        data: { getMyEvents: updatedSavedEvents },
                     });
                 }
             } catch (e) {
@@ -38,7 +38,7 @@ const EventCard = ({ event }) => {
                 console.error('Error removing event:', error.message);
                 // Handle the error state or display an error message
             });
-        window.location.reload();
+        //window.location.reload();
 
     };
     const startDateTime = new Date(parseInt(startDate, 10));
@@ -71,16 +71,16 @@ const EventCard = ({ event }) => {
                 <strong>End Date:</strong> {formattedEndDate} <br />
                 <strong>Description:</strong> {description}
             </p>
-            {renderButtons && (
-                <div className="event-buttons" style={styles.eventButtons}>
-                    <button onClick={handleRemoveEvent} style={styles.button}>
-                        Remove Event
-                    </button>
-                    {/* <Link to="/updateevent">
+
+            <div className="event-buttons" style={styles.eventButtons}>
+                <button onClick={handleRemoveEvent} style={styles.button}>
+                    Remove Event
+                </button>
+                {/* <Link to="/updateevent">
             <button style={styles.button}>Edit Event</button>
           </Link> */}
-                </div>
-            )}
+            </div>
+
             {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
         </div>
     );

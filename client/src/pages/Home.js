@@ -6,8 +6,6 @@ import HomeScreenPic from '../assets/images/HomeScreenPic.png';
 import "../assets/styles/Home.css";
 
 const Home = () => {
-  // const { loading, data } = useQuery(QUERY_THOUGHTS);
-
   return (
     <div className="home-container">
       <MDBRow className="home">
