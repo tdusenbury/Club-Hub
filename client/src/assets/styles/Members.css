@@ -34,7 +34,7 @@ table {
     border-collapse: collapse;
     text-align: center;
     table-layout: fixed;
-    
+    border-radius: 8px;
     background: #fff;
 }
 
