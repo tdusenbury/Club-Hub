@@ -23,6 +23,15 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    getMyEvents: async (parent, args, context) => {
+      console.log("I am here");
+      if (context.user) {
+        const events = await Event.find({ eventCreator: { _id: context.user._id } });
+        console.log(events);
+        return events;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     getFutureEvents: async (parent, args, context) => {
       if (context.user) {
         const currentDate = Date.now();

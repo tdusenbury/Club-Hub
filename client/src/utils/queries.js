@@ -63,6 +63,26 @@ export const QUERY_EVENTS = gql`
 
 `;
 
+export const QUERY_MY_EVENTS = gql`
+  {
+    getMyEvents {
+    _id
+    name
+    location
+    startTime
+    startDate
+    endTime
+    endDate
+    description
+    eventCreator{
+      _id
+    }
+    
+  }
+  }
+
+`;
+
 export const QUERY_FUTURE_EVENTS = gql`
   {
     getFutureEvents {
