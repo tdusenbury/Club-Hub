@@ -7,13 +7,14 @@ import { ADD_USER_EVENT } from '../utils/mutations';
 const EventRsvpCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, attendingUsers } = event;
     let renderButton = false
-    if (Auth.loggedIn()) {
+    if (Auth.loggedIn() && attendingUsers) {
         for (let i = 0; i < attendingUsers.length; i++) {
             if (attendingUsers[i]._id === Auth.getProfile().data._id) {
                 renderButton = true;
             }
         }
     }
+
 
     const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT);
 

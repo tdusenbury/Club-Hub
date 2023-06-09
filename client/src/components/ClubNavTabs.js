@@ -19,8 +19,8 @@ function ClubNavTabs({ currentPage, handlePageChange }) {
         <span className='nav_link'>Member List</span>
       </Link>
       <Link
-        to="/addevent">
-        <span className='nav_link'>Add Event</span>
+        to="/eventmanager">
+        <span className='nav_link'>Event Manager</span>
       </Link>
       <Link
         to="/personaldashboard">

@@ -64,4 +64,15 @@ mutation addUserEvent($eventId: ID!) {
     _id
     name
   }
+}`;
+
+export const REMOVE_USER_EVENT = gql`
+mutation removeUserEvent($eventId: ID!) {
+  removeUserEvent(eventId: $eventId) {
+ 
+      _id
+      name
+    
+
+  }
 }`

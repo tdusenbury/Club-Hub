@@ -64,6 +64,27 @@ export const QUERY_MY_EVENTS = gql`
     
   }
   }
+`;
+
+
+export const QUERY_ATTENDING_EVENTS = gql`
+  {
+    getAttendingEvents {
+    _id
+    name
+    location
+    startTime
+    startDate
+    endTime
+    endDate
+    description
+    eventCreator{
+      _id
+    }
+
+    
+  }
+  }
 
 `;
 

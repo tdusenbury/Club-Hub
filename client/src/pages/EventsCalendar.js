@@ -1,14 +1,13 @@
 import React from 'react';
 import EventCard from '../components/EventCard';
 import { useQuery } from '@apollo/client';
-import { QUERY_EVENTS } from '../utils/queries';
-import { QUERY_FUTURE_EVENTS } from '../utils/queries';
+import { QUERY_MY_EVENTS } from '../utils/queries';
 import { Link } from 'react-router-dom';
 
 export default function EventCalendar() {
 
-    const { loading, error, data } = useQuery(QUERY_FUTURE_EVENTS);
-    const events = data?.getFutureEvents || [];
+    const { loading, error, data } = useQuery(QUERY_MY_EVENTS);
+    const events = data?.getMyEvents || [];
     if (error) {
         return <p>Error: {error.message}</p>;
     }

@@ -77,18 +77,14 @@ function App() {
               path="/changeuserinfo"
               element={<ChangeUserInfoForm />}
             />
-            {/* <Route
-                path="/eventscalendar"
-                element={<EventCalendar />}
-              /> */}
+            <Route
+              path="/eventmanager"
+              element={<EventCalendar />}
+            />
             {/* <Route
                 path="/updateevent"
                 element={<UpdateEvent />}
               /> */}
-            <Route
-              path="/addevent"
-              element={<СreateEvent />}
-            />
             <Route
               path="/members"
               element={<Members />}
