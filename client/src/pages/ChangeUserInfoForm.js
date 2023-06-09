@@ -41,7 +41,7 @@ const ChangeUserInfoForm = () => {
         } catch (e) {
             console.error(e);
         }
-        // window.location.assign('/personaldashboard');
+        window.location.assign('/personaldashboard');
     };
 
     if (loading) {

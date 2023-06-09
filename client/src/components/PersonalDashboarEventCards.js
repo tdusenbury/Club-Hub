@@ -4,6 +4,7 @@ import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_USER_EVENT } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
+import { removeEventId } from '../utils/localStorage';
 
 const PersonalDashboarEventCards = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description } = event;
@@ -39,7 +40,7 @@ const PersonalDashboarEventCards = ({ event }) => {
                 console.error('Error revoking RVSP:', error.message);
                 // Handle the error state or display an error message
             });
-        //window.location.reload();
+        removeEventId(_id);
     };
     const startDateTime = new Date(parseInt(startDate, 10));
     const endDateTime = new Date(parseInt(endDate, 10));

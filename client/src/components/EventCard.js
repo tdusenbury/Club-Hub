@@ -2,6 +2,7 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_EVENT } from '../utils/mutations';
 import { QUERY_MY_EVENTS } from '../utils/queries';
+import { Link } from 'react-router-dom';
 
 const EventCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, eventCreator } = event;
@@ -72,9 +73,9 @@ const EventCard = ({ event }) => {
                 <button onClick={handleRemoveEvent} style={styles.button}>
                     Remove Event
                 </button>
-                {/* {<Link to="/updateevent">
-                    <button style={styles.button}>Edit Event</button>
-                </Link>} */}
+                {/* <Link to="/updateevent">
+                    <button style={styles.button}> Edit Event</button>
+                </Link> */}
             </div>
 
             {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}

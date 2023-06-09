@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Auth from '../utils/auth';
-
+import { saveEventIds, getSavedEventIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { ADD_USER_EVENT } from '../utils/mutations';
 
@@ -15,6 +15,10 @@ const EventRsvpCard = ({ event }) => {
         }
     }
 
+    const [savedEventIds, setSavedEventIds] = useState(getSavedEventIds());
+    useEffect(() => {
+        return () => saveEventIds(savedEventIds);
+    });
 
     const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT);
 
@@ -31,7 +35,9 @@ const EventRsvpCard = ({ event }) => {
                 console.error('Error adding user to the event:', error.message);
                 // Handle the error state or display an error message
             });
-        window.location.reload();
+
+        setSavedEventIds([...savedEventIds, _id]);
+        //window.location.reload();
     };
     const startDateTime = new Date(parseInt(startDate, 10));
     const endDateTime = new Date(parseInt(endDate, 10));
@@ -65,13 +71,17 @@ const EventRsvpCard = ({ event }) => {
             </p>
             {!renderButton && (
                 <div className="event-buttons" style={styles.eventButtons}>
-                    <button onClick={handleRSVPEvent} style={styles.button}>
-                        RSVP for Event
+                    <button onClick={handleRSVPEvent} style={styles.button}
+                        disabled={savedEventIds?.some((savedEventId) => savedEventId === _id)}>
+                        {savedEventIds?.some((savedEventId) => savedEventId === _id)
+                            ? 'already RSVPed'
+                            : 'RSVP for Event'}
                     </button>
                 </div>
-            )}
+            )
+            }
             {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
-        </div>
+        </div >
     );
 };
 
