@@ -82,11 +82,11 @@ const СreateEvent = () => {
         <div className="event-page-container">
             <h1>Create Event</h1>
             <form className="event-form">
-                <div class="input-area">
+                <div className="input-area">
                     <label>Name:</label>
                     <input type="text" name="name" value={eventData.name} onChange={handleInputChange} />
                 </div>
-                <div class="input-area">
+                <div className="input-area">
                     <label>Location:</label>
                     <textarea type="text" name="location" value={eventData.location} onChange={handleInputChange} />
                 </div>
@@ -112,7 +112,7 @@ const СreateEvent = () => {
                         </div>
                     </div>
                 </div>
-                <div class="input-area">
+                <div className="input-area">
                     <label>Description:</label>
                     <textarea name="description" value={eventData.description} onChange={handleInputChange} />
                 </div>

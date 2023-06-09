@@ -3,26 +3,23 @@ import Auth from '../utils/auth';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER_EVENT } from '../utils/mutations';
-import { QUERY_EVENTS } from '../utils/queries';
 
 const EventRsvpCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, attendingUsers } = event;
     let renderButton = false
-    if(Auth.loggedIn()){
-        for(let i=0; i< attendingUsers.length; i++){
-            if (attendingUsers[i]._id === Auth.getProfile().data._id){
+    if (Auth.loggedIn()) {
+        for (let i = 0; i < attendingUsers.length; i++) {
+            if (attendingUsers[i]._id === Auth.getProfile().data._id) {
                 renderButton = true;
             }
         }
     }
 
-    console.log(renderButton);
-    console.log(attendingUsers, name)
-
     const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT);
 
+
     const handleRSVPEvent = async () => {
-        console.log(`I am trying to add  to an event with id:${_id}`);
+
         await addUserEvent({ variables: { eventId: _id } })
             .then(() => {
 
@@ -33,6 +30,7 @@ const EventRsvpCard = ({ event }) => {
                 console.error('Error adding user to the event:', error.message);
                 // Handle the error state or display an error message
             });
+        window.location.reload();
     };
     const startDateTime = new Date(parseInt(startDate, 10));
     const endDateTime = new Date(parseInt(endDate, 10));

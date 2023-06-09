@@ -28,7 +28,7 @@ const EventCard = ({ event }) => {
     });
 
     const handleRemoveEvent = async () => {
-        console.log("I am trying to delete an event with id:", _id);
+
         await deleteEvent({ variables: { eventId: _id } })
             .then(() => {
                 console.log('Event removed successfully!');
@@ -38,6 +38,8 @@ const EventCard = ({ event }) => {
                 console.error('Error removing event:', error.message);
                 // Handle the error state or display an error message
             });
+        window.location.reload();
+
     };
     const startDateTime = new Date(parseInt(startDate, 10));
     const endDateTime = new Date(parseInt(endDate, 10));
