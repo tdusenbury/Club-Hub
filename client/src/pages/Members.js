@@ -18,7 +18,6 @@ const Members = () => {
             <div className="header-card custom-header-card">
                 <h4 className="members">Members</h4>
                 <div className="row justify-content-center">
-
                     <div className="members-list">
                         <div className="table-wrapper">
                             <table className="table">

@@ -7,6 +7,7 @@ import { UPDATE_USER } from '../utils/mutations';
 
 const ChangeUserInfoForm = () => {
     const { loading, data } = useQuery(GET_ME);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const user = data?.getMe || {};
 
@@ -42,10 +43,55 @@ const ChangeUserInfoForm = () => {
         });
 
     };
+    const handleBlur = (event) => {
+        const { target } = event;
+        const inputType = target.name;
+        const inputValue = target.value;
+
+        if (inputValue.trim() === '') {
+            if (inputType === 'name') {
+                setErrorMessage('❌ The name should be entered!');
+            } else if (inputType === 'phone'){
+                const phoneNo = /^\+?[1-9][0-9]{7,14}$/;
+                if(!phoneNo.test(String(inputValue.trim())))
+                {
+                    setErrorMessage('❌ The phone number is not valid!');
+                }
+            }
+            else if (inputType === 'emergencyContactNumber'){
+                const phoneNo = /^\+?[1-9][0-9]{7,14}$/;
+                if(!phoneNo.test(String(inputValue.trim())))
+                {
+                    setErrorMessage('❌ The emergency contact number is not valid!');
+                }
+            }
+        }
+        setErrorMessage('');
+    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
+        if (formState.name.trim() === '') {
+            setErrorMessage('❌ The name should be entered!');
+            return;
+        }  
+
+        if (formState.phone.trim() !== ''){
+            const phoneNo = /^\+?[1-9][0-9]{7,14}$/;
+            if(!phoneNo.test(String(formState.phone.trim())))
+            {
+                setErrorMessage('❌ The phone number is not valid!');
+                return;
+            }
+        }
+        if (formState.emergencyContactNumber.trim() !== ''){
+            const phoneNo = /^\+?[1-9][0-9]{7,14}$/;
+            if(!phoneNo.test(String(formState.emergencyContactNumber.trim())))
+            {
+                setErrorMessage('❌ The emergency contact number is not valid!');
+                return;
+            }
+        }
 
         try {
             await updateUser({
@@ -55,7 +101,7 @@ const ChangeUserInfoForm = () => {
         } catch (e) {
             console.error(e);
         }
-        window.location.assign('/personaldashboard');
+       // window.location.assign('/personaldashboard');
     };
 
     if (loading) {
@@ -65,7 +111,7 @@ const ChangeUserInfoForm = () => {
         <main className="flex-row justify-center mb-4">
             <div className="col-12 col-lg-10">
                 <div className="card">
-                    <h4 className="card-header bg-dark text-light p-2">Edit My Information:</h4>
+                    <h4 className="card-header bg-dark text-light p-2">Edit My Information</h4>
                     <div className="card-body">
                         {!data ? (
                             <p>
@@ -127,6 +173,7 @@ const ChangeUserInfoForm = () => {
                                 >
                                     Change Personal information
                                 </button>
+                                <p className="form-label error-message">{errorMessage}</p>
                             </form>
                         )}
 
