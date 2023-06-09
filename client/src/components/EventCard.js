@@ -3,7 +3,6 @@ import Auth from '../utils/auth';
 
 import { useMutation } from '@apollo/client';
 import { REMOVE_EVENT } from '../utils/mutations';
-import { QUERY_EVENTS } from '../utils/queries';
 import { QUERY_MY_EVENTS } from '../utils/queries';
 
 const EventCard = ({ event }) => {

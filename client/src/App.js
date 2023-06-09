@@ -49,55 +49,55 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-      <Header />
+        <Header />
         <div className="flex-column justify-flex-start min-100-vh">
-          
-            <Routes>
-              <Route
-                path="/"
-                element={<Home />}
-              />
-              <Route
-                path="/login"
-                element={<Login />}
-              />
-              <Route
-                path="/signup"
-                element={<Signup />}
-              />
-              <Route
-                path="/clubhomepage"
-                element={<ClubHomePage />}
-              />
-              <Route
-                path="/personaldashboard"
-                element={<PersonalDashboard />}
-              />
-              <Route
-                path="/changeuserinfo"
-                element={<ChangeUserInfoForm />}
-              />
-              <Route
+
+          <Routes>
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/signup"
+              element={<Signup />}
+            />
+            <Route
+              path="/clubhomepage"
+              element={<ClubHomePage />}
+            />
+            <Route
+              path="/personaldashboard"
+              element={<PersonalDashboard />}
+            />
+            <Route
+              path="/changeuserinfo"
+              element={<ChangeUserInfoForm />}
+            />
+            {/* <Route
                 path="/eventscalendar"
                 element={<EventCalendar />}
-              />
-              {/* <Route
+              /> */}
+            {/* <Route
                 path="/updateevent"
                 element={<UpdateEvent />}
               /> */}
-              <Route
-                path="/addevent"
-                element={<СreateEvent />}
-              />
-              <Route
-                path="/members"
-                element={<Members />}
-              />
-              {/* <Route 
+            <Route
+              path="/addevent"
+              element={<СreateEvent />}
+            />
+            <Route
+              path="/members"
+              element={<Members />}
+            />
+            {/* <Route 
                 path="/about" 
                 element={<About />}
               /> */}
-            </Routes>
+          </Routes>
         </div>
       </Router>
     </ApolloProvider>
