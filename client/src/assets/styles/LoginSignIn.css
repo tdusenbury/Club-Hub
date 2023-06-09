@@ -18,6 +18,25 @@ h3 {
 font-size: 25px;
 }
 
-button {
+.button {
+    margin-top: 30px;
     width:20px;
+    margin-bottom: 50px;
+}
+
+.text {
+    font-size:30px;
+    font-style: italic;
+}
+
+.space {
+    margin-top: 30px;
+}
+
+.fontsize {
+    font-size: 25px;
+}
+
+.font {
+    font-family: 'Libre Baskerville', serif;
 }

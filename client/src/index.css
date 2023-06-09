@@ -1094,7 +1094,7 @@ a:hover {
 .card-header{
   background-color: #2d3e50;
   color: #d9e9e8;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 }
 
 
@@ -1137,10 +1137,9 @@ form .form-label {
 
 form .form-input {
   width: 100%;
-  padding: 0.75rem;
+  height: 57px;
   color: #1a1a1a;
   background-color: #ffffff;
-  margin: 0.625rem 0;
   font-size: 1.2rem;
   border: 1px solid #484848;
   border-radius: 0.3rem;

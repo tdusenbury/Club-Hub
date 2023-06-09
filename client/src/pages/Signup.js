@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import "../assets/styles/LoginSignIn.css";
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
 
@@ -40,10 +40,10 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
+    <main className="containing-div">
+      <div className="login-container">
+        <div className="card" style={{ backgroundColor: "#EEF4F4" }}>
+          <h4 className="card-header bg-dark text-light p-2 text-center">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
@@ -51,9 +51,14 @@ const Signup = () => {
                 <Link to="/clubhomepage">back to the club homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form onSubmit={handleFormSubmit}
+              className="container">
+                <p className="text text-center">By creating an account, you're gaining access to exclusive member opportunities and club member features. 
+                <br/>
+                Get ready to explore, connect. Let's get started! Sign up now and join our growing family!</p>
+                <br/>
                 <input
-                  className="form-input"
+                  className="form-input space"
                   placeholder="Your name"
                   name="name"
                   type="text"
@@ -61,7 +66,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input space"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -69,7 +74,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input space"
                   placeholder="Your phone number"
                   name="phone"
                   type="text"
@@ -77,7 +82,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input space"
                   placeholder="password"
                   name="password"
                   type="password"
@@ -85,7 +90,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-block btn-primary"
+                  className="btn btn-block btn-primary button fontsize"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
