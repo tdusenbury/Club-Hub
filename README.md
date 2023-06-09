@@ -68,21 +68,21 @@ If a user chooses to add an event, they can go to this page:
 This is a group collaboration. Below you can find the contact information for all developers:
 
 Afi Nkhume-Crecy
-- [**Github**]()
+- [**Github**](https://github.com/AFICRECY)
 - [**LinkedIn**]()
 - [**Email**]()
 
 
 Bahareh Hosseini
-- [**Github**]()
+- [**Github**](https://github.com/Bhmerir)
 - [**LinkedIn**]()
 - [**Email**]()
 
 
 Liubov Sobolevskaya
-- [**Github**]()
-- [**LinkedIn**]()
-- [**Email**]()
+- [**Github**](https://github.com/LiubovSobolevskaya)
+- [**LinkedIn**](https://www.linkedin.com/in/liubov-sobolevskaya/)
+- [**Email**](lubava39@gmail.com)
 
 Tamara "T" Dusenbury
   

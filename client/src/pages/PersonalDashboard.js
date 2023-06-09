@@ -1,17 +1,29 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-
+import EventCard from '../components/EventCard';
+import { QUERY_MY_EVENTS } from '../utils/queries';
 import { GET_ME } from '../utils/queries';
 import { Link } from 'react-router-dom';
 
 const PersonalDashboard = () => {
-    const { loading, data } = useQuery(GET_ME);
+    const { loading: meLoading, data: meData } = useQuery(GET_ME);
+    const { loading: eventsLoading, error: eventsError, data: eventsData } = useQuery(QUERY_MY_EVENTS);
 
-    const user = data?.getMe || {};
+
+    const user = meData?.getMe || {};
     console.log(user)
-    if (loading) {
+    if (meLoading) {
         return <div>Loading...</div>;
     }
+
+    const events = eventsData?.getMyEvents || [];
+
+    if (eventsError) {
+        return <p>Error: {eventsError.message}</p>;
+    }
+
+    console.log(events);
+
 
     /* if (!user?.username) {
        return (
@@ -65,8 +77,24 @@ const PersonalDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            <div>
+                <div className="event-card-container" style={styles.eventCardContainer}>
+                    {events.length ? events.map((event) => (<EventCard key={event._id} event={event} />)) : <h3>No Events Yet</h3>}
+                </div>
+                <div>{eventsLoading ? "Loading" : ""}</div>
+            </div>
+
         </div>
     );
 };
 
 export default PersonalDashboard;
+
+const styles = {
+    eventCardContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly'
+    }
+};
