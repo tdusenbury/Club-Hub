@@ -48,7 +48,7 @@ const Login = (props) => {
           <h4 className="card-header text-light p-3 text-center">
             Login
           </h4>
-          <div className="card-body">
+          <div className="card-body space">
             {data ? (
               <p>
                 Success! You may now head{" "}
@@ -57,7 +57,7 @@ const Login = (props) => {
             ) : (
               <form onSubmit={handleFormSubmit} className="container">
                 <input
-                  className="form-input"
+                  className="form-input space"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -65,7 +65,7 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input space"
                   placeholder="******"
                   name="password"
                   type="password"
@@ -73,14 +73,14 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-block btn-primary"
+                  className="btn btn-block btn-primary button fontsize"
                   style={{ cursor: "pointer" }}
                   type="submit"
                 >
                   Submit
                 </button>
                 <Link to="/signup">
-                  <h3 className="text-center mt-4">Sign Up</h3>
+                  <h3 className="text-center mt-4 font" style={{ textDecoration: "underline" }}>Click here to Sign Up and become a member</h3>
                 </Link>
               </form>
             )}
