@@ -13,6 +13,7 @@ const Signup = () => {
     email: '',
     password: '',
   });
+  const [errors, setErrors] = useState({});
   const [createUser, { error, data }] = useMutation(CREATE_USER);
 
   const handleChange = (event) => {
@@ -24,18 +25,48 @@ const Signup = () => {
     });
   };
 
+  const validateForm = () => {
+    let formErrors = {};
+
+    if (!formState.name.trim()) {
+      formErrors.name = 'Name is required';
+    }
+
+    if (!formState.email.trim()) {
+      formErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
+      formErrors.email = 'Invalid email address';
+    }
+
+    if ((formState.phone) && (!/^\+?[1-9][0-9]{7,14}$/.test(formState.phone))) {
+      formErrors.phone = 'Must match a phone number';
+    }
+
+    if (!formState.password.trim()) {
+      formErrors.password = 'Password is required';
+    } else if (formState.password.trim().length < 5 || formState.password.trim().length > 25) {
+      formErrors.password = 'Password must be at least 5 and at most 25 characters';
+    }
+
+
+    setErrors(formErrors);
+
+    return Object.keys(formErrors).length === 0;
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+    if (validateForm()) {
 
-    try {
-      const { data } = await createUser({
-        variables: { ...formState },
-      });
+      try {
+        const { data } = await createUser({
+          variables: { ...formState },
+        });
 
-      Auth.login(data.createUser.token);
-    } catch (e) {
-      console.error(e);
+        Auth.login(data.createUser.token);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
@@ -52,11 +83,11 @@ const Signup = () => {
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}
-              className="container">
-                <p className="text text-center">By creating an account, you're gaining access to exclusive member opportunities and club member features. 
-                <br/>
-                Get ready to explore, connect. Let's get started! Sign up now and join our growing family!</p>
-                <br/>
+                className="container">
+                <p className="text text-center">By creating an account, you're gaining access to exclusive member opportunities and club member features.
+                  <br />
+                  Get ready to explore, connect. Let's get started! Sign up now and join our growing family!</p>
+                <br />
                 <input
                   className="form-input space"
                   placeholder="Your name"
@@ -65,6 +96,7 @@ const Signup = () => {
                   value={formState.name}
                   onChange={handleChange}
                 />
+
                 <input
                   className="form-input space"
                   placeholder="Your email"
@@ -73,6 +105,7 @@ const Signup = () => {
                   value={formState.email}
                   onChange={handleChange}
                 />
+
                 <input
                   className="form-input space"
                   placeholder="Your phone number"
@@ -81,6 +114,7 @@ const Signup = () => {
                   value={formState.phone}
                   onChange={handleChange}
                 />
+
                 <input
                   className="form-input space"
                   placeholder="password"
@@ -89,6 +123,7 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
+
                 <button
                   className="btn btn-block btn-primary button fontsize"
                   style={{ cursor: 'pointer' }}
@@ -98,6 +133,10 @@ const Signup = () => {
                 </button>
               </form>
             )}
+            {errors.name && <span style={{ color: 'red' }}>{errors.name}<br /></span>}
+            {errors.email && <span style={{ color: 'red' }}>{errors.email}<br /></span>}
+            {errors.phone && <span style={{ color: 'red' }}>{errors.phone}<br /></span>}
+            {errors.password && <span style={{ color: 'red' }}>{errors.password}<br /></span>}
 
             {error && (
               <div className="my-3 p-3 bg-danger text-white">
@@ -107,7 +146,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-    </main>
+    </main >
   );
 };
 

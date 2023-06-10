@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MyClock from '../components/TimePicker';
 import '../assets/styles/Events.css';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { ADD_EVENT } from '../utils/mutations';
-import { QUERY_EVENTS } from '../utils/queries';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Link } from 'react-router-dom';
@@ -37,7 +36,7 @@ const СreateEvent = () => {
 
     const handleCreateEvent = async (event) => {
         event.preventDefault();
-
+        console.log(eventData)
         if (validateForm()) {
             try {
                 const { data } = await createEvent({
@@ -45,9 +44,9 @@ const СreateEvent = () => {
                         name: eventData.name,
                         location: eventData.location,
                         startTime: eventData.startTime,
-                        startDate: eventData.startDate.toString(),
+                        startDate: new Date(eventData.startDate).getTime().toString(),
                         endTime: eventData.endTime,
-                        endDate: eventData.endDate.toString(),
+                        endDate: new Date(eventData.endDate).getTime().toString(),
                         description: eventData.description
 
                     },
