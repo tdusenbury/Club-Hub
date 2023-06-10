@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import MyCalendar from '../components/DatePicker';
 import MyClock from '../components/TimePicker';
 import '../assets/styles/Events.css';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_EVENT } from '../utils/mutations';
 import { QUERY_EVENTS } from '../utils/queries';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { Link } from 'react-router-dom';
 
 
 const СreateEvent = () => {
+
     const [eventData, setEventData] = useState({
         name: '',
         location: '',
@@ -21,22 +24,8 @@ const СreateEvent = () => {
 
 
     const [errors, setErrors] = useState({});
-    const [createEvent, { error }] = useMutation(ADD_EVENT, {
-        update(cache, { data: { createEvent } }) {
-            try {
-                const { getAllEvents } = cache.readQuery({ query: QUERY_EVENTS });
-                if (getAllEvents) {
-                    cache.writeQuery({
-                        query: QUERY_EVENTS,
-                        data: { getAllEvents: [createEvent, ...getAllEvents] },
-                    });
-                }
-            } catch (e) {
-                console.error(e);
-            }
-        },
-    });
-
+    const [createEvent, { error }] = useMutation(ADD_EVENT);
+    const [eventCreated, setEventCreated] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -48,6 +37,7 @@ const СreateEvent = () => {
 
     const handleCreateEvent = async (event) => {
         event.preventDefault();
+
         if (validateForm()) {
             try {
                 const { data } = await createEvent({
@@ -62,7 +52,7 @@ const СreateEvent = () => {
 
                     },
                 });
-                console.log(data);
+
                 setEventData({
                     name: '',
                     location: '',
@@ -72,10 +62,12 @@ const СreateEvent = () => {
                     endDate: '',
                     description: ''
                 });
+                setEventCreated(true);
             } catch (err) {
                 console.error(err);
             }
-            window.location.assign('/personaldashboard');
+
+
         }
     };
 
@@ -105,10 +97,15 @@ const СreateEvent = () => {
         return Object.keys(formErrors).length === 0;
     };
 
+    const handleClose = () => {
+        setEventCreated(false);
+    };
+
+
 
     return (
         <div className="event-page-container">
-            <h1>Create Event</h1>
+            <h1>Add Event</h1>
             <form className="event-form">
                 <div className="input-area">
                     <label>Name:</label>
@@ -128,7 +125,8 @@ const СreateEvent = () => {
                         </div>
                         <div className="Date">
                             <label>Start Date:</label>
-                            <MyCalendar selectedDate={eventData.startDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} />
+                            {/* <MyCalendar selectedDate={eventData.startDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} /> */}
+                            <Calendar onChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} value={eventData.startDate} />
                             {errors.startDate && <span style={{ color: 'red' }}>{errors.startDate}</span>}
                         </div>
 
@@ -140,7 +138,7 @@ const СreateEvent = () => {
                         </div>
                         <div className="Date">
                             <label>End Date:</label>
-                            <MyCalendar selectedDate={eventData.endDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, endDate: date }))} />
+                            <Calendar value={eventData.endDate} onChange={(date) => setEventData((prevData) => ({ ...prevData, endDate: date }))} />
                             {errors.endDate && <span style={{ color: 'red' }}>{errors.endDate}</span>}
                         </div>
                     </div>
@@ -152,6 +150,19 @@ const СreateEvent = () => {
                 {errors.description && <span style={{ color: 'red' }}>{errors.description}</span>}
             </form>
             <button className="event-button" onClick={handleCreateEvent}>Create an event</button>
+            {eventCreated && (
+                <div className="modal">
+                    <div className="modal-content">
+                        Event created successfully!
+                        <Link to='/personaldashboard'>
+                            Go to personal dashboard
+                        </Link>
+                        <button className="close-button" onClick={handleClose}>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
