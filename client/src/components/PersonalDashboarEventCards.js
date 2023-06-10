@@ -64,9 +64,9 @@ const PersonalDashboarEventCards = ({ event }) => {
             <h2>{name}</h2>
             <p className="event-details" style={styles.eventDetails}>
                 <strong>Location:</strong> {location} <br />
-                {startTime && <span><strong>Start Time:</strong> {startTime}</span>}<br />
+                {startTime && <span><strong>Start Time:</strong> {startTime}<br /> </span>}
                 <strong>Start Date:</strong> {formattedStartDate} <br />
-                {endTime && <span><strong>End Time:</strong> {endTime} </span>}<br />
+                {endTime && <span><strong>End Time:</strong> {endTime} <br /></span>}
                 <strong>End Date:</strong> {formattedEndDate} <br />
                 <strong>Description:</strong> {description}
             </p>
