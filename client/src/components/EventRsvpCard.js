@@ -60,7 +60,6 @@ const EventRsvpCard = ({ event }) => {
     });
 
     return (
-        <div>
         <div className="event-card" style={styles.eventCard}>
             <h2>{name}</h2>
             <p className="event-details">

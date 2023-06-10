@@ -3,6 +3,8 @@ import { useQuery } from "@apollo/client";
 import PersonalDashboarEventCards from "../components/PersonalDashboarEventCards.js";
 import { GET_ME } from "../utils/queries";
 import { Link } from "react-router-dom";
+import '../assets/styles/PersonalDashboard.css';
+
 
 const PersonalDashboard = () => {
   const { loading: meLoading, data: meData } = useQuery(GET_ME);
@@ -35,7 +37,6 @@ const PersonalDashboard = () => {
           </div>
           <div
             className='mb-3 p-3'
-            style={{ border: "1px dotted #1a1a1a" }}
           >
             <div>
               <div className="btn btn-block btn-primary p-2 center">
