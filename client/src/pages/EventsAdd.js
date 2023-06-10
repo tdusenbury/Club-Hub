@@ -37,7 +37,7 @@ const СreateEvent = () => {
 
     const handleCreateEvent = async (event) => {
         event.preventDefault();
-
+        console.log(eventData)
         if (validateForm()) {
             try {
                 const { data } = await createEvent({
@@ -45,9 +45,9 @@ const СreateEvent = () => {
                         name: eventData.name,
                         location: eventData.location,
                         startTime: eventData.startTime,
-                        startDate: eventData.startDate.toString(),
+                        startDate: new Date(eventData.startDate).getTime().toString(),
                         endTime: eventData.endTime,
-                        endDate: eventData.endDate.toString(),
+                        endDate: new Date(eventData.endDate).getTime().toString(),
                         description: eventData.description
 
                     },
