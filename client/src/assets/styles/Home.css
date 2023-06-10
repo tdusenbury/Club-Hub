@@ -1,27 +1,21 @@
 .home-container {
-    background-color: #c1e8e0; /* Replace with your desired background color */
-    min-height: 100vh; /* Ensures the container covers the full height of the viewport */
-  }
+    background-color: #c1e8e0;
+    min-height: 100vh;
+}
 
 .home-image {
-    padding:30px;
     background-color: rgb(46, 77, 161);
     border-radius: 20px;
-    margin-left: 70px;
-    margin-top: 3.5rem; 
+    margin-top: 15%;
 }
 
 .involved-card {
     background-color: greenyellow;
-    padding: 20px;
-    height:400px;
+    margin-top: 18%;
     border-radius: 20px;
-    margin-top: 6rem; 
+    list-style-type: none;
 }
 
-.mt-custom {
-    margin-top: 3.5rem; 
-}
 
 li {
     font-size: 20px;
@@ -30,4 +24,27 @@ li {
 
 h2 {
     font-size: 40px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    align-items: flex-start;
+}
+
+.home-image {
+    width: 100%;
+    max-width: 100%;
+    /* Adjust the width as desired */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        /* Single column layout */
+        grid-gap: 10px;
+        /* Adjust the gap between the elements */
+    }
 }
