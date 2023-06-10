@@ -18,12 +18,12 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.15",
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/react": "^6.1.8",
+    "@fullcalendar/timegrid": "^6.1.8",
     "dotenv": "^16.1.4",
     "graphql-scalars": "^1.22.1",
     "mdb-react-ui-kit": "^6.1.0",
-    "mdbootstrap": "^4.20.0",
-    "rc-time-picker": "^3.7.3",
-    "react-calendar": "^4.2.1",
-    "react-router-dom": "^6.12.0"
+    "mdbootstrap": "^4.20.0"
   }
 }
