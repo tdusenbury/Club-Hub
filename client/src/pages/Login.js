@@ -105,7 +105,7 @@ const Login = (props) => {
                   Submit
                 </button>
                 <Link to="/signup">
-                  <h3 className="text-center mt-4 font" style={{ textDecoration: "underline" }}>Click here to Sign Up and become a member</h3>
+                  <h3 className="text-center mt-4 font" style={{ textDecoration: "underline" }}>Not a member? Sign up here!</h3>
                 </Link>
               </form>
             )}
