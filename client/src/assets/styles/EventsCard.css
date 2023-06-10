@@ -1,0 +1,34 @@
+.event-card {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
+.event-details {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.event-buttons {
+  margin-top: 10px;
+}
+
+#button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  width: 150px;
+}
+
+.error-message {
+  background-color: #ff4d4f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}

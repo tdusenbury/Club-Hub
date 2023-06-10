@@ -3,6 +3,7 @@ import Auth from '../utils/auth';
 import { saveEventIds, getSavedEventIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { ADD_USER_EVENT } from '../utils/mutations';
+import '../assets/styles/EventsCard.css';
 
 const EventRsvpCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, attendingUsers } = event;
@@ -58,9 +59,9 @@ const EventRsvpCard = ({ event }) => {
     });
 
     return (
-        <div className="event-card" style={styles.eventCard}>
+        <div className="event-card">
             <h2>{name}</h2>
-            <p className="event-details" style={styles.eventDetails}>
+            <p className="event-details">
                 <strong>Location:</strong> {location} <br />
                 <strong>Start Time:</strong> {startTime} <br />
                 <strong>Start Date:</strong> {formattedStartDate} <br />
@@ -69,8 +70,8 @@ const EventRsvpCard = ({ event }) => {
                 <strong>Description:</strong> {description}
             </p>
             {!renderButton && (
-                <div className="event-buttons" style={styles.eventButtons}>
-                    <button onClick={handleRSVPEvent} style={styles.button}
+                <div className="event-buttons">
+                    <button id="button" onClick={handleRSVPEvent} style={styles.button}
                         disabled={savedEventIds?.some((savedEventId) => savedEventId === _id)}>
                         {savedEventIds?.some((savedEventId) => savedEventId === _id)
                             ? 'already RSVPed'

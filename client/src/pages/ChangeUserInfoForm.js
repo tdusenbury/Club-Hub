@@ -34,20 +34,18 @@ const ChangeUserInfoForm = () => {
         if (formState.name.trim() === '') {
             setErrorMessage('❌ The name should be entered!');
             return;
-        }  
+        }
 
-        if (formState.phone.trim() !== ''){
+        if (formState.phone.trim() !== '') {
             const phoneNo = /^\+?[1-9][0-9]{7,14}$/;
-            if(!phoneNo.test(String(formState.phone.trim())))
-            {
+            if (!phoneNo.test(String(formState.phone.trim()))) {
                 setErrorMessage('❌ The phone number is not valid!');
                 return;
             }
         }
-        if (formState.emergencyContactNumber.trim() !== ''){
+        if (formState.emergencyContactNumber.trim() !== '') {
             const phoneNo = /^\+?[1-9][0-9]{7,14}$/;
-            if(!phoneNo.test(String(formState.emergencyContactNumber.trim())))
-            {
+            if (!phoneNo.test(String(formState.emergencyContactNumber.trim()))) {
                 setErrorMessage('❌ The emergency contact number is not valid!');
                 return;
             }
@@ -78,7 +76,7 @@ const ChangeUserInfoForm = () => {
                             <label>Name:</label>
                             <input
                                 className="form-input"
-                                placeholder="name"
+                                placeholder="Name"
                                 name="name"
                                 type="text"
                                 value={formState.name}
@@ -87,7 +85,7 @@ const ChangeUserInfoForm = () => {
                             <label>Address:</label>
                             <input
                                 className="form-input"
-                                placeholder="address"
+                                placeholder="Address"
                                 name="address"
                                 type="text"
                                 value={formState.address}
@@ -96,7 +94,7 @@ const ChangeUserInfoForm = () => {
                             <label>Phone Number:</label>
                             <input
                                 className="form-input"
-                                placeholder="phone"
+                                placeholder="Phone number"
                                 name="phone"
                                 type="text"
                                 value={formState.phone}
@@ -105,7 +103,7 @@ const ChangeUserInfoForm = () => {
                             <label>Emergency Contact Name:</label>
                             <input
                                 className="form-input"
-                                placeholder="emergencyContactName"
+                                placeholder="Emergency Contact Name"
                                 name="emergencyContactName"
                                 type="text"
                                 value={formState.emergencyContactName}
@@ -114,7 +112,7 @@ const ChangeUserInfoForm = () => {
                             <label>Emergency Contact Number:</label>
                             <input
                                 className="form-input"
-                                placeholder="emergencyContactNumber"
+                                placeholder="Emergency Contact Number"
                                 name="emergencyContactNumber"
                                 type="text"
                                 value={formState.emergencyContactNumber}
