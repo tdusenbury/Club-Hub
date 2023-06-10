@@ -185,8 +185,9 @@ const СreateEvent = () => {
                         <Link to='/eventmanager'>
                             Go to Event Manager
                         </Link>
+                        or
                         <button className="close-button" onClick={handleClose}>
-                            Close
+                            Click here to add another event
                         </button>
                     </div>
                 </div>

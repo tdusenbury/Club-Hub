@@ -5,9 +5,9 @@ import "../assets/styles/PersonalDashboard.css";
 const About = () => {
   return (
     <div className="about-container">
-      <div className="home-container">
-        <div className="flex-row justify-center mb-3">
-          <div className="col-12 col-md-10 text-light p-4 margins border space">
+      <div className="home-container" style={{ margin: "0 5%" }}>
+        <div className="flex-row justify-center mb-3 ">
+          <div className="col-12 col-md-12 text-light p-4 margins border space">
             <h2 className="text-center space">About</h2>
             <div style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}>
               <div>
@@ -32,9 +32,9 @@ const About = () => {
                     memorable experiences together.
                   </p>
                   <Link to="/signup">
-                  <h3 className="text-center mt-4 font" style={{ textDecoration: "underline" }}>Not a member? Sign up here!</h3>
-                </Link>
-                  <br/>
+                    <h3 className="text-center mt-4 font" style={{ textDecoration: "underline" }}>Not a member? Sign up here!</h3>
+                  </Link>
+                  <br />
                 </div>
               </div>
             </div>
