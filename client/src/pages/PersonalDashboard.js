@@ -17,9 +17,9 @@ const PersonalDashboard = () => {
   const events = user.events || [];
 
   return (
-    <div className="home-container">
+    <div className="home-container" style={{ margin: "0 5%" }}>
       <div className="flex-row justify-center mb-3">
-        <div className="col-12 col-md-10 text-light p-4 margins border space">
+        <div className="col-12 col-md-12 text-light p-4 margins border space">
           <h2 className="text-center space">Profile Information</h2>
           <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
             <div>
