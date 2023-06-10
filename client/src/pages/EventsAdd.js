@@ -45,7 +45,7 @@ const СreateEvent = () => {
                 if (cacheResponse && cacheResponse.getFutureEvents) {
                     cache.writeQuery({
                         query: QUERY_FUTURE_EVENTS,
-                        data: { getMyEvents: [createEvent, ...cacheResponse.getFutureEvents] },
+                        data: { getFutureEvents: [createEvent, ...cacheResponse.getFutureEvents] },
                     });
                 }
             } catch (e) {
