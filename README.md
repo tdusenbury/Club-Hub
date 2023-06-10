@@ -69,8 +69,8 @@ This is a group collaboration. Below you can find the contact information for al
 
 Afi Nkhume-Crecy
 - [**Github**](https://github.com/AFICRECY)
-- [**LinkedIn**]()
-- [**Email**](mailto:)
+- [**LinkedIn**](https://www.linkedin.com/in/afi-nkhume-crecy-932862128/)
+- [**Email**](mailto:aficrecy@gmail.com)
 
 
 Bahareh Hosseini

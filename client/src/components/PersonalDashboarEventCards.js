@@ -1,10 +1,10 @@
 import React from 'react';
 import Auth from '../utils/auth';
-
 import { useMutation } from '@apollo/client';
 import { REMOVE_USER_EVENT } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 import { removeEventId } from '../utils/localStorage';
+
 
 const PersonalDashboarEventCards = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description } = event;
@@ -60,6 +60,7 @@ const PersonalDashboarEventCards = ({ event }) => {
     });
 
     return (
+        <div>
         <div className="event-card" style={styles.eventCard}>
             <h2>{name}</h2>
             <p className="event-details" style={styles.eventDetails}>
@@ -79,12 +80,13 @@ const PersonalDashboarEventCards = ({ event }) => {
 
             {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
         </div >
+        </div>
     );
 };
 
 const styles = {
     eventCard: {
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#40E0D0',
         padding: '20px',
         borderRadius: '5px',
         marginBottom: '20px',

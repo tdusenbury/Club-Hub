@@ -3,6 +3,8 @@ import Auth from '../utils/auth';
 import { saveEventIds, getSavedEventIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { ADD_USER_EVENT } from '../utils/mutations';
+import "../assets/styles/PersonalDashboard.css";
+
 
 const EventRsvpCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, attendingUsers } = event;
@@ -58,7 +60,7 @@ const EventRsvpCard = ({ event }) => {
     });
 
     return (
-        <div className="event-card" style={styles.eventCard}>
+        <div className="event-card background" style={styles.eventCard}>
             <h2>{name}</h2>
             <p className="event-details" style={styles.eventDetails}>
                 <strong>Location:</strong> {location} <br />
@@ -101,7 +103,7 @@ const styles = {
     button: {
         backgroundColor: '#4caf50',
         color: '#fff',
-        padding: '8px 16px',
+        padding: '8px',
         border: 'none',
         borderRadius: '5px',
         cursor: 'pointer',
