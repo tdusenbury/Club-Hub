@@ -46,8 +46,6 @@ const EventCard = ({ event }) => {
         year: 'numeric',
     });
 
-    console.log(formattedStartDate);
-
     const formattedEndDate = endDateTime.toLocaleDateString('en-US', {
         weekday: 'long',
         month: 'short',
@@ -60,9 +58,10 @@ const EventCard = ({ event }) => {
             <h2>{name}</h2>
             <p className="event-details">
                 <strong>Location:</strong> {location} <br />
-                <strong>Start Time:</strong> {startTime} <br />
+                <strong>Location:</strong> {location} <br />
+                {startTime?.length > 0 && <strong>Start Time: {startTime}  <br /></strong>}
                 <strong>Start Date:</strong> {formattedStartDate} <br />
-                <strong>End Time:</strong> {endTime} <br />
+                {endTime?.length > 0 && <strong>End Time: {endTime} <br /></strong>}
                 <strong>End Date:</strong> {formattedEndDate} <br />
                 <strong>Description:</strong> {description}
             </p>
