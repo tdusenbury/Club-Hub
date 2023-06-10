@@ -836,6 +836,8 @@ a:hover {
 
 
 
+
+
 /* .btn.btn-squared {
   border-radius: 0;
 }  */
@@ -849,6 +851,9 @@ a:hover {
   font-size: 1.25rem;
   padding: 0.8rem 1.4rem;
 } */
+
+
+
 
 
 
@@ -873,6 +878,11 @@ a:hover {
 .btn.btn-primary:hover {
   background-color: #57779a;
 } 
+
+
+
+
+
 
 
 
@@ -919,7 +929,7 @@ a:hover {
   color: #1a1a1a;
 } */
 
-.btn.btn-white:hover {
+/* .btn.btn-white:hover {
   background-color: #cccccc;
 }
 
@@ -930,16 +940,16 @@ a:hover {
 
 .btn.btn-black:hover {
   background-color: #666666;
-}
+} */
 
-.btn.btn-link {
+/* .btn.btn-link {
   background-color: #1b89bc;
   color: #ffffff;
 }
 
 .btn.btn-link:hover {
   background-color: #31a9e1;
-}
+} */
 
 .card {
   border: 1px solid #1a1a1a;
@@ -960,7 +970,7 @@ a:hover {
   padding: 0.375rem; 
 }
 
-form {
+/* form {
   width: 100%;
 }
 
@@ -982,16 +992,16 @@ form select {
   background-repeat: no-repeat;
   background-position-x: 98%;
   background-position-y: 50%;
-}
+} */
 
-form label,
+/* form label,
 form .form-label {
   display: inline-block;
   font-size: 1.2rem;
   margin: 0.625rem 0 0.25rem 0.3rem;
-}
+} */
 
-form .form-input {
+/* form .form-input {
   width: 100%;
   height: 57px;
   color: #1a1a1a;
@@ -999,11 +1009,11 @@ form .form-input {
   font-size: 1.2rem;
   border: 1px solid #484848;
   border-radius: 0.3rem;
-}
+} */
 
-form .form-input.form-input-squared {
+/* form .form-input.form-input-squared {
   border-radius: 0;
-}
+} */
 
 form [type='checkbox'],
 form [type='radio'] {
