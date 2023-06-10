@@ -2,8 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
+    justify-content: space-around;
 }
 
 .card-container {
@@ -11,7 +10,8 @@
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 20px;
     width: 100%;
-    margin-bottom: 10px;
+    margin: 0 5%;
+    align-items: center;
 }
 
 .add-event-button {
@@ -34,7 +34,6 @@
     color: #6c757d;
 }
 
-/* Loader styles */
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
@@ -51,5 +50,11 @@
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .card-container {
+        align-items: center;
     }
 }

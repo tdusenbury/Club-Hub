@@ -16,7 +16,7 @@ import About from './pages/About';
 import ClubHomePage from './pages/ClubHomePage';
 import PersonalDashboard from './pages/PersonalDashboard';
 import ChangeUserInfoForm from './pages/ChangeUserInfoForm';
-import EventCalendar from './pages/EventsCalendar';
+import EventsManager from './pages/EventsManager';
 //import UpdateEvent from './pages/EventsUpdate';
 import СreateEvent from './pages/EventsAdd';
 import Members from './pages/Members'
@@ -50,7 +50,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-        <div className="flex-column justify-flex-start min-100-vh">
+        <div className="flex-column justify-space-evenly min-100-vh">
 
           <Routes>
             <Route
@@ -79,7 +79,7 @@ function App() {
             />
             <Route
               path="/eventmanager"
-              element={<EventCalendar />}
+              element={<EventsManager />}
             />
 
             {/* <Route

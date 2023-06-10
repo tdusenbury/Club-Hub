@@ -5,7 +5,7 @@ import { QUERY_MY_EVENTS } from '../utils/queries';
 import { Link } from 'react-router-dom';
 import '../assets/styles/EventManager.css';
 
-export default function EventCalendar() {
+export default function EventsManager() {
 
     const { loading, error, data } = useQuery(QUERY_MY_EVENTS);
     const events = data?.getMyEvents || [];
