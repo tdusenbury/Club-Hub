@@ -27,13 +27,13 @@ const PersonalDashboarEventCards = ({ event }) => {
     const [removeUserEvent, { loading, error }] = useMutation(REMOVE_USER_EVENT, {
         update(cache, { data: { removeUserEvent } }) {
             try {
-                const { getMe } = cache.readQuery({ query: GET_ME });
+                const cacheResponse = cache.readQuery({ query: GET_ME });
 
-                if (getMe) {
-                    const updatedEvents = getMe.events.filter((event) => event._id !== removeUserEvent._id);
+                if (cacheResponse && cacheResponse.getMe) {
+                    const updatedEvents = cacheResponse.getMe.events.filter((event) => event._id !== removeUserEvent._id);
                     cache.writeQuery({
                         query: GET_ME,
-                        data: { getMe: { ...getMe, events: [...updatedEvents] } },
+                        data: { getMe: { ...cacheResponse.getMe, events: [...updatedEvents] } },
                     });
                 }
             } catch (e) {
