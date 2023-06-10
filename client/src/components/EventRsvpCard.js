@@ -5,6 +5,22 @@ import { useMutation } from '@apollo/client';
 import { ADD_USER_EVENT } from '../utils/mutations';
 import '../assets/styles/EventsCard.css';
 
+
+function fixTime(time) {
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+
+    var AMPM = time.match(/\s(.*)$/)[1];
+    if (AMPM === "pm" && hours > 12) hours = hours - 12;
+    if (AMPM === "am" && hours === 12) hours = hours - 12;
+    let sHours = hours.toString();
+    let sMinutes = minutes.toString();
+    if (hours < 10) sHours = "0" + sHours;
+    if (minutes < 10) sMinutes = "0" + sMinutes;
+    return (sHours + ":" + sMinutes + " " + AMPM);
+}
+
+
 const EventRsvpCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, attendingUsers } = event;
     let renderButton = false
@@ -58,14 +74,24 @@ const EventRsvpCard = ({ event }) => {
         year: 'numeric',
     });
 
+    if (startTime?.length) {
+        var newStartTime = fixTime(startTime);
+    }
+    if (endTime?.length) {
+        var newEndTime = fixTime(endTime);
+    }
+
+
+
     return (
-        <div className="event-card">
+        <div className="event-card" style={styles.eventCard}>
             <h2>{name}</h2>
             <p className="event-details">
                 <strong>Location:</strong> {location} <br />
-                <strong>Start Time:</strong> {startTime} <br />
+                <strong>Location:</strong> {location} <br />
+                {startTime?.length > 0 && <strong>Start Time: {newStartTime}  <br /></strong>}
                 <strong>Start Date:</strong> {formattedStartDate} <br />
-                <strong>End Time:</strong> {endTime} <br />
+                {endTime?.length > 0 && <strong>End Time: {newEndTime} <br /></strong>}
                 <strong>End Date:</strong> {formattedEndDate} <br />
                 <strong>Description:</strong> {description}
             </p>
@@ -102,7 +128,7 @@ const styles = {
     button: {
         backgroundColor: '#4caf50',
         color: '#fff',
-        padding: '8px 16px',
+        padding: '8px',
         border: 'none',
         borderRadius: '5px',
         cursor: 'pointer',

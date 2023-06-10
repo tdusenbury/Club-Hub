@@ -322,9 +322,9 @@ a:hover {
   margin-bottom: 0.625rem !important;
 }
 
-.mb-3 {
+/* .mb-3 {
   margin-bottom: 1rem !important;
-}
+} */
 
 .mb-4 {
   margin-bottom: 1.375rem !important;
@@ -366,7 +366,8 @@ a:hover {
   margin-top: auto !important;
 }
 
-.mr-0 {
+/* Margin-right */
+/* .mr-0 {
   margin-right: 0 !important;
 }
 
@@ -392,9 +393,10 @@ a:hover {
 
 .mr-auto {
   margin-right: auto !important;
-}
+} */
 
-.ml-0 {
+/* Margin-left */
+/* .ml-0 {
   margin-left: 0 !important;
 }
 
@@ -420,9 +422,10 @@ a:hover {
 
 .ml-auto {
   margin-left: auto !important;
-}
+} */
 
-.mx-0 {
+/* Margin - x axis */
+/* .mx-0 {
   margin-right: 0 !important;
   margin-left: 0 !important;
 }
@@ -564,7 +567,8 @@ a:hover {
   padding-top: 1.625rem !important;
 }
 
-.pr-0 {
+/* padding-right */
+/* .pr-0 {
   padding-right: 0 !important;
 }
 
@@ -588,6 +592,7 @@ a:hover {
   padding-right: 1.625rem !important;
 } */
 
+/* padding-left */
 /* .pl-0 {
   padding-left: 0 !important;
 }
@@ -610,9 +615,10 @@ a:hover {
 
 .pl-5 {
   padding-left: 1.625rem !important;
-}
+} */ */
 
-.px-0 {
+/* padding - x axis */
+/* .px-0 {
   padding-right: 0 !important;
   padding-left: 0 !important;
 }
@@ -640,7 +646,7 @@ a:hover {
 .px-5 {
   padding-right: 1.625rem !important;
   padding-left: 1.625rem !important;
-}
+} */
 
 .py-0 {
   padding-top: 0 !important;
@@ -849,8 +855,7 @@ a:hover {
 
 /* .btn.btn-lg {
   font-size: 1.25rem;
-  padding: 0.8rem 1.4rem;
-} */
+}
 
 
 

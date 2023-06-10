@@ -1,10 +1,24 @@
 import React from 'react';
 import Auth from '../utils/auth';
-
 import { useMutation } from '@apollo/client';
 import { REMOVE_USER_EVENT } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 import { removeEventId } from '../utils/localStorage';
+
+function fixTime(time) {
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+
+    var AMPM = time.match(/\s(.*)$/)[1];
+    if (AMPM === "pm" && hours > 12) hours = hours - 12;
+    if (AMPM === "am" && hours === 12) hours = hours - 12;
+    let sHours = hours.toString();
+    let sMinutes = minutes.toString();
+    if (hours < 10) sHours = "0" + sHours;
+    if (minutes < 10) sMinutes = "0" + sMinutes;
+    return (sHours + ":" + sMinutes + " " + AMPM);
+}
+
 
 const PersonalDashboarEventCards = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description } = event;
@@ -59,32 +73,41 @@ const PersonalDashboarEventCards = ({ event }) => {
         year: 'numeric',
     });
 
+    if (startTime?.length) {
+        var newStartTime = fixTime(startTime);
+    }
+    if (endTime?.length) {
+        var newEndTime = fixTime(endTime);
+    }
+
     return (
-        <div className="event-card" style={styles.eventCard}>
-            <h2>{name}</h2>
-            <p className="event-details" style={styles.eventDetails}>
-                <strong>Location:</strong> {location} <br />
-                {startTime && <span><strong>Start Time:</strong> {startTime}</span>}<br />
-                <strong>Start Date:</strong> {formattedStartDate} <br />
-                {endTime && <span><strong>End Time:</strong> {endTime} </span>}<br />
-                <strong>End Date:</strong> {formattedEndDate} <br />
-                <strong>Description:</strong> {description}
-            </p>
+        <div>
+            <div className="event-card" style={styles.eventCard}>
+                <h2>{name}</h2>
+                <p className="event-details" style={styles.eventDetails}>
+                    <strong>Location:</strong> {location} <br />
+                    {startTime && <span><strong>Start Time:</strong> {newStartTime}<br /> </span>}
+                    <strong>Start Date:</strong> {formattedStartDate} <br />
+                    {endTime && <span><strong>End Time:</strong> {newEndTime} <br /></span>}
+                    <strong>End Date:</strong> {formattedEndDate} <br />
+                    <strong>Description:</strong> {description}
+                </p>
 
-            <div className="event-buttons" style={styles.eventButtons}>
-                <button onClick={handleRemoveRSVPEvent} style={styles.button}>
-                    Revoke RSVP
-                </button>
-            </div>
+                <div className="event-buttons" style={styles.eventButtons}>
+                    <button onClick={handleRemoveRSVPEvent} style={styles.button}>
+                        Revoke RSVP
+                    </button>
+                </div>
 
-            {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
-        </div >
+                {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
+            </div >
+        </div>
     );
 };
 
 const styles = {
     eventCard: {
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#40E0D0',
         padding: '20px',
         borderRadius: '5px',
         marginBottom: '20px',
@@ -97,7 +120,7 @@ const styles = {
         marginTop: '10px',
     },
     button: {
-        backgroundColor: '#4caf50',
+        backgroundColor: '#c42a2a',
         color: '#fff',
         padding: '8px 16px',
         border: 'none',

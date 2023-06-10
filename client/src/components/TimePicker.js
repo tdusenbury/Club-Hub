@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const timePickerStyle = {
 
-    '.rc-time-picker-clear': {
+    '.rcTimePickerClear': {
         display: 'none',
     },
 
