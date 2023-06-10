@@ -3,8 +3,9 @@
     margin-top: 10px;
     border-radius: 8px;
     padding: 0.5rem 1rem 1rem 3rem;
-    background: rgb(102, 115, 116);
+    background: rgb(40, 200, 168);
     text-align: center;
+    height: auto;
 }
 
 .header-card h4 {

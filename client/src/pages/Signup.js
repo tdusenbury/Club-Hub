@@ -43,7 +43,7 @@ const Signup = () => {
     <main className="containing-div">
       <div className="login-container">
         <div className="card" style={{ backgroundColor: "#EEF4F4" }}>
-          <h4 className="card-header bg-dark text-light p-2 text-center">Sign Up</h4>
+          <h4 className="card-header text-light p-2 text-center">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
