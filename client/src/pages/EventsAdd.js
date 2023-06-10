@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import MyClock from '../components/TimePicker';
+import Auth from '../utils/auth';
 import '../assets/styles/Events.css';
 import { useMutation } from '@apollo/client';
 import { ADD_EVENT } from '../utils/mutations';
+import { QUERY_MY_EVENTS, QUERY_FUTURE_EVENTS } from '../utils/queries';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Link } from 'react-router-dom';
@@ -17,13 +19,40 @@ const СreateEvent = () => {
         startDate: '',
         endTime: '',
         endDate: '',
-        description: ''
+        description: '',
+        eventCreator: Auth.getProfile().data._id
+
     });
 
 
 
     const [errors, setErrors] = useState({});
-    const [createEvent, { error }] = useMutation(ADD_EVENT);
+    const [createEvent, { error }] = useMutation(ADD_EVENT, {
+        update(cache, { data: { createEvent } }) {
+            try {
+                const cacheResponse = cache.readQuery({ query: QUERY_MY_EVENTS });
+                if (cacheResponse && cacheResponse.getMyEvents) {
+                    cache.writeQuery({
+                        query: QUERY_MY_EVENTS,
+                        data: { getMyEvents: [createEvent, ...cacheResponse.getMyEvents] },
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+            try {
+                const cacheResponse = cache.readQuery({ query: QUERY_FUTURE_EVENTS });
+                if (cacheResponse && cacheResponse.getFutureEvents) {
+                    cache.writeQuery({
+                        query: QUERY_FUTURE_EVENTS,
+                        data: { getMyEvents: [createEvent, ...cacheResponse.getFutureEvents] },
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        },
+    });
     const [eventCreated, setEventCreated] = useState(false);
 
     const handleInputChange = (e) => {
@@ -153,8 +182,8 @@ const СreateEvent = () => {
                 <div className="modal">
                     <div className="modal-content">
                         Event created successfully!
-                        <Link to='/personaldashboard'>
-                            Go to personal dashboard
+                        <Link to='/eventmanager'>
+                            Go to Event Manager
                         </Link>
                         <button className="close-button" onClick={handleClose}>
                             Close
