@@ -1,5 +1,5 @@
 .event-card {
-  background-color: #f8f8f8;
+  background-color: #31f191;
   padding: 20px;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -16,7 +16,7 @@
 }
 
 #button {
-  background-color: #4caf50;
+  background-color: #c42a2a;
   color: #fff;
   padding: 8px 16px;
   border: none;

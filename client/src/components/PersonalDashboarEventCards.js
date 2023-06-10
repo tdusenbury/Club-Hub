@@ -6,6 +6,7 @@ import { GET_ME } from '../utils/queries';
 import { removeEventId } from '../utils/localStorage';
 
 
+
 const PersonalDashboarEventCards = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description } = event;
 
@@ -99,7 +100,7 @@ const styles = {
         marginTop: '10px',
     },
     button: {
-        backgroundColor: '#4caf50',
+        backgroundColor: '#c42a2a',
         color: '#fff',
         padding: '8px 16px',
         border: 'none',

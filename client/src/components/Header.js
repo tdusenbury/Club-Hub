@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import HomeNavTabs from './HomeNavTabs';
 import ClubNavTabs from './ClubNavTabs';
-//import "../assets/styles/HomeNavTabs.css"
+import "../assets/styles/HomeNavTabs.css"
 import ClubHubLogo from '../assets/images/Clubhub-logo.png';
 
 const Header = () => {
@@ -17,7 +17,7 @@ const Header = () => {
         className='logo-shift'
         />
       </div>
-      <h1 className='d-flex justify-content-center text-light'>Club Hub</h1>
+      <h1 className='d-flex justify-content-center text-light size'>Club Hub</h1>
       {Auth.loggedIn() ? (
               <ClubNavTabs/>
           ) : (
