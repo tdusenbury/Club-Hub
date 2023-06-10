@@ -69,8 +69,7 @@ const ChangeUserInfoForm = () => {
     return (
         <main className="containing-div">
             <div className="login-container">
-                <div className="card" style={{ backgroundColor: "#EEF4F4" }}
-                >
+                <div className="card" style={{ backgroundColor: "#EEF4F4" }}>
                     <h4 className="card-header text-light  p-3 text-center">Edit My Information</h4>
                     <div className="card-body spaces">
                         <form onSubmit={handleFormSubmit}>
@@ -83,7 +82,7 @@ const ChangeUserInfoForm = () => {
                                 value={formState.name}
                                 onChange={handleChange}
                             />
-                            <br/>
+                            <br />
                             <label>Address:</label>
                             <input
                                 className="form-input"
@@ -93,7 +92,7 @@ const ChangeUserInfoForm = () => {
                                 value={formState.address}
                                 onChange={handleChange}
                             />
-                            <br/>
+                            <br />
                             <label>Phone Number:</label>
                             <input
                                 className="form-input"
@@ -103,17 +102,7 @@ const ChangeUserInfoForm = () => {
                                 value={formState.phone}
                                 onChange={handleChange}
                             />
-                            <br/>
-                            <label>Emergency Contact Name:</label>
-                            <input
-                                className="form-input"
-                                placeholder="Emergency Contact Name"
-                                name="emergencyContactName"
-                                type="text"
-                                value={formState.emergencyContactName}
-                                onChange={handleChange}
-                            />
-                            <br/>
+                            <br />
                             <label>Emergency Contact Number:</label>
                             <input
                                 className="form-input"
@@ -123,7 +112,18 @@ const ChangeUserInfoForm = () => {
                                 value={formState.emergencyContactNumber}
                                 onChange={handleChange}
                             />
-                            <br/>
+                            <br />
+                            <label>Emergency Contact Name:</label>
+                            <input
+                                className="form-input"
+                                placeholder="Emergency Contact Name"
+                                name="emergencyContactName"
+                                type="text"
+                                value={formState.emergencyContactName}
+                                onChange={handleChange}
+                            />
+                            <br />
+
                             <button
                                 className="btn btn-block btn-primary mt-5"
                                 style={{ cursor: 'pointer' }}

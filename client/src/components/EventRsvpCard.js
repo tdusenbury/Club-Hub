@@ -106,7 +106,7 @@ const EventRsvpCard = ({ event }) => {
         <div className="event-card">
             <h2 className="name">{name}</h2>
             <div className="event-details">
-                <p><strong>Location:</strong> {location}</p>
+                <p><strong>Name:</strong> {location}</p>
                 <p><strong>Location:</strong> {location}</p>
                 <p>{startTime?.length > 0 && <strong>Start Time: {newStartTime}</strong>}</p>
                 <p><strong>Start Date:</strong> {formattedStartDate}</p>
