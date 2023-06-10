@@ -134,7 +134,7 @@ const Signup = () => {
               </form>
             )}
             {errors.name && <span style={{ color: 'red' }}>{errors.name}<br /></span>}
-            {errors.email && <span style={{ color: 'red', margin: '-50px 0' }}>{errors.email}<br /></span>}
+            {errors.email && <span style={{ color: 'red' }}>{errors.email}<br /></span>}
             {errors.phone && <span style={{ color: 'red' }}>{errors.phone}<br /></span>}
             {errors.password && <span style={{ color: 'red' }}>{errors.password}<br /></span>}
 

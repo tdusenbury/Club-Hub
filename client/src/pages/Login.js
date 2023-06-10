@@ -6,9 +6,12 @@ import "../assets/styles/LoginSignIn.css";
 
 import Auth from "../utils/auth";
 
+
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState('');
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -20,18 +23,38 @@ const Login = (props) => {
     });
   };
 
+  const validateForm = () => {
+    let formErrors = {};
+
+    if (!formState.email.trim()) {
+      formErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
+      formErrors.email = 'Invalid email address';
+    }
+
+    if (!formState.password.trim()) {
+      formErrors.password = 'Password is required';
+    } else if (formState.password.trim().length < 5 || formState.password.trim().length > 25) {
+      formErrors.password = 'Password must be at least 5 and at most 25 characters';
+    }
+
+    setErrors(formErrors);
+
+    return Object.keys(formErrors).length === 0;
+  };
+
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
-    try {
-      const { data } = await login({
-        variables: { ...formState },
-      });
-
-      Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
+    if (validateForm()) {
+      try {
+        const { data } = await login({
+          variables: { ...formState },
+        });
+        Auth.login(data.login.token);
+      } catch (e) {
+        setServerError('No user found with this email address');
+      }
     }
 
     // clear form values
@@ -39,6 +62,8 @@ const Login = (props) => {
       email: "",
       password: "",
     });
+
+    setTimeout(() => { setServerError(''); }, 3000);
   };
 
   return (
@@ -85,9 +110,12 @@ const Login = (props) => {
               </form>
             )}
 
-            {error && (
+            {errors.email && <span style={{ color: 'red' }}>{errors.email}<br /></span>}
+            {errors.password && <span style={{ color: 'red' }}>{errors.password}<br /></span>}
+
+            {serverError.length > 0 && (
               <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
+                {serverError}
               </div>
             )}
           </div>
