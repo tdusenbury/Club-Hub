@@ -100,7 +100,7 @@ const EventRsvpCard = ({ event }) => {
                     <button id="button" onClick={handleRSVPEvent} style={styles.button}
                         disabled={savedEventIds?.some((savedEventId) => savedEventId === _id)}>
                         {savedEventIds?.some((savedEventId) => savedEventId === _id)
-                            ? 'already RSVPed'
+                            ? 'Already RSVPed'
                             : 'RSVP for Event'}
                     </button>
                 </div>
