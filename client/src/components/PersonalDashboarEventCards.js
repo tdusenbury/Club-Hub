@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client';
 import { REMOVE_USER_EVENT } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 import { removeEventId } from '../utils/localStorage';
+import '../assets/styles/EventsCard.css';
 
 function fixTime(time) {
     var hours = Number(time.match(/^(\d+)/)[1]);
@@ -26,13 +27,13 @@ const PersonalDashboarEventCards = ({ event }) => {
     const [removeUserEvent, { loading, error }] = useMutation(REMOVE_USER_EVENT, {
         update(cache, { data: { removeUserEvent } }) {
             try {
-                const { getMe } = cache.readQuery({ query: GET_ME });
+                const cacheResponse = cache.readQuery({ query: GET_ME });
 
-                if (getMe) {
-                    const updatedEvents = getMe.events.filter((event) => event._id !== removeUserEvent._id);
+                if (cacheResponse && cacheResponse.getMe) {
+                    const updatedEvents = cacheResponse.getMe.events.filter((event) => event._id !== removeUserEvent._id);
                     cache.writeQuery({
                         query: GET_ME,
-                        data: { getMe: { ...getMe, events: [...updatedEvents] } },
+                        data: { getMe: { ...cacheResponse.getMe, events: [...updatedEvents] } },
                     });
                 }
             } catch (e) {
@@ -82,58 +83,27 @@ const PersonalDashboarEventCards = ({ event }) => {
 
     return (
         <div>
-            <div className="event-card" style={styles.eventCard}>
-                <h2>{name}</h2>
-                <p className="event-details" style={styles.eventDetails}>
-                    <strong>Location:</strong> {location} <br />
-                    {startTime && <span><strong>Start Time:</strong> {newStartTime}<br /> </span>}
-                    <strong>Start Date:</strong> {formattedStartDate} <br />
-                    {endTime && <span><strong>End Time:</strong> {newEndTime} <br /></span>}
-                    <strong>End Date:</strong> {formattedEndDate} <br />
-                    <strong>Description:</strong> {description}
-                </p>
-
-                <div className="event-buttons" style={styles.eventButtons}>
-                    <button onClick={handleRemoveRSVPEvent} style={styles.button}>
+            <div className="event-card">
+                <h2 className="name">{name}</h2>
+                <div className="event-details">
+                    <p><strong>Location:</strong> {location}</p>
+                    <p><strong>Location:</strong> {location}</p>
+                    <p>{startTime?.length > 0 && <strong>Start Time: {newStartTime}</strong>}</p>
+                    <p><strong>Start Date:</strong> {formattedStartDate}</p>
+                    <p>{endTime?.length > 0 && <strong>End Time: {newEndTime} <br /></strong>}</p>
+                    <p><strong>End Date:</strong> {formattedEndDate} <br /></p>
+                    <p><strong>Description:</strong> {description}</p>
+                </div>
+                <div className="event-buttons">
+                    <button id="button" onClick={handleRemoveRSVPEvent} >
                         Revoke RSVP
                     </button>
                 </div>
 
-                {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
+                {error && <div className="error-message" style={{ color: 'red' }}>{error.message}</div>}
             </div >
-        </div>
+        </div >
     );
-};
-
-const styles = {
-    eventCard: {
-        backgroundColor: '#40E0D0',
-        padding: '20px',
-        borderRadius: '5px',
-        marginBottom: '20px',
-    },
-    eventDetails: {
-        fontSize: '16px',
-        marginBottom: '10px',
-    },
-    eventButtons: {
-        marginTop: '10px',
-    },
-    button: {
-        backgroundColor: '#c42a2a',
-        color: '#fff',
-        padding: '8px 16px',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        marginRight: '10px',
-    },
-    errorMessage: {
-        backgroundColor: '#ff4d4f',
-        color: '#fff',
-        padding: '10px',
-        borderRadius: '5px',
-    },
 };
 
 export default PersonalDashboarEventCards;

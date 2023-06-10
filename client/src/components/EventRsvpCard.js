@@ -3,6 +3,7 @@ import Auth from '../utils/auth';
 import { saveEventIds, getSavedEventIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { ADD_USER_EVENT } from '../utils/mutations';
+import { GET_ME } from '../utils/queries';
 import '../assets/styles/EventsCard.css';
 
 
@@ -37,7 +38,25 @@ const EventRsvpCard = ({ event }) => {
         return () => saveEventIds(savedEventIds);
     });
 
-    const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT);
+    const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT, {
+
+        update(cache, { data: { addUserEvent } }) {
+            try {
+                const cacheResponse = cache.readQuery({ query: GET_ME });
+
+                if (cacheResponse && cacheResponse.getMe) {
+
+                    cache.writeQuery({
+                        query: GET_ME,
+                        data: { getMe: { ...cacheResponse.getMe, events: [...cacheResponse.getMe.events, addUserEvent] } },
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        },
+
+    });
 
     const handleRSVPEvent = async () => {
 
@@ -84,63 +103,33 @@ const EventRsvpCard = ({ event }) => {
 
 
     return (
-        <div className="event-card" style={styles.eventCard}>
-            <h2>{name}</h2>
-            <p className="event-details">
-                <strong>Location:</strong> {location} <br />
-                <strong>Location:</strong> {location} <br />
-                {startTime?.length > 0 && <strong>Start Time: {newStartTime}  <br /></strong>}
-                <strong>Start Date:</strong> {formattedStartDate} <br />
-                {endTime?.length > 0 && <strong>End Time: {newEndTime} <br /></strong>}
-                <strong>End Date:</strong> {formattedEndDate} <br />
-                <strong>Description:</strong> {description}
-            </p>
+        <div className="event-card">
+            <h2 className="name">{name}</h2>
+            <div className="event-details">
+                <p><strong>Location:</strong> {location}</p>
+                <p><strong>Location:</strong> {location}</p>
+                <p>{startTime?.length > 0 && <strong>Start Time: {newStartTime}</strong>}</p>
+                <p><strong>Start Date:</strong> {formattedStartDate}</p>
+                <p>{endTime?.length > 0 && <strong>End Time: {newEndTime} <br /></strong>}</p>
+                <p><strong>End Date:</strong> {formattedEndDate} <br /></p>
+                <p><strong>Description:</strong> {description}</p>
+            </div>
             {!renderButton && (
                 <div className="event-buttons">
-                    <button id="button" onClick={handleRSVPEvent} style={styles.button}
+                    <button id="rvsp-button" onClick={handleRSVPEvent}
                         disabled={savedEventIds?.some((savedEventId) => savedEventId === _id)}>
                         {savedEventIds?.some((savedEventId) => savedEventId === _id)
-                            ? 'already RSVPed'
+                            ? 'Already RSVPed'
                             : 'RSVP for Event'}
                     </button>
                 </div>
             )
             }
-            {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
+            {error && <div className="error-message" style={{ color: 'red' }}>{error.message}</div>}
         </div >
     );
 };
 
-const styles = {
-    eventCard: {
-        backgroundColor: '#f8f8f8',
-        padding: '20px',
-        borderRadius: '5px',
-        marginBottom: '20px',
-    },
-    eventDetails: {
-        fontSize: '16px',
-        marginBottom: '10px',
-    },
-    eventButtons: {
-        marginTop: '10px',
-    },
-    button: {
-        backgroundColor: '#4caf50',
-        color: '#fff',
-        padding: '8px',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        marginRight: '10px',
-        width: '150px'
-    },
-    errorMessage: {
-        backgroundColor: '#ff4d4f',
-        color: '#fff',
-        padding: '10px',
-        borderRadius: '5px',
-    },
-};
+
 
 export default EventRsvpCard;

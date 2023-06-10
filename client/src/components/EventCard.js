@@ -80,24 +80,24 @@ const EventCard = ({ event }) => {
 
     return (
         <div className="event-card">
-            <h2>{name}</h2>
-            <p className="event-details">
-                <strong>Location:</strong> {location} <br />
-                <strong>Location:</strong> {location} <br />
-                {startTime?.length > 0 && <strong>Start Time: {newStartTime}  <br /></strong>}
-                <strong>Start Date:</strong> {formattedStartDate} <br />
-                {endTime?.length > 0 && <strong>End Time: {newEndTime} <br /></strong>}
-                <strong>End Date:</strong> {formattedEndDate} <br />
-                <strong>Description:</strong> {description}
-            </p>
-            <div className="event-buttons">
-                <button id="button" onClick={handleRemoveEvent}>
-                    Remove Event
-                </button>
-                {/* <Link to="/updateevent">
+            <h2 className="name">{name}</h2>
+            <div className="event-details">
+                <p><strong>Location:</strong> {location}</p>
+                <p><strong>Location:</strong> {location}</p>
+                <p>{startTime?.length > 0 && <strong>Start Time: {newStartTime}</strong>}</p>
+                <p><strong>Start Date:</strong> {formattedStartDate}</p>
+                <p>{endTime?.length > 0 && <strong>End Time: {newEndTime} <br /></strong>}</p>
+                <p><strong>End Date:</strong> {formattedEndDate} <br /></p>
+                <p><strong>Description:</strong> {description}</p>
+            </div>
+
+            <button id="button" onClick={handleRemoveEvent}>
+                Remove Event
+            </button>
+            {/* <Link to="/updateevent">
                     <button style={styles.button}> Edit Event</button>
                 </Link> */}
-            </div>
+
 
             {error && <div className="error-message" >{error.message}</div>}
         </div >

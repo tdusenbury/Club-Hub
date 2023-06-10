@@ -36,8 +36,8 @@ export const UPDATE_USER = gql`
 `;
 
 export const ADD_EVENT = gql`
-  mutation createEvent($name:String!, $location: String!, $startTime:String!,$startDate: String!, $endTime:String,$endDate: String!, $description:String! ) {
-    createEvent(name:$name, location: $location, startTime: $startTime,startDate: $startDate, endTime:$endTime,endDate: $endDate, description: $description) {
+  mutation createEvent($name:String!, $location: String!, $startTime:String!,$startDate: String!, $endTime:String,$endDate: String!, $description:String!, $eventCreator:ID ) {
+    createEvent(name:$name, location: $location, startTime: $startTime,startDate: $startDate, endTime:$endTime,endDate: $endDate, description: $description, eventCreator:$eventCreator) {
       _id
       name 
       location
