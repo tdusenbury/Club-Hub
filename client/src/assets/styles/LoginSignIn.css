@@ -40,3 +40,7 @@ font-size: 25px;
 .font {
     font-family: 'Libre Baskerville', serif;
 }
+
+.spaces {
+    margin-top: 15px;
+}

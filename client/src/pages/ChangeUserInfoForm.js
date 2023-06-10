@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import "../assets/styles/LoginSignIn.css";
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
@@ -67,11 +67,12 @@ const ChangeUserInfoForm = () => {
         return <div>Loading...</div>;
     }
     return (
-        <main className="flex-row justify-center mt-4">
-            <div className="col-12 col-lg-10">
-                <div className="card">
-                    <h4 className="card-header bg-dark text-light text-center">Edit My Information</h4>
-                    <div className="card-body">
+        <main className="containing-div">
+            <div className="login-container">
+                <div className="card" style={{ backgroundColor: "#EEF4F4" }}
+                >
+                    <h4 className="card-header text-light  p-3 text-center">Edit My Information</h4>
+                    <div className="card-body spaces">
                         <form onSubmit={handleFormSubmit}>
                             <label>Name:</label>
                             <input
@@ -82,6 +83,7 @@ const ChangeUserInfoForm = () => {
                                 value={formState.name}
                                 onChange={handleChange}
                             />
+                            <br/>
                             <label>Address:</label>
                             <input
                                 className="form-input"
@@ -91,6 +93,7 @@ const ChangeUserInfoForm = () => {
                                 value={formState.address}
                                 onChange={handleChange}
                             />
+                            <br/>
                             <label>Phone Number:</label>
                             <input
                                 className="form-input"
@@ -100,6 +103,7 @@ const ChangeUserInfoForm = () => {
                                 value={formState.phone}
                                 onChange={handleChange}
                             />
+                            <br/>
                             <label>Emergency Contact Name:</label>
                             <input
                                 className="form-input"
@@ -109,6 +113,7 @@ const ChangeUserInfoForm = () => {
                                 value={formState.emergencyContactName}
                                 onChange={handleChange}
                             />
+                            <br/>
                             <label>Emergency Contact Number:</label>
                             <input
                                 className="form-input"
@@ -118,8 +123,9 @@ const ChangeUserInfoForm = () => {
                                 value={formState.emergencyContactNumber}
                                 onChange={handleChange}
                             />
+                            <br/>
                             <button
-                                className="btn btn-block btn-primary"
+                                className="btn btn-block btn-primary mt-5"
                                 style={{ cursor: 'pointer' }}
                                 type="submit"
                             >
