@@ -3,6 +3,7 @@ import Auth from '../utils/auth';
 import { saveEventIds, getSavedEventIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { ADD_USER_EVENT } from '../utils/mutations';
+import { GET_ME } from '../utils/queries';
 import '../assets/styles/EventsCard.css';
 
 
@@ -37,7 +38,25 @@ const EventRsvpCard = ({ event }) => {
         return () => saveEventIds(savedEventIds);
     });
 
-    const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT);
+    const [addUserEvent, { loading, error }] = useMutation(ADD_USER_EVENT, {
+
+        update(cache, { data: { addUserEvent } }) {
+            try {
+                const cacheResponse = cache.readQuery({ query: GET_ME });
+
+                if (cacheResponse && cacheResponse.getMe) {
+
+                    cache.writeQuery({
+                        query: GET_ME,
+                        data: { getMe: { ...cacheResponse.getMe, events: [...cacheResponse.getMe.events, addUserEvent] } },
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        },
+
+    });
 
     const handleRSVPEvent = async () => {
 
@@ -100,7 +119,7 @@ const EventRsvpCard = ({ event }) => {
                     <button id="button" onClick={handleRSVPEvent} style={styles.button}
                         disabled={savedEventIds?.some((savedEventId) => savedEventId === _id)}>
                         {savedEventIds?.some((savedEventId) => savedEventId === _id)
-                            ? 'already RSVPed'
+                            ? 'Already RSVPed'
                             : 'RSVP for Event'}
                     </button>
                 </div>

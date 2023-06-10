@@ -131,6 +131,9 @@ const Signup = () => {
                 >
                   Create Account
                 </button>
+                <Link to="/login">
+                  <h3 className="text-center mt-4 font" style={{ textDecoration: "underline" }}>Already a member? Sign in here!</h3>
+                </Link>
               </form>
             )}
             {errors.name && <span style={{ color: 'red' }}>{errors.name}<br /></span>}

@@ -1,12 +1,13 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import PersonalDashboarEventCards from "../components/PersonalDashboarEventCards.js";
 import { GET_ME } from "../utils/queries";
 import { Link } from "react-router-dom";
 import '../assets/styles/PersonalDashboard.css';
+import PersonalDashboarEventCards from "../components/PersonalDashboarEventCards";
 
 
 const PersonalDashboard = () => {
+
   const { loading: meLoading, data: meData } = useQuery(GET_ME);
   const user = meData?.getMe || {};
   console.log(user);
@@ -22,18 +23,18 @@ const PersonalDashboard = () => {
           <h2 className="text-center space">Profile Information</h2>
           <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
             <div>
-                <br/>
-          <p className="userinfo space marginright">Name: {user.name}</p>
-          <p className="userinfo space marginright">Phone: {user.phone}</p>
-          <p className="userinfo space marginright">Address: {user.address}</p>
-          <p className="userinfo space marginright">
-            Emergency Contact Number: {user.emergencyContactNumber}
-          </p>
-          <p className="userinfo marginright">
-            Emergency Contact Name: {user.emergencyContactName}
-          </p>
-          <br/>
-          </div>
+              <br />
+              <p className="userinfo space marginright">Name: {user.name}</p>
+              <p className="userinfo space marginright">Phone: {user.phone}</p>
+              <p className="userinfo space marginright">Address: {user.address}</p>
+              <p className="userinfo space marginright">
+                Emergency Contact Number: {user.emergencyContactNumber}
+              </p>
+              <p className="userinfo marginright">
+                Emergency Contact Name: {user.emergencyContactName}
+              </p>
+              <br />
+            </div>
           </div>
           <div
             className='mb-3 p-3'
@@ -42,7 +43,7 @@ const PersonalDashboard = () => {
               <div className="btn btn-block btn-primary p-2 center">
                 <Link
                   to="/changeuserinfo"
-                  style={{ textDecoration: 'none', color: "inherit"}}
+                  style={{ textDecoration: 'none', color: "inherit" }}
                 >
                   Change Personal Information
                 </Link>
