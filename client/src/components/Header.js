@@ -4,35 +4,25 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import HomeNavTabs from './HomeNavTabs';
 import ClubNavTabs from './ClubNavTabs';
-import "../assets/styles/HomeNavTabs.css"
+//import "../assets/styles/HomeNavTabs.css"
 import ClubHubLogo from '../assets/images/Clubhub-logo.png';
 
 const Header = () => {
-  const logout = (event) => {
-    event.preventDefault();
-    Auth.logout();
-  };
   return (
-    <header className="bg-primary text-light py-1 flex-row align-center header_width">
-      {/* <div className="container flex-row justify-space-between-lg justify-center align-center"> */}
-        <div>
+    <header className="bg-primary header d-flex flex-column flex-wrap justify-content-center">
+      <div className="d-flex flex-row">
         <img src={ClubHubLogo} 
         alt="logo"
-        width="150px auto"
+        width="150px auto" 
         className='logo-shift'
         />
-        </div>
-      <div>
-        <h1 className='app-name'>Club Hub</h1>
       </div>
-        <div className='nav_links'>
-          {Auth.loggedIn() ? (
+      <h1 className='d-flex justify-content-center text-light'>Club Hub</h1>
+      {Auth.loggedIn() ? (
               <ClubNavTabs/>
           ) : (
             <HomeNavTabs/>
-          )}
-        </div>
-      {/* </div> */}
+      )}
     </header>
   );
 };
