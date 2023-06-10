@@ -2,7 +2,7 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_EVENT } from '../utils/mutations';
 import { QUERY_MY_EVENTS } from '../utils/queries';
-import { Link } from 'react-router-dom';
+import '../assets/styles/EventsCard.css';
 
 const EventCard = ({ event }) => {
     const { _id, name, location, startTime, startDate, endTime, endDate, description, eventCreator } = event;
@@ -35,8 +35,6 @@ const EventCard = ({ event }) => {
                 console.error('Error removing event:', error.message);
                 // Handle the error state or display an error message
             });
-        //window.location.reload();
-
     };
     const startDateTime = new Date(parseInt(startDate, 10));
     const endDateTime = new Date(parseInt(endDate, 10));
@@ -58,9 +56,9 @@ const EventCard = ({ event }) => {
     });
 
     return (
-        <div className="event-card" style={styles.eventCard}>
+        <div className="event-card">
             <h2>{name}</h2>
-            <p className="event-details" style={styles.eventDetails}>
+            <p className="event-details">
                 <strong>Location:</strong> {location} <br />
                 <strong>Start Time:</strong> {startTime} <br />
                 <strong>Start Date:</strong> {formattedStartDate} <br />
@@ -69,8 +67,8 @@ const EventCard = ({ event }) => {
                 <strong>Description:</strong> {description}
             </p>
 
-            <div className="event-buttons" style={styles.eventButtons}>
-                <button onClick={handleRemoveEvent} style={styles.button}>
+            <div className="event-buttons">
+                <button id="button" onClick={handleRemoveEvent}>
                     Remove Event
                 </button>
                 {/* <Link to="/updateevent">
@@ -78,41 +76,11 @@ const EventCard = ({ event }) => {
                 </Link> */}
             </div>
 
-            {error && <div className="error-message" style={styles.errorMessage}>{error.message}</div>}
+            {error && <div className="error-message" >{error.message}</div>}
         </div >
     );
 };
 
-const styles = {
-    eventCard: {
-        backgroundColor: '#f8f8f8',
-        padding: '20px',
-        borderRadius: '5px',
-        marginBottom: '20px',
-    },
-    eventDetails: {
-        fontSize: '16px',
-        marginBottom: '10px',
-    },
-    eventButtons: {
-        marginTop: '10px',
-    },
-    button: {
-        backgroundColor: '#4caf50',
-        color: '#fff',
-        padding: '8px 16px',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        marginRight: '10px',
-        width: '150px'
-    },
-    errorMessage: {
-        backgroundColor: '#ff4d4f',
-        color: '#fff',
-        padding: '10px',
-        borderRadius: '5px',
-    },
-};
+
 
 export default EventCard;

@@ -3,6 +3,15 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
 
+const timePickerStyle = {
+
+    '.rc-time-picker-clear': {
+        display: 'none',
+    },
+
+};
+
+
 const MyClock = ({ selectedTime, onTimeChange }) => {
 
     const str = 'HH:mm a';
@@ -10,16 +19,18 @@ const MyClock = ({ selectedTime, onTimeChange }) => {
     function onChange(value) {
         onTimeChange(value.format(str));
         selectedTime = value.format(str);
+
     }
 
     return (
-        <div>
+        <div style={timePickerStyle}>
             <TimePicker
                 use12Hours={true}
                 style={{ width: 100 }}
                 showSecond={false}
+                allowEmpty={false}
                 defaultValue={moment()}
-                className="xxx"
+                minuteStep={15}
                 onChange={onChange}
             />
         </div>
