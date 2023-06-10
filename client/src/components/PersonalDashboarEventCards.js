@@ -84,16 +84,16 @@ const PersonalDashboarEventCards = ({ event }) => {
     return (
         <div>
             <div className="event-card">
-                <h2>{name}</h2>
-                <p className="event-details">
-                    <strong>Location:</strong> {location} <br />
-                    {startTime && <span><strong>Start Time:</strong> {newStartTime}<br /> </span>}
-                    <strong>Start Date:</strong> {formattedStartDate} <br />
-                    {endTime && <span><strong>End Time:</strong> {newEndTime} <br /></span>}
-                    <strong>End Date:</strong> {formattedEndDate} <br />
-                    <strong>Description:</strong> {description}
-                </p>
-
+                <h2 className="name">{name}</h2>
+                <div className="event-details">
+                    <p><strong>Location:</strong> {location}</p>
+                    <p><strong>Location:</strong> {location}</p>
+                    <p>{startTime?.length > 0 && <strong>Start Time: {newStartTime}</strong>}</p>
+                    <p><strong>Start Date:</strong> {formattedStartDate}</p>
+                    <p>{endTime?.length > 0 && <strong>End Time: {newEndTime} <br /></strong>}</p>
+                    <p><strong>End Date:</strong> {formattedEndDate} <br /></p>
+                    <p><strong>Description:</strong> {description}</p>
+                </div>
                 <div className="event-buttons">
                     <button id="button" onClick={handleRemoveRSVPEvent} >
                         Revoke RSVP
