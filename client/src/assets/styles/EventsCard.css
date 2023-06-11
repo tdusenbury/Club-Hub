@@ -4,6 +4,15 @@
   border-radius: 5px;
   margin: 20px;
 }
+.event-card-home{
+  background-color: #31f191;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  margin: 20px;
+  width:28%;
+  display: inline-block;
+
+}
 
 .event-details {
   font-size: 16px;
@@ -15,7 +24,13 @@
 .event-buttons {
   margin-top: 10px;
 }
-
+@media screen and (min-width: 500px) {
+  .event-card-home {
+    width:45%;
+    display: inline-block;
+  
+  }
+}
 
 
 @media screen and (max-width: 400px) {
@@ -179,8 +194,8 @@
 }
 
 .error-message {
-  background-color: #ff4d4f;
+  background-color: #ff4d4f; 
   color: #fff;
-  padding: 10px;
-  border-radius: 5px;
+  /* padding: 10px;
+  border-radius: 5px; */
 }

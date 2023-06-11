@@ -101,7 +101,7 @@ const EventRsvpCard = ({ event }) => {
 
 
     return (
-        <div className="event-card">
+        <div className="event-card-home">
             <h2 className="name">{name}</h2>
             <div className="event-details">
                 <p><strong>Name:</strong> {name}</p>

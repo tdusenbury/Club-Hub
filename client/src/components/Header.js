@@ -11,16 +11,16 @@ const Header = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       anime({
-        targets: 'h1',
-    keyframes: [
-      {translateY: -10},
-      {translateX: 50},
-      {translateY: 20},
-      {translateX: 0},
-      {translateY: 0}
-    ],
-    duration: 4000,
-    easing: 'easeOutElastic(1, .8)',
+        targets: '.logo_heading',
+        keyframes: [
+          {translateY: -10},
+          {translateX: 50},
+          {translateY: 20},
+          {translateX: 0},
+          {translateY: 0}
+        ],
+        duration: 4000,
+        easing: 'easeOutElastic(1, .8)',
       });
     }, 10000);
 
@@ -28,19 +28,41 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-primary header d-flex flex-column flex-wrap justify-content-center">
-      <div className="d-flex flex-row">
+    <header className="bg-primary header d-flex flex-column flex-wrap ">
+     {Auth.loggedIn() ? (
+      <span>
+           <div className="d-flex flex-row  ">
+        
+        
+        <a href="/clubhomepage">
         <img src={ClubHubLogo} 
         alt="logo"
         width="150px auto" 
         className='logo-shift'
         />
+        </a>
+        
+        <span className='d-flex justify-content-center text-light size logo_heading'>Club Hub</span>
       </div>
-      <h1 className='club-hub-title d-flex justify-content-center text-light size'>Club Hub</h1>
-      {Auth.loggedIn() ? (
-              <ClubNavTabs/>
+      
+          <ClubNavTabs/>
+      </span>
           ) : (
-            <HomeNavTabs/>
+            <span>
+               <div className="d-flex flex-row  ">
+               <a href="/"> 
+                <img src={ClubHubLogo} 
+                alt="logo"
+                width="150px auto" 
+                className='logo-shift'
+                />
+                </a>
+                <span className='d-flex justify-content-center text-light size logo_heading'>Club Hub</span>
+              </div>
+      
+              <HomeNavTabs/>
+            </span>
+
       )}
     </header>
   );
