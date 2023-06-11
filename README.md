@@ -7,11 +7,11 @@ Club Hub is an application that allows multiple users to access a community cale
 
 --------------------------------------------------------------
 
-[Check out the site live here!]()
+[Check out the site live here!](https://clubhub.herokuapp.com/)
 
 ---------------------------------------------------------------
 
-If you have found this blog outside of GitHub and wish to view the original, [visit my Repository link here.]()
+If you have found this blog outside of GitHub and wish to view the original, [visit the Repository link here.]()
 
 
 --------------------------------------------------------------
