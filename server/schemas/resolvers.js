@@ -104,7 +104,6 @@ const resolvers = {
     },
     deleteUser: async (parent, args, context) => {
       if (context.user) {
-        // TODO: How to expire token while deleting user
         const user = await User.findOneAndDelete(
           { _id: context.user._id },
           { new: true }

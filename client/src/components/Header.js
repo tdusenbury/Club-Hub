@@ -1,6 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React,{useEffect} from 'react';
+import anime from 'animejs';
 import Auth from '../utils/auth';
 import HomeNavTabs from './HomeNavTabs';
 import ClubNavTabs from './ClubNavTabs';
@@ -8,11 +7,31 @@ import "../assets/styles/HomeNavTabs.css"
 import ClubHubLogo from '../assets/images/Clubhub-logo.png';
 
 const Header = () => {
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      anime({
+        targets: '.logo_heading',
+        keyframes: [
+          {translateY: -10},
+          {translateX: 50},
+          {translateY: 20},
+          {translateX: 0},
+          {translateY: 0}
+        ],
+        duration: 4000,
+        easing: 'easeOutElastic(1, .8)',
+      });
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <header className="bg-primary header d-flex flex-column flex-wrap ">
+    <header className="bg-primary header d-flex flex-column flex-wrap-wrap ">
      {Auth.loggedIn() ? (
       <span>
-           <div className="d-flex flex-row  ">
+           <div className="d-flex flex-column flex-wrap-wrap p-4 mb-3">
         
         
         <a href="/clubhomepage">
@@ -30,7 +49,7 @@ const Header = () => {
       </span>
           ) : (
             <span>
-               <div className="d-flex flex-row  ">
+               <div className=" flex-column flex-wrap-wrap ps-4 mb-3">
                <a href="/"> 
                 <img src={ClubHubLogo} 
                 alt="logo"

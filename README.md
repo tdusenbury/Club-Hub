@@ -11,7 +11,7 @@ Club Hub is an application that allows multiple users to access a community cale
 
 ---------------------------------------------------------------
 
-If you have found this blog outside of GitHub and wish to view the original, [visit the Repository link here.]()
+If you have found this blog outside of GitHub and wish to view the original, [visit our Repository link here.](https://github.com/tdusenbury/Club-Hub)
 
 
 --------------------------------------------------------------
@@ -19,7 +19,7 @@ If you have found this blog outside of GitHub and wish to view the original, [vi
 The below image shows that when the site loads, you are presented with the Club Hub home page:
 
 
-![alt text]()
+![alt text](./client/src/assets/images/ClubHub.gif)
 
 
 ----------------------------------------------------------------------
@@ -27,10 +27,11 @@ The below image shows that when the site loads, you are presented with the Club 
 ## Table of Contents
 
   - [**Description**](#description)
-  - [**Technology Used**](#description)
+  - [**Technology Used**](#technology-used)
+  - [**Code Examples**](#code-examples)
+  - [**New Technology Used**](#new-technology-used)
   - [**Usage**](#usage)
   - [**Author Info**](#author-info)
-  - [**Credits**](#credits)
   - [**Contributing**](#contributing)
   - [**License**](#license)
 
@@ -50,19 +51,14 @@ This application allows members of a club to view other members, view current cl
 *************
 When a user loads the site, they are directed to a main home page where they can choose to login, sign up, or view the "About" page:
 
-![alt text]()
+![alt text](./client/src/assets/images/HomePage.png)
 
 ****************
 Once logged in, a user arrives at the Club Hub Home Page where they are given a list of scheduled club events:
 
-![alt text]()
+![alt text](./client/src/assets/images/ClubHomePage.png)
 
 *****************
-If a user chooses to add an event, they can go to this page:
-
-![alt text]()
-
-------------------------------------------------------------------
 
 ## Author Info
 This is a group collaboration. Below you can find the contact information for all developers:
@@ -89,13 +85,6 @@ Tamara "T" Dusenbury
 - [**Github**](https://github.com/tdusenbury)
 - [**LinkedIn**](https://linkedin.com/in/tamara-dusenbury-02ab8591)
 - [**Email**](mailto:tamara.dusenbury@gmail.com)
-
-
-
-
-------------------------------------------------------------
-## Credits
-
 
 
 -----------------------------------------------------------------
