@@ -3,3 +3,13 @@
         font-weight: bold;
         }
 
+.logo-shift{
+        height: 200px;
+        width: 200px;
+        float: left;
+}
+
+.logo_heading{
+        width: 80%;
+        align-items: center;
+}

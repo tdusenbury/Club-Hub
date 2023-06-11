@@ -46,3 +46,7 @@ h3 {
 .spaces {
     margin-top: 15px;
 }
+
+.card-body input{
+    margin-bottom: 22px;
+}
