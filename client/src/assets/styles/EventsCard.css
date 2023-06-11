@@ -20,15 +20,40 @@
   margin: 0 10px;
 }
 
+.name {
+  font-size: 200%;
+  font-weight: bolder;
+  padding: 5%;
+}
+
 #rvsp-button,
 .event-buttons {
   margin-top: 10px;
 }
-@media screen and (min-width: 500px) {
+
+@media screen and (max-width: 1000px) {
+  /* .event-card-home {
+    width:45%;
+    display: inline-block;
+  
+  } */
+  .name {
+    font-size: 150%;
+    margin: 2%;
+  }
+}
+
+
+
+@media screen and (max-width: 500px) {
   .event-card-home {
     width:45%;
     display: inline-block;
   
+  }
+  .name {
+    font-size: 130%;
+    margin: 5%;
   }
 }
 
@@ -40,7 +65,7 @@
   }
 
   .name {
-    font-size: 100%;
+    font-size: 120%;
     margin: 5%;
   }
 
@@ -53,7 +78,7 @@
   #rvsp-button,
   #button {
     font-size: 70%;
-    width: 50%;
+    max-width: 50%;
     margin: 5%;
 
   }
@@ -80,7 +105,7 @@
   #rvsp-button,
   #button {
     font-size: 70%;
-    width: 50%;
+    max-width: 60%;
     margin: 5%;
 
   }
@@ -108,7 +133,7 @@
   #rvsp-button,
   #button {
     font-size: 70%;
-    width: 50%;
+    max-width: 50%;
     margin: 5%;
 
   }
@@ -135,7 +160,7 @@
   #rvsp-button,
   #button {
     font-size: 50%;
-    max-width: 50px;
+    max-width: 50%;
     padding: 0;
     margin: 0;
 
