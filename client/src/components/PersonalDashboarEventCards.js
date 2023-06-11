@@ -1,5 +1,4 @@
 import React from 'react';
-import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { REMOVE_USER_EVENT } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';

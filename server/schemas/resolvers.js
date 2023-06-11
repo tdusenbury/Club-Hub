@@ -102,17 +102,6 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    deleteUser: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findOneAndDelete(
-          { _id: context.user._id },
-          { new: true }
-        );
-
-        return user;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
     createEvent: async (parent, { name, location, startTime, startDate, endTime, endDate, description, eventCreator }, context) => {
       if (context.user) {
         const newEvent = await Event.create(
