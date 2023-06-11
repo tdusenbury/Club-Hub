@@ -49,3 +49,21 @@
     color:rgb(5, 5, 152)
   }
   
+  .custom-title {
+    font-size: 60px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: white;
+    padding: 20px;
+    background-color: #28C8A8;
+  }
+
+
+  @media only screen and (max-width: 400px) {
+  .custom-title {
+    font-size: 90%;
+  }
+  .profile-title {
+    font-size: 90%;
+  }
+}
