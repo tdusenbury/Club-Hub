@@ -28,10 +28,10 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-primary header d-flex flex-column flex-wrap ">
+    <header className="bg-primary header d-flex flex-column flex-wrap-wrap ">
      {Auth.loggedIn() ? (
       <span>
-           <div className="d-flex flex-row  ">
+           <div className="d-flex flex-column flex-wrap-wrap p-4 mb-3">
         
         
         <a href="/clubhomepage">
@@ -49,7 +49,7 @@ const Header = () => {
       </span>
           ) : (
             <span>
-               <div className="d-flex flex-row  ">
+               <div className=" flex-column flex-wrap-wrap ps-4 mb-3">
                <a href="/"> 
                 <img src={ClubHubLogo} 
                 alt="logo"
