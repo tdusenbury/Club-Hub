@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { a } from 'react-router-dom';
 //import '../assets/styles/HomeNavTabs.css';
 import Auth from '../utils/auth';
 
@@ -11,46 +11,45 @@ function ClubNavTabs() {
   return (
     <ul className="nav justify-content-start">
       <li className="nav-item">
-        <Link
+        <a
           className="btn btn-block btn-primary"
           style={{ whiteSpace: 'normal' }}
-          to="/clubhomepage">
+          href="/clubhomepage">
           Club Home Page
-        </Link>
+        </a>
       </li>
       <li className="nav-item">
-        <Link
+        <a
           className="btn btn-block btn-primary"
           style={{ whiteSpace: 'normal' }}
-          to="/members">
+          href="/members">
           Member List
-        </Link>
+        </a>
       </li>
       <li className="nav-item">
-        <Link
+        <a
           className="btn btn-block btn-primary custom-link-style"
           style={{ whiteSpace: 'normal' }}
-          to="/eventmanager">
+          href="/eventmanager">
           Event Manager
-        </Link>
+        </a>
       </li>
       <li className="nav-item">
-        <Link
+        <a
           className="btn btn-block btn-primary"
           style={{ whiteSpace: 'normal' }}
-          to="/personaldashboard">
+          href="/personaldashboard">
           Personal Dashboard
-        </Link>
+        </a>
       </li>
       <li>
-        <Link
+        <a
           className="btn btn-block btn-primary"
           style={{ whiteSpace: 'normal' }}
           onClick={logout}
-
-        >
+          href="#signout">
           Sign Out
-        </Link>
+        </a>
       </li>
     </ul>
   );
