@@ -5,6 +5,8 @@
     justify-content: space-around;
 }
 
+
+
 .card-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -12,6 +14,16 @@
     width: 100%;
     margin: 0 5%;
     align-items: center;
+}
+
+#title {
+    font-size: 60px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: white;
+    padding: 20px;
+    background-color: #28C8A8;
+    width: 100%;
 }
 
 .add-event-button {
@@ -25,6 +37,8 @@
     text-decoration: none;
     transition: background-color 0.2s ease;
 }
+
+
 
 .add-event-button:hover {
     background-color: #0056b3;
