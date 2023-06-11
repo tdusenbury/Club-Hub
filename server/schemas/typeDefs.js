@@ -54,10 +54,5 @@ const typeDefs = gql`
     removeUserEvent(eventId: ID!): Event
   }
 `;
-// TODO: what if i have a many to many relationship in mongoose and i need to update both of Event and User (line 48 + 49)
-// type UserEvent {
-//   _id; ID!
-//   user: User!
-//   event: Event!
-// }
+
 module.exports = typeDefs;

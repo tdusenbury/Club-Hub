@@ -65,7 +65,7 @@ const СreateEvent = () => {
 
     const handleCreateEvent = async (event) => {
         event.preventDefault();
-        console.log(eventData)
+
         if (validateForm()) {
             try {
                 const { data } = await createEvent({
@@ -133,7 +133,7 @@ const СreateEvent = () => {
 
     return (
         <div className="event-page-container">
-            <h1>Add Event</h1>
+            <h2>Add Event</h2>
             <form className="event-form">
                 <div className="input-area">
                     <label>Name:</label>
