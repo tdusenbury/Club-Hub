@@ -15,7 +15,25 @@ export default function EventsManager() {
     }
 
     return (
-        <div className="page-container">
+        <div style={{width:"100&"}}>
+             
+             <div>
+                 <h2
+          className="text-center title-size"
+          style={{
+            fontSize: "60px",
+            fontWeight: "bold",
+            textDecoration: "underline",
+            color: "white",
+            padding: "20px",
+            backgroundColor: "#28C8A8",
+           
+          }}
+        >
+          Event Manager
+        </h2>
+        <br />
+        </div>
             <div className="card-container">
                 {events.length
                     ? events.map((event) => (<EventCard key={event._id} event={event} />))
