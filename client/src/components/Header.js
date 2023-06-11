@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import anime from 'animejs';
 import Auth from '../utils/auth';
 import HomeNavTabs from './HomeNavTabs';
@@ -7,20 +7,26 @@ import "../assets/styles/HomeNavTabs.css"
 import ClubHubLogo from '../assets/images/Clubhub-logo.png';
 
 const Header = () => {
-  const clubHubTitle = document.querySelector('.club-hub-title');
-  anime({
-    targets: 'h1',
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      anime({
+        targets: 'h1',
     keyframes: [
-      {translateY: -20},
-      {translateX: 75},
-      {translateY: 30},
+      {translateY: -10},
+      {translateX: 50},
+      {translateY: 20},
       {translateX: 0},
       {translateY: 0}
     ],
     duration: 4000,
     easing: 'easeOutElastic(1, .8)',
-    loop: true
-  });
+      });
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <header className="bg-primary header d-flex flex-column flex-wrap justify-content-center">
       <div className="d-flex flex-row">

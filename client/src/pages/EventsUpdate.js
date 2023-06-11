@@ -28,7 +28,6 @@ const СreateEvent = (eventId) => {
     };
 
     const handleUpdateEvent = () => {
-        // TODO add login and use mutation hook
         console.log(eventData);
     };
 

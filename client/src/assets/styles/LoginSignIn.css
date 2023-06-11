@@ -1,8 +1,6 @@
 .containing-div {
     background-color: #c1e8e0;
-    /* Replace with your desired background color */
     min-height: 100vh;
-    /* Ensures the container covers the full height of the viewport */
 }
 
 .login-container {
@@ -30,10 +28,6 @@ h3 {
     font-size: 30px;
     font-style: italic;
 }
-
-/* .space {
-    margin-top: 30px;
-} */
 
 .fontsize {
     font-size: 25px;

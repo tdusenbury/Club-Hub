@@ -11,7 +11,6 @@ const timePickerStyle = {
 
 };
 
-
 const MyClock = ({ selectedTime, onTimeChange }) => {
 
     const str = 'HH:mm a';
