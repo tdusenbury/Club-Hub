@@ -9,7 +9,7 @@ import ClubHubLogo from '../assets/images/Clubhub-logo.png';
 const Header = () => {
   const clubHubTitle = document.querySelector('.club-hub-title');
   anime({
-    targets: clubHubTitle,
+    targets: 'h1',
     keyframes: [
       {translateY: -20},
       {translateX: 75},
@@ -19,6 +19,7 @@ const Header = () => {
     ],
     duration: 4000,
     easing: 'easeOutElastic(1, .8)',
+    loop: true
   });
   return (
     <header className="bg-primary header d-flex flex-column flex-wrap justify-content-center">
