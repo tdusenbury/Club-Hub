@@ -26,23 +26,14 @@ const PersonalDashboard = () => {
     <>
       <div>
         <h2
-          className="text-center title-size"
-          style={{
-            fontSize: "60px",
-            fontWeight: "bold",
-            textDecoration: "underline",
-            color: "white",
-            padding: "20px",
-            backgroundColor: "#28C8A8",
-          }}
-        >
+          className="custom-title text-center title-size">
           Personal Dashboard
         </h2>
         <br />
       </div><div className="home-container" style={{ margin: "0 5%" }}>
         <div className="flex-row justify-center mb-3">
           <div className="col-12 col-md-12 text-light p-4 margins border space">
-            <h2 className="text-center space">Profile Information</h2>
+            <h2 className="profile-title text-center space">Profile Information</h2>
             <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
               <div>
                 <br />
