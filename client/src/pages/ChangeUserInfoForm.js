@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import "../assets/styles/LoginSignIn.css";
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
+import '../assets/styles/EventManager.css';
 
 const ChangeUserInfoForm = () => {
+    // Query the current user's data
     const { loading, data } = useQuery(GET_ME);
+    // State to store error message
     const [errorMessage, setErrorMessage] = useState('');
-
+    // Extract user data from the query response
     const user = data?.getMe || {};
-
+    // Initialize form state with user data, or empty values if not available
     const [formState, setFormState] = useState({
         name: user.name || '',
         phone: user.phone || '',
@@ -18,8 +20,9 @@ const ChangeUserInfoForm = () => {
         emergencyContactNumber: user?.emergencyContactNumber || '',
         emergencyContactName: user?.emergencyContactName || ''
     });
-
+    // Mutation to update user data
     const [updateUser, { error }] = useMutation(UPDATE_USER);
+    // Handle form input changes
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({
@@ -28,9 +31,10 @@ const ChangeUserInfoForm = () => {
         });
 
     };
-
+    // Handle form submission
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        // Validate form input
         if (formState.name.trim() === '') {
             setErrorMessage('❌ The name should be entered!');
             return;
@@ -50,9 +54,10 @@ const ChangeUserInfoForm = () => {
                 return;
             }
         }
-
+        // Clear error message
         setErrorMessage('');
         try {
+            // Call the updateUser mutation to update user data
             await updateUser({
                 variables: { ...formState },
             });
@@ -60,11 +65,12 @@ const ChangeUserInfoForm = () => {
         } catch (e) {
             console.error(e);
         }
+        // Redirect to the personal dashboard page
         window.location.assign('/personaldashboard');
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loader"></div>;
     }
     return (
         <main className="containing-div">

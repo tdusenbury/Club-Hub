@@ -3,6 +3,7 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
 
+// Inline style for hiding the clear button in TimePicker
 const timePickerStyle = {
 
     '.rcTimePickerClear': {
@@ -12,11 +13,13 @@ const timePickerStyle = {
 };
 
 const MyClock = ({ selectedTime, onTimeChange }) => {
-
+    // Define the time format string
     const str = 'HH:mm a';
-
+    // Handle time change event
     function onChange(value) {
+        // Convert the selected time to the desired format and call the onTimeChange function
         onTimeChange(value.format(str));
+        // Update the selectedTime variable directly 
         selectedTime = value.format(str);
 
     }

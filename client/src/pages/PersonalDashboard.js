@@ -4,31 +4,45 @@ import { GET_ME } from "../utils/queries";
 import { Link } from "react-router-dom";
 import '../assets/styles/PersonalDashboard.css';
 import PersonalDashboarEventCards from "../components/PersonalDashboarEventCards";
-
+import '../assets/styles/EventManager.css';
 
 const PersonalDashboard = () => {
 
+  // Query hook for retrieving the current user
   const { loading: meLoading, data: meData } = useQuery(GET_ME);
+
+  // Retrieve the user data from the query response, or initialize it as an empty object if data is not available
   const user = meData?.getMe || {};
 
+  // Check if the query is still loading
   if (meLoading) {
-    return <div>Loading...</div>;
+    return <div className="loader"></div>;
   }
+
+  // Retrieve the events data from the user object, or initialize it as an empty array if not available
   const events = user.events || [];
 
   return (
-   
-             
-    <><div>
-      <h2
-        className="custom-title text-center title-size">
-        Personal Dashboard
-      </h2>
-      <br />
-    </div><div className="home-container" style={{ margin: "0 5%" }}>
+    <>
+      <div>
+        <h2
+          className="text-center title-size"
+          style={{
+            fontSize: "60px",
+            fontWeight: "bold",
+            textDecoration: "underline",
+            color: "white",
+            padding: "20px",
+            backgroundColor: "#28C8A8",
+          }}
+        >
+          Personal Dashboard
+        </h2>
+        <br />
+      </div><div className="home-container" style={{ margin: "0 5%" }}>
         <div className="flex-row justify-center mb-3">
           <div className="col-12 col-md-12 text-light p-4 margins border space">
-            <h2 className="profile-title text-center space">Profile Information</h2>
+            <h2 className="text-center space">Profile Information</h2>
             <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
               <div>
                 <br />

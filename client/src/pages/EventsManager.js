@@ -7,9 +7,11 @@ import '../assets/styles/EventManager.css';
 
 export default function EventsManager() {
 
+    // Query hook for retrieving user's events
     const { loading, error, data } = useQuery(QUERY_MY_EVENTS);
+    // Retrieve the events data from the query response, or initialize it as an empty array if data is not available
     const events = data?.getMyEvents || [];
-
+    // Check if there is an error in the query
     if (error) {
         return <p>Error: {error.message}</p>;
     }

@@ -1,6 +1,4 @@
 import React from 'react';
-import { a } from 'react-router-dom';
-//import '../assets/styles/HomeNavTabs.css';
 import Auth from '../utils/auth';
 
 function ClubNavTabs() {
