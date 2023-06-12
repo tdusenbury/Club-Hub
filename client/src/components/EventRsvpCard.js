@@ -101,14 +101,12 @@ const EventRsvpCard = ({ event }) => {
                 <p><strong>Description:</strong> {description}</p>
             </div>
             {!renderButton && (
-                <div className="event-buttons">
-                    <button id="rvsp-button" onClick={handleRSVPEvent}
-                        disabled={savedEventIds?.some((savedEventId) => savedEventId === _id)}>
-                        {savedEventIds?.some((savedEventId) => savedEventId === _id)
-                            ? 'Already RSVPed'
-                            : 'RSVP for Event'}
-                    </button>
-                </div>
+                <button id="rvsp-button" onClick={handleRSVPEvent}
+                    disabled={savedEventIds?.some((savedEventId) => savedEventId === _id)}>
+                    {savedEventIds?.some((savedEventId) => savedEventId === _id)
+                        ? 'Already RSVPed'
+                        : 'RSVP for Event'}
+                </button>
             )
             }
             {error && <div className="error-message" style={{ color: 'red' }}>{error.message}</div>}

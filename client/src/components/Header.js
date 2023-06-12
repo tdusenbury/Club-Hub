@@ -33,7 +33,7 @@ const Header = () => {
     <header className="bg-primary header d-flex flex-column flex-wrap-wrap ">
       {Auth.loggedIn() ? (
         <span>
-          <div className="d-flex flex-column flex-wrap-wrap p-4 mb-3">
+          <div className="flex-column flex-wrap-wrap p-4 mb-3">
 
 
             <a href="/clubhomepage">

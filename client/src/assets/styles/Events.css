@@ -21,6 +21,13 @@ body {
     width: 100%;
 }
 
+#dateAndTim {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+
+}
+
 .event-form .form-row {
     flex-wrap: wrap;
     display: flex;
@@ -41,6 +48,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 
@@ -96,6 +104,7 @@ textarea {
     text-align: center;
 }
 
+
 /* Close Button */
 .close-button {
     background-color: #ccc;
@@ -116,5 +125,41 @@ textarea {
 @media (max-width: 768px) {
     .event-form .form-column {
         margin: 20px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .react-calendar {
+        transform: scale(0.79);
+        transform-origin: center;
+        padding: 0;
+        margin-top: -8%;
+    }
+
+    .Date {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: center;
+    }
+
+    .Date label {
+        margin: 0;
+    }
+
+    .react-calendar__month-view__weekdays {
+        font-size: 80%;
+    }
+
+    .react-calendar__month-view__days__day {
+        padding: 0px;
+    }
+
+    .react-calendar__navigation {
+        font-size: 80%
+    }
+
+    .react-calendar__navigation__label {
+        padding: 0;
     }
 }
