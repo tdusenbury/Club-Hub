@@ -13,10 +13,12 @@ const PersonalDashboarEventCards = ({ event }) => {
     const [removeUserEvent, { loading, error }] = useMutation(REMOVE_USER_EVENT, {
         update(cache, { data: { removeUserEvent } }) {
             try {
+                // Read the existing data from the cache using the GET_ME query
                 const cacheResponse = cache.readQuery({ query: GET_ME });
-
+                // Filter out the removed event from the existing events array
                 if (cacheResponse && cacheResponse.getMe) {
                     const updatedEvents = cacheResponse.getMe.events.filter((event) => event._id !== removeUserEvent._id);
+                    // Write the updated data back to the cache using the GET_ME query
                     cache.writeQuery({
                         query: GET_ME,
                         data: { getMe: { ...cacheResponse.getMe, events: [...updatedEvents] } },
@@ -31,16 +33,15 @@ const PersonalDashboarEventCards = ({ event }) => {
 
 
     const handleRemoveRSVPEvent = async () => {
-
+        // Call the removeUserEvent mutation and pass the eventId as variables
         await removeUserEvent({ variables: { eventId: _id } })
             .then(() => {
                 console.log('RVSP revoked successfully!');
-                // Perform any additional logic or UI updates here
             })
             .catch((error) => {
                 console.error('Error revoking RVSP:', error.message);
-                // Handle the error state or display an error message
             });
+        // Call the removeEventId function to remove the eventId from the state or perform any necessary cleanup
         removeEventId(_id);
     };
     const startDateTime = new Date(parseInt(startDate, 10));

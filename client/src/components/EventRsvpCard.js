@@ -89,7 +89,6 @@ const EventRsvpCard = ({ event }) => {
     }
 
 
-
     return (
         <div className="event-card-home">
             <h2 className="name"><strong>{name}</strong></h2>
