@@ -143,7 +143,7 @@ const СreateEvent = () => {
     return (
         <div className="event-page-container">
             <h2>Add Event</h2>
-            <form className="event-form">
+            <form className="event-form card">
                 <div className="input-area">
                     <label>Name:</label>
                     <input type="text" name="name" value={eventData.name} onChange={handleInputChange} />
