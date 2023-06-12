@@ -7,15 +7,18 @@ import { CREATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const Signup = () => {
+  // State for managing form input values
   const [formState, setFormState] = useState({
     name: '',
     phone: '',
     email: '',
     password: '',
   });
+  // State for managing form validation errors
   const [errors, setErrors] = useState({});
+  // Mutation hook for creating a user
   const [createUser, { error, data }] = useMutation(CREATE_USER);
-
+  // Event handler for form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -24,45 +27,46 @@ const Signup = () => {
       [name]: value,
     });
   };
-
+  // Form validation function 
   const validateForm = () => {
     let formErrors = {};
-
+    // Check if name is empty
     if (!formState.name.trim()) {
       formErrors.name = 'Name is required';
     }
-
+    // Check if email is empty or invalid
     if (!formState.email.trim()) {
       formErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
       formErrors.email = 'Invalid email address';
     }
-
+    // Check if phone number is provided and matches the expected format
     if ((formState.phone) && (!/^\+?[1-9][0-9]{7,14}$/.test(formState.phone))) {
       formErrors.phone = 'Must match a phone number';
     }
-
+    // Check if password is empty and within the length range
     if (!formState.password.trim()) {
       formErrors.password = 'Password is required';
     } else if (formState.password.trim().length < 5 || formState.password.trim().length > 25) {
       formErrors.password = 'Password must be at least 5 and at most 25 characters';
     }
 
-
+    // Set the formErrors state with the validation errors
     setErrors(formErrors);
-
+    // Return true if there are no validation errors
     return Object.keys(formErrors).length === 0;
   };
-
+  // Event handler for form submission
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
 
       try {
+        // Perform the createUser mutation with formState as variables
         const { data } = await createUser({
           variables: { ...formState },
         });
-
+        // Handle successful user creation by logging in with the returned token
         Auth.login(data.createUser.token);
       } catch (e) {
         console.error(e);

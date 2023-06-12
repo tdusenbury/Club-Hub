@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_EVENT } from '../utils/mutations';
-import { QUERY_MY_EVENTS } from '../utils/queries';
+import { QUERY_MY_EVENTS, QUERY_FUTURE_EVENTS } from '../utils/queries';
 import '../assets/styles/EventsCard.css';
 
 
@@ -14,14 +14,30 @@ const EventCard = ({ event }) => {
         update(cache, { data: { deleteEvent } }) {
             try {
                 // Read the existing data from the cache using the QUERY_MY_EVENTS query
-                const { getMyEvents } = cache.readQuery({ query: QUERY_MY_EVENTS });
-                if (getMyEvents) {
+
+                const cacheMyResponse = cache.readQuery({ query: QUERY_MY_EVENTS });
+                if (cacheMyResponse && cacheMyResponse.getMyEvents) {
                     // Filter out the deleted event from the existing data
-                    const updatedSavedEvents = getMyEvents.filter((event) => event._id !== deleteEvent._id);
+                    const updatedSavedEvents = cacheMyResponse.getMyEvents.filter((event) => event._id !== deleteEvent._id);
                     // Write the updated data back to the cache using the QUERY_MY_EVENTS query
                     cache.writeQuery({
                         query: QUERY_MY_EVENTS,
                         data: { getMyEvents: updatedSavedEvents },
+                    });
+                }
+
+            } catch (e) {
+                console.error(e);
+            }
+            try {
+                // Update 'QUERY_FUTURE_EVENTS' cache query
+                const cacheResponse = cache.readQuery({ query: QUERY_FUTURE_EVENTS });
+                if (cacheResponse && cacheResponse.getFutureEvents) {
+                    const updatedEvents = cacheResponse.getFutureEvents.filter((event) => event._id !== deleteEvent._id);
+                    // Write the updated data back to the cache using the QUERY_FUTURE_EVENTS query
+                    cache.writeQuery({
+                        query: QUERY_FUTURE_EVENTS,
+                        data: { getFutureEvents: updatedEvents },
                     });
                 }
             } catch (e) {

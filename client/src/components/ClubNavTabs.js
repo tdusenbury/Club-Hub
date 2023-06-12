@@ -1,5 +1,4 @@
 import React from 'react';
-import { a } from 'react-router-dom';
 import Auth from '../utils/auth';
 
 function ClubNavTabs() {

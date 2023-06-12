@@ -8,12 +8,16 @@ import Auth from "../utils/auth";
 
 
 const Login = (props) => {
+  // State for managing form input values
   const [formState, setFormState] = useState({ email: "", password: "" });
+  // Mutation hook for user login
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  // State for managing form validation errors
   const [errors, setErrors] = useState({});
+  // State for server-side error message
   const [serverError, setServerError] = useState('');
 
-  // update state based on form input changes
+  // Event handler for form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -23,36 +27,40 @@ const Login = (props) => {
     });
   };
 
+  // Form validation function
   const validateForm = () => {
     let formErrors = {};
-
+    // Check if email is empty
     if (!formState.email.trim()) {
       formErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
       formErrors.email = 'Invalid email address';
     }
-
+    // Check if password is empty and within the length range
     if (!formState.password.trim()) {
       formErrors.password = 'Password is required';
     } else if (formState.password.trim().length < 5 || formState.password.trim().length > 25) {
       formErrors.password = 'Password must be at least 5 and at most 25 characters';
     }
-
+    // Set the formErrors state with the validation errors
     setErrors(formErrors);
-
+    // Return true if there are no validation errors
     return Object.keys(formErrors).length === 0;
   };
 
-  // submit form
+  // Event handler for form submission
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
       try {
+        // Perform the login mutation with formState as variables
         const { data } = await login({
           variables: { ...formState },
         });
+        // Handle successful login by storing the token in Auth
         Auth.login(data.login.token);
       } catch (e) {
+        // Set serverError state if there is an error during login
         setServerError('No user found with this email address');
       }
     }
@@ -62,7 +70,7 @@ const Login = (props) => {
       email: "",
       password: "",
     });
-
+    // Clear serverError state after a delay of 3 seconds
     setTimeout(() => { setServerError(''); }, 3000);
   };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import '../assets/styles/Members.css';
+import '../assets/styles/EventManager.css';
 
 import { GET_MEMBERS } from '../utils/queries';
 
@@ -10,7 +11,7 @@ const Members = () => {
     const members = data?.getMembers || {};
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loader"></div>;
     }
 
     return (

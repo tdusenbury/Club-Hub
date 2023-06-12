@@ -1,8 +1,8 @@
 export function fixTime(time) {
     // Extract hours, minutes, and AMPM from the provided time string
-    var hours = Number(time.match(/^(\d+)/)[1]);
-    var minutes = Number(time.match(/:(\d+)/)[1]);
-    var AMPM = time.match(/\s(.*)$/)[1];
+    let hours = Number(time.match(/^(\d+)/)[1]);
+    let minutes = Number(time.match(/:(\d+)/)[1]);
+    const AMPM = time.match(/\s(.*)$/)[1];
 
     // Adjust hours based on the AMPM value
     if (AMPM === "pm" && hours > 12) hours = hours - 12;

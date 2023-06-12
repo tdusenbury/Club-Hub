@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 
 const СreateEvent = () => {
-
+    // State for storing event data
     const [eventData, setEventData] = useState({
         name: '',
         location: '',
@@ -24,12 +24,14 @@ const СreateEvent = () => {
 
     });
 
-
-
+    // State for storing validation errors
     const [errors, setErrors] = useState({});
+    // Mutation hook for creating an event
     const [createEvent, { error }] = useMutation(ADD_EVENT, {
+        // Update cache after creating an event
         update(cache, { data: { createEvent } }) {
             try {
+                // Update 'QUERY_MY_EVENTS' cache query
                 const cacheResponse = cache.readQuery({ query: QUERY_MY_EVENTS });
                 if (cacheResponse && cacheResponse.getMyEvents) {
                     cache.writeQuery({
@@ -41,6 +43,7 @@ const СreateEvent = () => {
                 console.error(e);
             }
             try {
+                // Update 'QUERY_FUTURE_EVENTS' cache query
                 const cacheResponse = cache.readQuery({ query: QUERY_FUTURE_EVENTS });
                 if (cacheResponse && cacheResponse.getFutureEvents) {
                     cache.writeQuery({
@@ -53,8 +56,9 @@ const СreateEvent = () => {
             }
         },
     });
+    // State for tracking if the event has been created
     const [eventCreated, setEventCreated] = useState(false);
-
+    // Event handler for input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setEventData((prevData) => ({
@@ -63,12 +67,14 @@ const СreateEvent = () => {
         }));
     };
 
+    // Event handler for creating an event
     const handleCreateEvent = async (event) => {
         event.preventDefault();
-
+        // Validate the form before creating an event
         if (validateForm()) {
             try {
-                const { data } = await createEvent({
+                // Create the event using the createEvent mutation
+                await createEvent({
                     variables: {
                         name: eventData.name,
                         location: eventData.location,
@@ -80,7 +86,7 @@ const СreateEvent = () => {
 
                     },
                 });
-
+                // Reset the event data in the state to empty values
                 setEventData({
                     name: '',
                     location: '',
@@ -90,6 +96,7 @@ const СreateEvent = () => {
                     endDate: '',
                     description: ''
                 });
+                // Set the eventCreated state to true
                 setEventCreated(true);
             } catch (err) {
                 console.error(err);
@@ -98,33 +105,35 @@ const СreateEvent = () => {
 
         }
     };
-
+    // Form validation function
     const validateForm = () => {
         let formErrors = {};
-
+        // Check if the name field is empty
         if (eventData.name.trim() === '') {
             formErrors.name = 'Name is required';
         }
+        // Check if the location field is empty
         if (eventData.location.trim() === '') {
             formErrors.location = 'Location is required';
         }
-
+        // Check if the start date field is empty
         if (eventData.startDate === '') {
             formErrors.startDate = 'Start Date is required';
         }
+        // Check if the end date field is empty
         if (eventData.endDate === '') {
             formErrors.endDate = 'End date is required';
         }
-
+        // Check if the description is within the allowed length range
         if (eventData.description.trim().length < 1 || eventData.description.trim().length > 280) {
             formErrors.description = 'Description must be at leats 1 character and at most 280 characters.';
         }
-
+        // Set the formErrors state with the validation errors
         setErrors(formErrors);
-
+        // Return true if there are no validation errors
         return Object.keys(formErrors).length === 0;
     };
-
+    // Event handler for closing the event creation confirmation
     const handleClose = () => {
         setEventCreated(false);
     };
@@ -153,7 +162,6 @@ const СreateEvent = () => {
                         </div>
                         <div className="Date">
                             <label>Start Date:</label>
-                            {/* <MyCalendar selectedDate={eventData.startDate} onDateChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} /> */}
                             <Calendar onChange={(date) => setEventData((prevData) => ({ ...prevData, startDate: date }))} value={eventData.startDate} />
                             {errors.startDate && <span style={{ color: 'red' }}>{errors.startDate}</span>}
                         </div>

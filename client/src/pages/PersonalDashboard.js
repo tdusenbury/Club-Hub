@@ -4,16 +4,22 @@ import { GET_ME } from "../utils/queries";
 import { Link } from "react-router-dom";
 import '../assets/styles/PersonalDashboard.css';
 import PersonalDashboarEventCards from "../components/PersonalDashboarEventCards";
-
+import '../assets/styles/EventManager.css';
 
 const PersonalDashboard = () => {
 
+  // Query hook for retrieving the current user
   const { loading: meLoading, data: meData } = useQuery(GET_ME);
+
+  // Retrieve the user data from the query response, or initialize it as an empty object if data is not available
   const user = meData?.getMe || {};
 
+  // Check if the query is still loading
   if (meLoading) {
-    return <div>Loading...</div>;
+    return <div className="loader"></div>;
   }
+
+  // Retrieve the events data from the user object, or initialize it as an empty array if not available
   const events = user.events || [];
 
   return (
