@@ -18,7 +18,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 100%;
+    width: 100% !important;
+    border:none !important;
+    box-shadow: none !important;
+    background-color: #c1e8e0;
 }
 
 #dateAndTim {
